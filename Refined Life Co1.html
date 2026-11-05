@@ -1,0 +1,1714 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Refined Life Co.</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Parisienne&family=Jost:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cinematic apothecary — full-bleed moss film scenes (hero, pinned chapters, mentorship, gatherings) alternating with parchment shelves; scroll-linked reveals, one sticky header, hash-routed views */
+:root{
+  --bg:#f3eee4; --bg-deep:#e9e1d2; --card:#fbf8f2; --line:#ddd3c1;
+  --ink:#2a251f; --ink-soft:#615749; --ink-faint:#8a7f6f;
+  --moss:#3a4630; --moss-deep:#232b1d; --night:#171c13; --on-moss:#eef0e6; --on-moss-soft:#b9c2a8;
+  --clay:#a3643a; --clay-ink:#8c5430; --amber:#c79f57; --amber-soft:#e3c98f;
+  --ok:#4f6b3a;
+  --f-display:'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --f-script:'Parisienne', 'Snell Roundhand', 'Brush Script MT', cursive;
+  --f-body:'Jost', 'Futura', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono:'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --arch:999px 999px 14px 14px;
+  --shadow:0 1px 2px rgba(42,37,31,.06), 0 10px 32px rgba(42,37,31,.08);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1a16; --bg-deep:#23221d; --card:#26251f; --line:#3a382f;
+    --ink:#ece6da; --ink-soft:#bdb4a3; --ink-faint:#8d8576;
+    --moss:#2b3424; --moss-deep:#1d2418; --night:#11150e; --on-moss:#eef0e6; --on-moss-soft:#b2bba1;
+    --clay:#d08e5f; --clay-ink:#e0a578; --amber:#d8b26b; --amber-soft:#ebd29c; --ok:#8fb070;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 32px rgba(0,0,0,.28);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1a16; --bg-deep:#23221d; --card:#26251f; --line:#3a382f;
+  --ink:#ece6da; --ink-soft:#bdb4a3; --ink-faint:#8d8576;
+  --moss:#2b3424; --moss-deep:#1d2418; --night:#11150e; --on-moss:#eef0e6; --on-moss-soft:#b2bba1;
+  --clay:#d08e5f; --clay-ink:#e0a578; --amber:#d8b26b; --amber-soft:#ebd29c; --ok:#8fb070;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 32px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay-ink)}
+.film .eyebrow,.hero .eyebrow{color:var(--amber)}
+.muted{color:var(--ink-soft)}
+.film{background:var(--moss-deep);color:var(--on-moss)}
+.film .muted{color:var(--on-moss-soft)}
+.night{background:var(--night)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:10px 26px;border-radius:999px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font-weight:700;font-size:14.5px;letter-spacing:.02em;cursor:pointer;position:relative;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s;will-change:transform}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.solid{background:var(--moss);border-color:var(--moss);color:var(--on-moss)}
+.btn.solid:hover{background:var(--clay);border-color:var(--clay);color:#fff}
+.btn.amber{background:var(--amber);border-color:var(--amber);color:#1d2418}
+.btn.amber:hover{background:var(--amber-soft);border-color:var(--amber-soft)}
+.film .btn:not(.amber):not(.solid),.hero .btn:not(.amber):not(.solid),.btn.light{border-color:rgba(238,240,230,.5);color:var(--on-moss)}
+.film .btn:not(.amber):not(.solid):hover,.hero .btn:not(.amber):not(.solid):hover,.btn.light:hover{background:var(--on-moss);color:var(--moss-deep)}
+.btn.small{min-height:38px;padding:6px 16px;font-size:13.5px}
+.btn .arr{transition:transform .3s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+.link{color:var(--clay-ink);font-weight:700;font-size:14px;border-bottom:1.5px solid currentColor;padding-bottom:1px}
+.film .link{color:var(--amber)}
+
+/* progress + curtain + cursor */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--amber);z-index:120;pointer-events:none}
+.curtain{position:fixed;inset:0;z-index:110;background:var(--moss-deep);transform:scaleY(0);transform-origin:50% 100%;pointer-events:none;display:flex;align-items:center;justify-content:center}
+.curtain span{font-family:var(--f-display);font-style:italic;font-size:clamp(28px,4vw,46px);color:var(--amber);opacity:0;transition:opacity .2s}
+.curtain.in{transform:scaleY(1);transition:transform .45s var(--ease-out)}
+.curtain.in span{opacity:1}
+.curtain.out{transform:scaleY(0);transform-origin:50% 0;transition:transform .55s var(--ease-out) .05s}
+.cursor,.cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:130;border-radius:50%;display:none}
+.cursor{width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--clay);transition:width .25s var(--ease),height .25s var(--ease),margin .25s var(--ease),background .25s,border-color .25s}
+.cursor-dot{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;background:var(--clay)}
+.cursor.big{width:70px;height:70px;margin:-35px 0 0 -35px;background:color-mix(in srgb, var(--amber) 18%, transparent);border-color:var(--amber)}
+@media (pointer:fine){.cursor,.cursor-dot{display:block;opacity:0;transition:opacity .3s}body.moved .cursor,body.moved .cursor-dot{opacity:1}}
+
+/* header */
+.announce{background:var(--night);color:var(--on-moss-soft);font-size:12.5px;letter-spacing:.04em;text-align:center;padding-block:8px;overflow:hidden;white-space:nowrap}
+.announce .track{display:inline-flex;gap:56px;animation:marq 40s linear infinite}
+.announce b{color:var(--amber);font-weight:700}
+@keyframes marq{to{transform:translateX(-50%)}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:60;background:var(--moss-deep)}
+header.site{position:sticky;top:env(safe-area-inset-top, 0px);z-index:50;transition:background .35s,border-color .35s,color .35s;border-bottom:1px solid var(--line);background:color-mix(in srgb, var(--bg) 90%, transparent);backdrop-filter:blur(12px)}
+header.site.over{background:transparent;border-color:transparent;color:var(--on-moss);backdrop-filter:none}
+header.site.over .logo i{color:var(--amber)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;height:70px}
+.logo{font-family:var(--f-display);font-size:22px;font-weight:500;white-space:nowrap}
+.logo i{font-style:italic;font-weight:300;color:var(--clay-ink)}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav ul a{font-size:14px;font-weight:600;padding:6px 0;position:relative}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav ul a:hover::after,.nav ul a[aria-current="page"]::after{transform:scaleX(1);transform-origin:left}
+.nav-r{display:flex;align-items:center;gap:6px}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:0;background:transparent;cursor:pointer;position:relative}
+.icon-btn:hover{background:color-mix(in srgb, currentColor 10%, transparent)}
+.icon-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8}
+.badge{position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--clay);color:#fff;font-size:10.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+#menuBtn{display:none}
+.nav .btn.small{margin-left:6px}
+header.site.over .btn{border-color:rgba(238,240,230,.5);color:var(--on-moss)}
+.mobile-nav{position:fixed;inset:0;z-index:95;background:var(--moss-deep);color:var(--on-moss);display:flex;flex-direction:column;justify-content:center;gap:4px;padding-left:max(28px, env(safe-area-inset-left, 0px));padding-right:max(28px, env(safe-area-inset-right, 0px));padding-block:80px 40px}
+.mobile-nav a{font-family:var(--f-display);font-size:clamp(34px,9vw,48px);font-weight:300;padding:4px 0}
+.mobile-nav a small{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-left:12px;vertical-align:middle}
+.mobile-nav .x{position:absolute;top:calc(14px + env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px))}
+
+/* reveal: scroll-driven where supported, always visible otherwise */
+@supports (animation-timeline: view()){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  .rv-l{animation:rvl linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+  .zoom-in{animation:zi linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+}
+@keyframes rv{from{transform:translateY(46px);opacity:.15}to{transform:none;opacity:1}}
+@keyframes rvl{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes zi{from{transform:scale(1.18)}to{transform:scale(1)}}
+
+/* hero */
+.hero{position:relative;min-height:min(92vh,880px);margin-top:-71px;padding-top:71px;display:flex;align-items:flex-end;overflow:hidden;background:var(--night);color:var(--on-moss)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,21,14,.1) 30%,rgba(17,21,14,.75) 100%);pointer-events:none}
+.hero-in{position:relative;z-index:2;width:100%;padding-block:40px 64px}
+.hero h1{font-size:clamp(52px,9.2vw,138px);font-weight:200;letter-spacing:-.025em;line-height:.95}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .ln span{display:inline-block;animation:up 1.2s var(--ease-out) both}
+.hero h1 .ln:nth-child(2) span{animation-delay:.12s;color:var(--amber)}
+@keyframes up{from{transform:translateY(105%)}to{transform:none}}
+.hero-bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end;margin-top:34px}
+.hero .lede{font-size:clamp(16px,1.5vw,19px);color:var(--on-moss-soft);max-width:52ch;animation:fadein 1.2s .45s both}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;animation:fadein 1.2s .6s both}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.moon-chip{justify-self:end;display:flex;gap:14px;align-items:center;padding:14px 18px;border:1px solid rgba(238,240,230,.18);border-radius:16px;background:rgba(17,21,14,.35);backdrop-filter:blur(8px);max-width:360px;animation:fadein 1.2s .75s both}
+.moon-chip canvas{position:static;width:44px;height:44px;flex:none}
+.moon-chip strong{display:block;font-family:var(--f-display);font-weight:400;font-size:17px}
+.moon-chip small{font-size:12.5px;color:var(--on-moss-soft)}
+.scroll-cue{position:absolute;left:50%;bottom:16px;z-index:2;transform:translateX(-50%);font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--on-moss-soft);display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-cue i{width:1px;height:34px;background:linear-gradient(var(--amber),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* manifesto */
+.manifesto{padding-block:clamp(90px,14vw,170px)}
+.manifesto p{font-family:var(--f-display);font-weight:300;font-size:clamp(28px,4.2vw,58px);line-height:1.18;letter-spacing:-.01em;max-width:22ch}
+.manifesto .w{opacity:.22;transition:opacity .3s}
+.manifesto .w.on{opacity:1}
+.manifesto em{color:var(--clay-ink)}
+.manifesto .sig{margin-top:30px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+
+/* pinned chapters */
+.chapters{position:relative}
+.chapters .stage{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.chapters .head{position:absolute;top:calc(92px + env(safe-area-inset-top, 0px));left:0;right:0}
+.chapters .track{display:flex;gap:4vw;padding-left:max(20px, calc((100vw - 1240px)/2 + 20px));padding-right:10vw;will-change:transform}
+.chap{flex:none;width:min(78vw,980px);display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+.chap .tile{aspect-ratio:4/5;border-radius:var(--arch)}
+.chap h3{font-size:clamp(40px,5.4vw,80px);font-weight:200;letter-spacing:-.02em}
+.chap h3 em{color:var(--amber)}
+.chap .k{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;display:block}
+.chap p{color:var(--on-moss-soft);font-size:17px;max-width:44ch;margin:18px 0 26px}
+.chap ul{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chap li{font-size:12.5px;border:1px solid rgba(238,240,230,.22);border-radius:999px;padding:4px 12px;color:var(--on-moss)}
+.chap-meter{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom, 0px));left:0;right:0;display:flex;gap:10px;align-items:center;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-moss-soft)}
+.chap-meter .bar{flex:1;height:1px;background:rgba(238,240,230,.18);position:relative}
+.chap-meter .bar i{position:absolute;inset:0;background:var(--amber);transform-origin:0 50%;transform:scaleX(0)}
+.chapters.flat{height:auto!important}
+.chapters.flat .stage{position:relative;height:auto;padding-block:80px 60px}
+.chapters.flat .head{position:static;margin-bottom:34px}
+.chapters.flat .track{overflow-x:auto;scroll-snap-type:x mandatory;transform:none!important;padding-bottom:20px;scrollbar-width:none}
+.chapters.flat .track::-webkit-scrollbar{display:none}
+.chapters.flat .chap{scroll-snap-align:start;width:84vw;grid-template-columns:1fr;gap:20px}
+.chapters.flat .chap .tile{aspect-ratio:16/11}
+.chapters.flat .chap-meter{display:none}
+
+/* sections */
+section.band{padding-block:clamp(70px,9vw,120px)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:40px}
+.sec-head h2{font-size:clamp(34px,4.6vw,62px);font-weight:300;letter-spacing:-.015em;margin-top:10px}
+.sec-head h2 em{color:var(--clay-ink)}
+.film .sec-head h2 em{color:var(--amber)}
+.sec-head p{max-width:54ch;margin-top:12px}
+
+/* collage (fluid, overlapping) */
+.collage{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(60px,auto);gap:16px;align-items:start}
+.collage .c1{grid-column:1/6;grid-row:1/5}
+.collage .c2{grid-column:5/9;grid-row:3/7;z-index:2}
+.collage .c3{grid-column:9/13;grid-row:1/4}
+.collage .txt{grid-column:9/13;grid-row:4/8;align-self:center}
+.collage .tile{box-shadow:var(--shadow)}
+.collage .c1 .tile{aspect-ratio:4/5;border-radius:var(--arch)}
+.collage .c2 .tile{aspect-ratio:1/1}
+.collage .c3 .tile{aspect-ratio:1/1;border-radius:999px}
+.collage h2{font-size:clamp(32px,3.8vw,52px);font-weight:300;margin:12px 0 16px}
+.collage p{color:var(--ink-soft);margin-bottom:22px}
+[data-speed]{will-change:transform}
+
+/* intention hover list */
+.intent-list{border-top:1px solid var(--line);position:relative}
+.irow{display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:center;padding-block:22px;border-bottom:1px solid var(--line);cursor:pointer;position:relative}
+.irow h3{font-size:clamp(30px,4.6vw,64px);font-weight:200;letter-spacing:-.02em;transition:transform .5s var(--ease-out),color .3s}
+.irow .n{font-family:var(--f-mono);font-size:12px;color:var(--ink-faint);letter-spacing:.1em}
+.irow .d{font-size:14px;color:var(--ink-soft);max-width:28ch;text-align:right}
+.irow:hover h3{transform:translateX(18px);color:var(--clay-ink)}
+.irow .go{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.irow:hover .go{background:var(--moss);border-color:var(--moss);color:var(--on-moss);transform:rotate(-45deg)}
+.preview{position:fixed;top:0;left:0;width:220px;aspect-ratio:3/4;border-radius:var(--arch);overflow:hidden;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-50%) scale(.8);transition:opacity .25s,transform .35s var(--ease-out);box-shadow:var(--shadow)}
+.preview.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* tiles */
+.tile{position:relative;overflow:hidden;border-radius:14px;display:block}
+.tile>svg{display:block;width:100%;height:100%}
+.tile .label{position:absolute;left:14px;bottom:12px;right:14px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+
+/* product grid + rail */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.card{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card .tile{aspect-ratio:1/1;cursor:pointer}
+.tile>a{display:block;height:100%}
+.tile>a>svg{display:block;width:100%;height:100%}
+.card .tile svg{transition:transform .8s var(--ease-out)}
+.card:hover .tile svg{transform:scale(1.07)}
+.kit-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card .quick{position:absolute;left:12px;right:12px;bottom:12px;z-index:2;transform:translateY(130%);transition:transform .4s var(--ease-out)}
+.card:hover .quick,.card:focus-within .quick{transform:none}
+.card .quick .btn{width:100%;min-height:40px;background:var(--card);border-color:var(--card);color:var(--ink);font-size:13px}
+.card h3{font-size:17px;font-weight:400}
+.card .why{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+.card .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+.price{font-family:var(--f-display);font-size:18px;font-weight:500;font-variant-numeric:tabular-nums}
+.price s{font-family:var(--f-body);font-size:13.5px;color:var(--ink-faint);margin-left:6px;font-weight:400}
+.price .from{font-family:var(--f-body);font-size:12.5px;color:var(--ink-soft);font-weight:500;margin-right:3px}
+.add{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;flex:none}
+.add:hover{border-color:var(--moss);background:var(--moss);color:var(--on-moss)}
+.add svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+.tag{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:var(--card);color:var(--ink);padding:4px 8px;border-radius:6px}
+.tag.sale{background:var(--clay);color:#fff}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(300px,72vw);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:18px;cursor:grab;scrollbar-width:thin}
+.rail>*{scroll-snap-align:start}
+.rail.drag{cursor:grabbing;scroll-snap-type:none}
+.rail-nav{display:flex;gap:8px}
+
+/* kits */
+.kit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.kit{background:rgba(238,240,230,.04);border:1px solid rgba(238,240,230,.12);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0;transition:transform .5s var(--ease-out),border-color .3s}
+.kit:hover{transform:translateY(-6px);border-color:var(--amber)}
+.kit .tile{aspect-ratio:16/10;border-radius:999px 999px 12px 12px}
+.kit h3{font-size:24px;color:var(--on-moss)}
+.kit .for{font-size:14px;color:var(--on-moss-soft)}
+.kit ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:14px;color:var(--on-moss-soft)}
+.kit li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed rgba(238,240,230,.14);padding-bottom:6px}
+.kit li span:last-child{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.kit .kp{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:auto}
+.kit .kp b{font-family:var(--f-display);font-size:30px;font-weight:400;color:var(--amber)}
+.kit .kp s{color:var(--on-moss-soft);font-size:14px}
+.save{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(199,159,87,.45);border-radius:999px;padding:3px 9px}
+.kit .proposed{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-moss-soft)}
+
+/* mentorship */
+.mentor{display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:center}
+.phone{justify-self:center;width:min(320px,86vw);aspect-ratio:9/18.5;border-radius:44px;border:10px solid #0d100b;background:#f5f1e8;box-shadow:0 40px 80px rgba(0,0,0,.45);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.phone .bar-top{height:54px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;font-size:12px;font-weight:700;color:#2a251f;border-bottom:1px solid #e3dccd;background:#fbf8f2;flex:none}
+.phone .msgs{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px 12px;overflow:hidden}
+.bubble{max-width:84%;padding:9px 13px;border-radius:18px 18px 18px 6px;background:#e7e0d1;color:#2a251f;font-size:13.5px;line-height:1.4;animation:pop .45s var(--ease-out) both}
+.bubble.mus{background:#efe3d1;display:flex;gap:8px;align-items:center}
+.bubble.mus::before{content:"♪";font-size:13px;width:22px;height:22px;border-radius:50%;background:#a3643a;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.bubble.vid{background:#3a4630;color:#eef0e6;display:flex;gap:8px;align-items:center}
+.bubble.vid::before{content:"▶";font-size:10px;width:22px;height:22px;border-radius:50%;background:#c79f57;color:#1d2418;display:flex;align-items:center;justify-content:center;flex:none}
+.bubble small{display:block;font-size:10.5px;opacity:.6;margin-top:2px}
+.typing{display:inline-flex;gap:4px;padding:12px 14px;border-radius:18px;background:#e7e0d1;width:max-content}
+.typing i{width:6px;height:6px;border-radius:50%;background:#8a7f6f;animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lvl{border:1px solid var(--line);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:14px;background:var(--card);transition:transform .4s var(--ease-out),border-color .3s}
+.lvl:hover{transform:translateY(-6px);border-color:var(--clay)}
+.lvl.feat{background:var(--moss-deep);color:var(--on-moss);border-color:var(--moss-deep)}
+.lvl.feat .muted{color:var(--on-moss-soft)}
+.lvl.feat .eyebrow{color:var(--amber)}
+.lvl h3{font-size:26px}
+.lvl .amt{font-family:var(--f-display);font-size:44px;font-weight:300;font-variant-numeric:tabular-nums}
+.lvl .amt small{font-family:var(--f-body);font-size:14px;color:var(--ink-soft)}
+.lvl.feat .amt small{color:var(--on-moss-soft)}
+.lvl ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:14.5px}
+.lvl li{display:flex;gap:10px}
+.lvl li::before{content:"✦";color:var(--clay);flex:none}
+.lvl.feat li::before{color:var(--amber)}
+.lvl .btn{margin-top:auto}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--card)}
+.toggle button{border:0;background:transparent;border-radius:999px;padding:8px 18px;font-weight:700;font-size:14px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--moss);color:var(--on-moss)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:s}
+.steps div{border-top:1px solid var(--line);padding-top:18px}
+.steps div::before{counter-increment:s;content:"Step " counter(s);font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay-ink);display:block;margin-bottom:8px}
+.steps b{font-family:var(--f-display);font-weight:400;font-size:21px;display:block;margin-bottom:6px}
+
+.types{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.type{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:transform .4s var(--ease-out),border-color .3s,background .3s}
+.type:hover,.type[aria-pressed="true"]{transform:translateY(-4px);border-color:var(--clay)}
+.type b{font-family:var(--f-display);font-weight:400;font-size:21px}
+.type span{font-size:14px;color:var(--ink-soft)}
+@media (max-width:900px){.types{grid-template-columns:1fr 1fr}}
+
+/* goal demo */
+.goal-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
+.goal-form{display:flex;flex-direction:column;gap:12px;padding:28px;border:1px solid var(--line);border-radius:22px;background:var(--card)}
+.goal-form .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay-ink);margin-top:8px}
+.goal-form input{font:inherit;font-size:17px;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.goal-out{padding:28px;border-radius:22px;background:var(--moss-deep);color:var(--on-moss);min-width:0}
+.goal-out .eyebrow{color:var(--amber)}
+.goal-out .muted{color:var(--on-moss-soft)}
+.road-head h3{font-size:clamp(26px,3vw,36px);font-weight:300;margin:8px 0 4px}
+.road{list-style:none;margin:26px 0;padding:0;position:relative;display:grid;gap:18px}
+.road::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:1.5px;background:linear-gradient(var(--amber),rgba(216,178,107,.15))}
+.road li{display:flex;gap:18px;align-items:flex-start;animation:pop .5s var(--ease-out) both;animation-delay:calc(var(--i) * .12s)}
+.road .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--amber);background:var(--moss-deep);flex:none;position:relative;z-index:1}
+.road li:last-child .dot{background:var(--amber)}
+.road small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-moss-soft);display:block}
+.road b{font-family:var(--f-display);font-weight:400;font-size:19px}
+.road-tools{display:grid;gap:12px;border-top:1px solid rgba(238,240,230,.14);padding-top:20px}
+.road-tool-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.goal-out .upsell{background:rgba(238,240,230,.06);color:var(--on-moss)}
+.goal-out .upsell small{color:var(--on-moss-soft)}
+.goal-out .upsell .tile{width:48px;height:48px}
+.week-chip .wk{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--amber);display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;line-height:1}
+.week-chip .wk b{font-family:var(--f-display);font-weight:400;font-size:20px;color:var(--amber)}
+.week-chip .wk small{font-size:9px;letter-spacing:.08em}
+/* soulrise phone */
+.phone.app{background:#f5f1e8}
+.app-body{flex:1;display:flex;flex-direction:column;gap:12px;padding:16px 14px;color:#2a251f}
+.app-goal{display:flex;gap:12px;align-items:center;background:#fbf8f2;border-radius:16px;padding:12px}
+.ring{width:48px;height:48px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke:#e3dccd;stroke-width:5}
+.ring .fg{stroke:#c79f57;stroke-linecap:round}
+.app-goal small,.app-week small,.app-text small{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8a7f6f;display:block}
+.app-goal b{font-family:var(--f-display);font-weight:400;font-size:16px;display:block;line-height:1.2}
+.app-goal span{font-size:12px;color:#4f6b3a;font-weight:700}
+.app-steps{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px}
+.app-steps li{display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:#fbf8f2}
+.app-steps li::before{content:"";width:12px;height:12px;border-radius:50%;border:1.5px solid #8a7f6f;flex:none}
+.app-steps li.done{color:#8a7f6f;text-decoration:line-through}
+.app-steps li.done::before{background:#4f6b3a;border-color:#4f6b3a}
+.app-steps li.now{background:#3a4630;color:#eef0e6}
+.app-steps li.now::before{border-color:#c79f57}
+.app-steps em{margin-left:auto;font-style:normal;font-size:11px;color:#e3c98f}
+.app-week{background:#efe3d1;border-radius:14px;padding:12px}
+.app-week b{font-family:var(--f-display);font-weight:400;font-size:16px;display:block}
+.app-week span{font-size:12px;color:#8c5430;font-weight:700}
+.app-text{margin-top:auto;background:#e7e0d1;border-radius:14px 14px 14px 4px;padding:10px 12px;font-size:13px}
+.app-feats{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px;color:var(--on-moss)}
+.app-feats li{display:flex;gap:10px}
+.app-feats li::before{content:"✦";color:var(--amber)}
+/* moon calendar */
+.moon-cal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.mc{border:1px solid rgba(238,240,230,.14);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.mc.on{border-color:var(--amber);background:rgba(216,178,107,.06)}
+.mc canvas{width:48px;height:48px}
+.mc b{font-family:var(--f-display);font-weight:400;font-size:22px}
+.mc span{font-size:14px;color:var(--on-moss-soft)}
+@media (max-width:900px){.goal-grid{grid-template-columns:1fr}.moon-cal{grid-template-columns:1fr 1fr}.road-tool-row{grid-template-columns:1fr}}
+
+/* story */
+.story-pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.sp{display:flex;flex-direction:column;gap:10px;padding:18px;border:1px solid rgba(238,240,230,.14);border-radius:22px;transition:transform .4s var(--ease-out),border-color .3s}
+.sp:hover{transform:translateY(-6px);border-color:var(--amber)}
+.sp .tile{aspect-ratio:1/1;border-radius:999px 999px 12px 12px}
+.sp h3{font-size:24px;font-weight:400}
+.sp p{color:var(--on-moss-soft);font-size:14.5px;flex:1}
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.who div{background:var(--card);padding:24px;display:flex;flex-direction:column;gap:6px}
+.who b{font-family:var(--f-display);font-weight:400;font-size:22px}
+.who span{color:var(--ink-soft);font-size:15px}
+.values{margin-top:10px}
+.values summary{font-family:var(--f-display);font-weight:400;font-size:21px}
+@media (max-width:900px){.story-pillars{grid-template-columns:1fr 1fr}.who{grid-template-columns:1fr}}
+@media (max-width:480px){.story-pillars{grid-template-columns:1fr}}
+/* gatherings */
+.events{display:grid;gap:0;border-top:1px solid rgba(238,240,230,.16)}
+.ev{display:grid;grid-template-columns:120px 1fr auto;gap:28px;align-items:center;padding-block:24px;border-bottom:1px solid rgba(238,240,230,.16);transition:background .3s,padding .4s var(--ease-out)}
+.ev:hover{background:rgba(238,240,230,.04);padding-left:14px}
+.ev .date{font-family:var(--f-display);line-height:1}
+.ev .date b{display:block;font-size:44px;font-weight:300;color:var(--amber)}
+.ev .date span{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-moss-soft)}
+.ev h3{font-size:clamp(22px,2.6vw,32px);font-weight:300}
+.ev p{color:var(--on-moss-soft);font-size:14.5px;margin-top:6px;max-width:60ch}
+.ev .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pill{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(238,240,230,.25);border-radius:999px;padding:3px 9px;color:var(--on-moss)}
+.pill.sample{border-color:var(--amber);color:var(--amber)}
+.rsvp{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;padding-top:6px}
+.rsvp input{flex:1 1 220px;min-height:44px;border-radius:999px;border:1.5px solid rgba(238,240,230,.3);background:rgba(238,240,230,.06);color:var(--on-moss);padding:8px 18px;font:inherit;font-size:14.5px}
+.rsvp input::placeholder{color:var(--on-moss-soft)}
+.rsvp p{flex-basis:100%;font-size:13px;color:var(--on-moss-soft)}
+.inquiry{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px}
+.inquiry label{display:grid;gap:6px;font-size:13px;font-weight:600}
+.inquiry .full{grid-column:1/-1}
+.inquiry input,.inquiry select,.inquiry textarea{font:inherit;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+.inquiry textarea{min-height:110px;resize:vertical}
+
+/* story */
+.split{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center}
+.split .tile{aspect-ratio:4/5;border-radius:var(--arch)}
+.prose p{color:var(--ink-soft);margin-bottom:14px;max-width:62ch;font-size:17px}
+.film .prose p{color:var(--on-moss-soft)}
+.prose h2{font-size:clamp(34px,4.4vw,58px);font-weight:300;margin:12px 0 20px}
+.prose h3{font-size:24px;margin:30px 0 10px}
+.sig{font-family:var(--f-display);font-style:italic;font-size:20px;color:var(--clay-ink)}
+.origins{width:100%;border-collapse:collapse;font-size:15px}
+.origins th,.origins td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line)}
+.origins th{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+.tbl{overflow-x:auto}
+
+/* life design */
+.roadmap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.roadmap div{background:var(--card);padding:20px;display:flex;flex-direction:column;gap:6px;min-height:150px;transition:background .3s}
+.roadmap div:hover{background:var(--bg-deep)}
+.roadmap small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay-ink)}
+.roadmap b{font-family:var(--f-display);font-weight:400;font-size:19px;line-height:1.2}
+.sheet-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.sheet-tabs button{border:1px solid var(--line);background:var(--card);border-radius:10px 10px 0 0;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
+.sheet-tabs button[aria-pressed="true"]{background:var(--moss);color:var(--on-moss);border-color:var(--moss)}
+.sheet-view{border:1px solid var(--line);border-radius:0 14px 14px 14px;padding:24px;background:var(--card);min-height:120px}
+.sheet-view b{font-family:var(--f-display);font-weight:400;font-size:22px;display:block;margin-bottom:6px}
+
+/* journal / article / faq */
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.post{display:flex;flex-direction:column;gap:12px;cursor:pointer;min-width:0}
+.post .tile{aspect-ratio:16/11}
+.post .tile>svg{transition:transform .8s var(--ease-out)}
+.post:hover .tile>svg{transform:scale(1.06)}
+.post h3{font-size:22px;font-weight:400}
+.post p{font-size:14.5px;color:var(--ink-soft)}
+.article{max-width:740px;margin:0 auto;padding-block:56px 80px}
+.article h1{font-size:clamp(38px,5.4vw,64px);font-weight:300;margin:14px 0 18px}
+.article .tile{aspect-ratio:16/8;margin:28px 0 32px}
+.article p,.article li{color:var(--ink-soft);font-size:17.5px}
+.article p{margin-bottom:16px}
+.article h2{font-size:26px;margin:32px 0 10px}
+.article ol,.article ul{padding-left:22px;margin:0 0 16px}
+.article li{margin-bottom:8px}
+.shop-the-ritual{margin-top:40px;padding:24px;border-radius:18px;background:var(--bg-deep)}
+.page-head{padding-block:clamp(56px,8vw,96px) 30px}
+.page-head h1{font-size:clamp(46px,7vw,100px);font-weight:200;letter-spacing:-.02em;margin-top:12px}
+.page-head h1 em{color:var(--clay-ink)}
+.film .page-head h1 em{color:var(--amber)}
+.page-head p{max-width:58ch;margin-top:16px;font-size:18px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;transition:border-color .2s,background .2s;color:var(--ink)}
+.chip:hover{border-color:var(--clay)}
+.chip[aria-pressed="true"]{background:var(--moss);color:var(--on-moss);border-color:var(--moss)}
+.film .chip{background:transparent;border-color:rgba(238,240,230,.25);color:var(--on-moss)}
+.film .chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#1d2418}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-block:14px;border-block:1px solid var(--line);margin:18px 0 28px;font-size:14px;color:var(--ink-soft)}
+.toolbar select{font:inherit;font-size:14px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.crumbs{font-size:13px;color:var(--ink-faint);padding-block:24px 0}
+.crumbs a:hover{color:var(--clay-ink)}
+.pdp{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;padding-block:24px 70px}
+.gallery{display:grid;gap:12px;position:sticky;top:90px;align-self:start}
+.gallery .main{aspect-ratio:1/1;border-radius:22px;cursor:zoom-in}
+.gallery .main>svg{transition:transform .5s var(--ease-out);transform-origin:var(--zx,50%) var(--zy,50%)}
+.gallery .main:hover>svg{transform:scale(1.6)}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.thumbs .tile{aspect-ratio:1/1;border-radius:10px;cursor:pointer;opacity:.7;transition:opacity .2s}
+.thumbs .tile:hover,.thumbs .tile.on{opacity:1;outline:2px solid var(--clay);outline-offset:2px}
+.pdp-info{display:flex;flex-direction:column;gap:16px;min-width:0}
+.pdp-info h1{font-size:clamp(34px,4vw,50px);font-weight:300}
+.pdp-info .price{font-size:28px}
+.why-line{font-size:17.5px;color:var(--ink-soft)}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;height:48px}
+.qty button{width:40px;height:100%;border:0;background:transparent;cursor:pointer;font-size:18px}
+.qty output{min-width:28px;text-align:center;font-variant-numeric:tabular-nums}
+.buy-row{display:flex;gap:12px;flex-wrap:wrap}
+.buy-row .btn.solid{flex:1 1 200px}
+.reassure{font-size:13px;color:var(--ink-soft);display:flex;gap:16px;flex-wrap:wrap}
+.reassure span::before{content:"✓ ";color:var(--ok);font-weight:700}
+details.acc{border-top:1px solid var(--line);padding-block:15px}
+details.acc:last-of-type{border-bottom:1px solid var(--line)}
+details.acc summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";font-family:var(--f-mono);color:var(--clay-ink)}
+details.acc[open] summary::after{content:"–"}
+details.acc div{padding-top:10px;color:var(--ink-soft);font-size:15.5px}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+.specs dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding-top:3px}
+.specs dd{margin:0}
+.upsell{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;background:var(--bg-deep);cursor:pointer;transition:transform .3s var(--ease-out)}
+.upsell:hover{transform:translateX(4px)}
+.upsell .tile{width:64px;height:64px;flex:none;border-radius:999px 999px 8px 8px}
+.upsell b{display:block;font-family:var(--f-display);font-weight:400;font-size:17px}
+.upsell small{color:var(--ink-soft);font-size:13px}
+.faq{max-width:800px;margin:0 auto;padding-block:20px 90px}
+.faq h2{margin:36px 0 6px;font-family:var(--f-mono);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--clay-ink);font-size:12px}
+.draft{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--clay);color:var(--clay-ink);border-radius:999px;padding:2px 7px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+
+/* letter + cta */
+.letter{text-align:center}
+.letter h2{font-size:clamp(34px,4.6vw,60px);font-weight:300;margin:12px 0 14px}
+.letter p{color:var(--on-moss-soft);max-width:54ch;margin:0 auto}
+.phases{display:flex;justify-content:center;gap:clamp(12px,4vw,40px);margin:34px 0}
+.phases div{display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-moss-soft)}
+.phases canvas{width:42px;height:42px}
+.nl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:28px auto 0}
+.nl input{flex:1 1 240px;min-height:48px;border-radius:999px;border:1.5px solid rgba(238,240,230,.3);background:rgba(238,240,230,.06);color:var(--on-moss);padding:10px 20px;font:inherit;font-size:15px}
+.nl input::placeholder{color:var(--on-moss-soft)}
+.nl-msg{font-size:13px;color:var(--on-moss-soft);margin-top:12px}
+.big-cta{padding-block:clamp(90px,12vw,160px);text-align:center;overflow:hidden}
+.big-cta h2{font-size:clamp(54px,10vw,150px);font-weight:200;letter-spacing:-.03em;line-height:.95}
+.big-cta h2 em{color:var(--clay-ink)}
+.big-cta p{margin:22px auto 30px;max-width:48ch;color:var(--ink-soft);font-size:18px}
+.marquee{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);padding-block:18px}
+.marquee .track{display:inline-flex;gap:40px;animation:marq 36s linear infinite;font-family:var(--f-display);font-size:clamp(26px,3.4vw,44px);font-weight:300;font-style:italic;color:var(--ink-soft)}
+.marquee .track span::after{content:"✦";font-style:normal;color:var(--clay);margin-left:40px;font-size:.6em;vertical-align:middle}
+
+/* trust + footer */
+.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding-block:38px}
+.trust div{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft)}
+.trust svg{flex:none;width:24px;height:24px;stroke:var(--clay);fill:none;stroke-width:1.6}
+.trust b{display:block;color:var(--ink);font-size:14.5px}
+footer{background:var(--night);color:var(--on-moss-soft);padding-block:70px 30px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:34px}
+footer .logo{color:var(--on-moss);font-size:28px}
+footer .logo i{color:var(--amber)}
+footer h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:500;margin-bottom:14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:14px}
+footer ul a:hover{color:var(--on-moss)}
+.foot-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:50px;padding-top:22px;border-top:1px solid rgba(238,240,230,.12);font-size:12.5px}
+.pay{display:flex;gap:6px;flex-wrap:wrap}
+.pay span{border:1px solid rgba(238,240,230,.22);border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:700;color:var(--on-moss)}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(17,21,14,.55);z-index:80;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);background:var(--bg);z-index:90;transform:translateX(100%);transition:transform .5s var(--ease-out);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top, 0px);padding-bottom:env(safe-area-inset-bottom, 0px);padding-right:env(safe-area-inset-right, 0px)}
+.drawer.on{transform:none}
+.dr-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.dr-head h2{font-size:24px;font-weight:400}
+.ship{padding:14px 22px;border-bottom:1px solid var(--line);font-size:13.5px}
+.meter{height:6px;border-radius:3px;background:var(--bg-deep);margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok);border-radius:3px;transition:width .5s var(--ease-out)}
+.lines{flex:1;overflow-y:auto;padding:8px 22px}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding-block:14px;border-bottom:1px solid var(--line)}
+.line .tile{width:64px;height:64px;border-radius:10px}
+.line b{font-size:14.5px;font-weight:600;display:block;line-height:1.3}
+.line small{font-size:12.5px;color:var(--ink-soft)}
+.line .qty{height:34px;margin-top:6px}
+.line .qty button{width:30px;font-size:15px}
+.line .lp{font-family:var(--f-display);font-weight:500;font-variant-numeric:tabular-nums}
+.dr-foot{padding:18px 22px;border-top:1px solid var(--line);display:grid;gap:12px}
+.dr-foot .tot{display:flex;justify-content:space-between;font-weight:700;font-size:17px}
+.empty{padding:40px 0;text-align:center;color:var(--ink-soft);display:grid;gap:14px;justify-items:center}
+.note{font-size:12.5px;color:var(--ink-soft);text-align:center}
+.upsell-mini{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;background:var(--bg-deep);font-size:13.5px}
+.upsell-mini .tile{width:44px;height:44px;flex:none;border-radius:8px}
+.upsell-mini span{flex:1;min-width:0}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom, 0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:all .3s var(--ease-out);z-index:100;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+
+/* type tuning for DM Serif Display + Parisienne + Jost */
+h1,h2,h3,h4,.price,.logo,.card h3,.post h3,.kit h3,.lvl h3,.sp h3,.road b,.steps b,.roadmap b,.who b,.type b,.mc b,.app-goal b,.app-week b,.page-head h1,.chap h3,.irow h3,.big-cta h2,.manifesto p,.mobile-nav a,.lvl .amt,.pdp-info h1,.article h1{font-weight:400}
+.hero h1{font-size:clamp(46px,7.6vw,116px);letter-spacing:-.02em;line-height:1}
+.hero h1 .ln{padding-bottom:.2em;margin-bottom:-.12em}
+.page-head h1{font-size:clamp(42px,6vw,88px);letter-spacing:-.015em}
+.chap h3,.big-cta h2{letter-spacing:-.015em}
+.sec-head h2{font-size:clamp(32px,4.2vw,56px);letter-spacing:-.01em}
+.manifesto p{font-size:clamp(26px,3.6vw,50px);line-height:1.22}
+.card h3{font-size:18px;line-height:1.2}
+.price{font-size:19px}
+.pdp-info .price{font-size:28px}
+.logo{font-size:23px;letter-spacing:0}
+/* Parisienne script accents: short emphasis words only */
+h1 em,h2 em,h3 em,.manifesto em,.hero h1 .ln:nth-child(2) span,.logo i,.sig,.curtain span{font-family:var(--f-script);font-style:normal;font-weight:400;letter-spacing:0}
+h1 em,h2 em,h3 em,.manifesto em{font-size:1.15em;line-height:.9;padding-right:.04em}
+.hero h1 .ln:nth-child(2) span{font-size:1.14em}
+.logo i{font-size:1.3em;line-height:0;vertical-align:-.04em}
+.sig{font-size:28px}
+.curtain span{font-size:clamp(40px,6vw,72px)}
+.marquee .track{font-family:var(--f-script);font-style:normal;font-size:clamp(30px,4vw,52px)}
+.btn{letter-spacing:.03em}
+body{font-size:16px;line-height:1.65}
+/* responsive */
+@media (max-width:1080px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot{grid-template-columns:1fr 1fr 1fr}
+  .trust,.roadmap{grid-template-columns:1fr 1fr}
+  .nav ul{gap:20px}
+}
+@media (max-width:900px){
+  .nav ul,.nav .btn.small{display:none}
+  #menuBtn{display:inline-flex}
+  .hero-bottom,.split,.pdp,.mentor{grid-template-columns:1fr;gap:36px}
+  .moon-chip{justify-self:start}
+  .scroll-cue{display:none}
+  .kit-grid,.kit-grid.two,.posts,.levels,.steps{grid-template-columns:1fr}
+  .grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .collage{grid-template-columns:repeat(6,1fr)}
+  .collage .c1{grid-column:1/5;grid-row:auto}
+  .collage .c2{grid-column:3/7;grid-row:auto;margin-top:-30%}
+  .collage .c3{display:none}
+  .collage .txt{grid-column:1/-1;grid-row:auto}
+  .irow{grid-template-columns:1fr auto}
+  .irow .d{display:none}
+  .ev{grid-template-columns:1fr;gap:12px}
+  .gallery{position:static}
+  .inquiry{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .trust,.foot,.roadmap{grid-template-columns:1fr}
+  .card .quick{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .cursor,.cursor-dot{display:none!important}
+}
+</style>
+
+<div class="progress" id="progress"></div>
+<div class="curtain" id="curtain"><span id="curtainWord">Refined</span></div>
+<div class="cursor" id="cursor"></div><div class="cursor-dot" id="cursorDot"></div>
+<div class="preview" id="preview"></div>
+
+<div class="announce"><div class="track"><span>Free U.S. shipping over <b>$35</b></span><span>Ritual Kits save up to 20%</span><span>New: <b>Daily Inspiration Texts</b> from $2.99 a week</span><span>Coming soon: the <b>Soulrise</b> goal roadmap app</span><span>Free U.S. shipping over <b>$35</b></span><span>Ritual Kits save up to 20%</span><span>New: <b>Daily Inspiration Texts</b> from $2.99 a week</span><span>Coming soon: the <b>Soulrise</b> goal roadmap app</span></div></div>
+
+<header class="site" id="siteHeader">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="logo" href="#home" data-go="home">Refined <i>Life</i> Co.</a>
+      <ul id="navLinks">
+        <li><a href="#design" data-go="design">Life Design</a></li>
+        <li><a href="#inspiration" data-go="inspiration">Daily Inspiration</a></li>
+        <li><a href="#gatherings" data-go="gatherings">Gatherings</a></li>
+        <li><a href="#spiritual" data-go="spiritual">Spiritual</a></li>
+        <li><a href="#shop" data-go="shop">The Ritual Shop</a></li>
+        <li><a href="#story" data-go="story">Our Story</a></li>
+      </ul>
+      <div class="nav-r">
+        <button class="icon-btn" id="cartBtn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24"><path d="M5 8h14l-1.3 12H6.3L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+          <span class="badge" id="cartCount" hidden>0</span>
+        </button>
+        <a class="btn small mag" href="#design" data-go="design">Start here</a>
+        <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="mobile-nav" id="mobileNav" hidden>
+  <button class="icon-btn x" id="menuClose" aria-label="Close menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <a href="#design" data-go="design">Life Design</a>
+  <a href="#inspiration" data-go="inspiration">Daily Inspiration <small>new</small></a>
+  <a href="#gatherings" data-go="gatherings">Gatherings</a>
+  <a href="#spiritual" data-go="spiritual">Spiritual</a>
+  <a href="#shop" data-go="shop">The Ritual Shop</a>
+  <a href="#kits" data-go="kits">Ritual Kits <small>save 20%</small></a>
+  <a href="#story" data-go="story">Our Story</a>
+  <a href="#faq" data-go="faq">FAQ</a>
+</div>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="logo">Refined <i>Life</i> Co.</div>
+        <p style="margin-top:14px;max-width:32ch;font-size:14px">Rituals for your space, tools for your next chapter, and a daily dose of inspiration.</p>
+      </div>
+      <div><h4>The Ritual Shop</h4><ul>
+        <li><a href="#shop-crystals" data-go="shop-crystals">Stones</a></li>
+        <li><a href="#shop-sage" data-go="shop-sage">Sacred Smoke</a></li>
+        <li><a href="#shop-bath" data-go="shop-bath">Bath Rituals</a></li>
+        <li><a href="#shop-aroma" data-go="shop-aroma">Incense + Aroma</a></li>
+        <li><a href="#shop-home" data-go="shop-home">Home + Altar</a></li>
+        <li><a href="#kits" data-go="kits">Ritual Kits + Gift Sets</a></li>
+      </ul></div>
+      <div><h4>Grow</h4><ul>
+        <li><a href="#design" data-go="design">Life Design</a></li>
+        <li><a href="#design" data-go="design">Career Toolkit</a></li>
+        <li><a href="#inspiration" data-go="inspiration">Daily Inspiration Texts</a></li>
+        <li><a href="#design" data-go="design">For Coaches</a></li>
+        <li><a href="#home" data-go="home" data-then="soulrise">Soulrise App</a></li>
+      </ul></div>
+      <div><h4>Gather + Spirit</h4><ul>
+        <li><a href="#gatherings" data-go="gatherings">Full Moon Circle</a></li>
+        <li><a href="#gatherings" data-go="gatherings">Workshops</a></li>
+        <li><a href="#gatherings" data-go="gatherings">Private Events</a></li>
+        <li><a href="#spiritual" data-go="spiritual">Ritual Guides</a></li>
+      </ul></div>
+      <div><h4>Help</h4><ul>
+        <li><a href="#story" data-go="story">Our Story</a></li>
+        <li><a href="#faq" data-go="faq">FAQ + Shipping</a></li>
+        <li>therefinedlifeco@gmail.com</li>
+      </ul></div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Refined Life Co. · therefined.net</span>
+      <div class="pay"><span>Visa</span><span>Mastercard</span><span>Amex</span><span>Shop Pay</span><span>Apple Pay</span><span>PayPal</span></div>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="dr-head"><h2>Your cart</h2><button class="icon-btn" id="closeCart" aria-label="Close cart"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="ship" id="ship"></div>
+  <div class="lines" id="lines"></div>
+  <div class="dr-foot" id="drFoot"></div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- Catalog (live from Shopify, Oct 20 2026; copy rewritten) ---------- */
+const COLLS = {
+  crystals:{name:'Stones',long:'Stones + Crystals',blurb:'Hand-picked stones from Brazil for grounding, clarity and intention.',g:'crystal',c:['#e7e0ef','#5b4a73']},
+  sage:{name:'Sacred Smoke',long:'Sacred Smoke',blurb:'Hand-tied sage, palo santo and the tools to clear a room.',g:'sage',c:['#dfe3d3','#3a4630']},
+  bath:{name:'Bath Rituals',long:'Bath Rituals',blurb:'Organic milk baths, salts, steamers and soaps for slow evenings.',g:'jar',c:['#efe3d2','#8c5430']},
+  aroma:{name:'Incense + Aroma',long:'Incense + Aroma',blurb:'Hand-rolled incense and burners from India, Tibet and Africa.',g:'incense',c:['#e8ddd0','#5c4733']},
+  home:{name:'Home + Altar',long:'Home + Altar',blurb:'Singing bowls, shells, chests and everything for the altar.',g:'bowl',c:['#e4e0d6','#4a4436']},
+  design:{name:'Life Design',long:'Life Design',blurb:'Planners, an eBook and a career toolkit for your next chapter.',g:'page',c:['#e3e7da','#3a4630']}
+};
+const INTENTS = {calm:['Calm + Sleep','Stones, smoke and baths for slower nights.'],cleanse:['Cleanse + Protect','Clear a room, a week or a new home.'],love:['Self-Love','Soft rituals that put you first.'],abundance:['Abundance','Citrine, vision boards and money plans.'],begin:['New Beginnings','Fresh starts, new jobs, new chapters.']};
+
+const P = [
+ ['7-chakra-crystal-set','7 Chakra Crystal Set','crystals',5.99,6.99,0,'One stone for each energy center, so you can build a full alignment practice from a single pouch.','Cleanse the stones, then lay one on each chakra point while you breathe slowly for ten minutes.',{Includes:'Clear quartz, black obsidian, citrine, rose quartz, sodalite, green aventurine, amethyst',Origin:'Brazil'},['begin','calm'],'crystal',['#ece4ef','#5b4a73'],'bestseller'],
+ ['selenite-tower-6','Selenite Tower','crystals',14.99,14.99,24.99,'A self-cleansing stone that keeps a room feeling clear. Set it where you spend the most time.','Run it slowly over the body an inch or two away, pausing where energy feels heavy. Keep it dry.',{Material:'Selenite'},['cleanse'],'tower',['#efede8','#6b6658'],'sale'],
+ ['selenite-wand-moon-phases','Selenite Wand · Moon Phases','crystals',9.99,9.99,0,'Engraved with the lunar cycle. A cleansing wand made for full moon rituals.','Sweep slowly around your body or across your other crystals to clear them.',{Material:'Selenite'},['cleanse','begin'],'wand',['#efede8','#4a4436']],
+ ['selenite-charging-bowl','Selenite Charging Bowl','crystals',22.22,25.25,0,'Rest your stones or jewelry in it overnight to recharge them. Hand-carved, so each one is a little different.','Place crystals in the bowl overnight. Keep away from water.',{Material:'Hand-carved selenite'},['cleanse'],'bowl',['#efede8','#6b6658']],
+ ['rose-quartz','Rose Quartz','crystals',1.49,29.99,0,'The stone of the heart. Gentle and comforting, for self-love and softening old hurts.','Carry it in a pocket, or keep it by your bed. Hold it while setting love intentions.',{Size:'Tumbled, 1–1.5 in',Origin:'Brazil'},['love'],'stone',['#f3e0de','#9b5a5a']],
+ ['amethyst','Amethyst','crystals',1.49,29.99,0,'A classic meditation stone, known for calm, protection and a clear mind.','Keep one on your nightstand or meditation space, or hold it during breathwork.',{Size:'Tumbled, 1–1.5 in',Origin:'Brazil'},['calm','cleanse'],'stone',['#e7ddef','#5b4a73']],
+ ['citrine','Citrine','crystals',1.49,29.99,0,'Bright, sunny and energizing. A favorite for motivation and attracting abundance.','Place in your workspace or wallet to keep abundance intentions close.',{Size:'Tumbled, 1–1.5 in',Origin:'Brazil'},['abundance'],'stone',['#f4e8c8','#8a6a1f']],
+ ['crystals-tigers-eye','Tiger’s Eye','crystals',3.49,3.49,0,'Grounding and steadying when life feels unpredictable. Good for willpower and follow-through.','Carry it on days that ask for courage, like an interview or a big conversation.',{Size:'Tumbled, 1–1.5 in'},['abundance','begin'],'stone',['#efe0c9','#7a5420']],
+ ['crystals-smoky-quartz','Smoky Quartz','crystals',1.49,29.99,0,'A protective grounding stone that helps turn heavy energy into something lighter.','Keep near your front door or hold during grounding meditations.',{Size:'Tumbled, 1–1.5 in'},['cleanse'],'stone',['#e2ddd6','#4e463c']],
+ ['beginner-tumbled-stones','Beginner Crystals','crystals',2.22,2.49,0,'A mini bag of three assorted stones. The easiest way to start a collection.','Choose the stone you are drawn to first, and start there.',{Size:'½–1 in, 3 stones',Origin:'Brazil'},['begin'],'stone',['#e9e3ec','#5b4a73']],
+ ['7-chakra-pyramid-engraved-box','7 Chakra Pyramid Set + Engraved Box','crystals',34.99,34.99,0,'Seven crystal pyramids in a carved keepsake box. A beautiful gift for a meditation space.','Arrange the pyramids on your altar in chakra order, from root to crown.',{Includes:'Red jasper, orange calcite, citrine, green aventurine and more'},['calm','begin'],'pyramid',['#eee5dc','#7a4a33']],
+ ['crystals-super-seven','Super Seven Quartz','crystals',19.19,30.30,0,'Seven minerals in one stone, traditionally said to work with every chakra at once.','Hold during meditation or place at the center of a crystal grid.',{Type:'Specimen, each unique'},['begin'],'cluster',['#e6dfea','#4f3f63']],
+ ['amethyst-druzy-crystal-19','Amethyst Druzy · No. 19','crystals',29.99,29.99,0,'A one-of-a-kind amethyst cluster. The piece pictured is the piece you receive.','Display it in your bedroom or meditation corner. Dust gently with a dry brush.',{Type:'One of a kind'},['calm'],'cluster',['#e2d6ec','#4f3f63'],'one of one'],
+ ['crystals-tumbled-assorted-1lb-mix','Tumbled Assorted · 1 lb','crystals',27.99,27.99,0,'A full pound of mixed tumbled stones for grids, jars, gifting or sharing.','Sort by color for chakra work, or fill a jar for your altar.',{Size:'½–1 in stones, 1 lb',Origin:'Brazil'},['begin'],'stone',['#ebe2d7','#6b4f3b']],
+ ['california-white-sage-7','California White Sage','sage',6.99,28.99,0,'The classic cleansing bundle for clearing a new home, a hard week or a fresh start.','Set an intention, light the tip for 20–30 seconds, blow out the flame and let the smoke move through each room.',{Herb:'California white sage'},['cleanse','begin'],'sage',['#e3e7da','#3a4630'],'bestseller'],
+ ['sacred-palo-santo-sticks','Sacred Palo Santo Sticks','sage',1.49,11.99,0,'Sweet, woody smoke with notes of pine, mint and lemon. Softer than sage.','Light one end, let it burn for 30 seconds, then blow it out and let it smolder.',{Origin:'South America'},['calm','cleanse'],'stick',['#efe3d1','#8c5430']],
+ ['blue-sage','Blue Sage','sage',3.99,3.99,0,'Less pungent and more relaxing than white sage. Ideal for small rooms and meditation spaces.','Light, blow out and wave gently through the space with a feather or your hand.',{Herb:'Blue sage'},['calm','cleanse'],'sage',['#dfe4e6','#3d5560']],
+ ['lavender-sage','Lavender Sage','sage',3.49,14.99,0,'White sage wrapped with lavender, for cleansing that leaves the room feeling calm.','Burn before bed or before meditation.',{Herb:'White sage, lavender'},['calm'],'sage',['#e7e2ee','#5b4a73']],
+ ['dragons-blood-sage','Dragon’s Blood Sage','sage',3.33,13.13,0,'White sage coated in dragon’s blood resin. Rich, warm smoke for protection rituals.','Burn during protection rituals, and open a window when you finish.',{Herb:'White sage, dragon’s blood resin'},['cleanse'],'sage',['#efdad6','#8a3b2e']],
+ ['mixed-sage-bundle','Mixed Sage Bundle','sage',8.88,8.88,0,'A sampler of several sage varieties, so you can find the one you love.','Try a different bundle each week and notice how each one feels.',{Type:'Assorted bundles'},['begin','cleanse'],'sage',['#e3e7da','#3a4630']],
+ ['sage-deluxe-kit','Sage Deluxe Kit','sage',29.99,29.99,0,'Everything for a complete smudging ritual, packed together.','Set an intention, light, and move through each room.',{Type:'Kit'},['cleanse','begin'],'kit',['#e3e7da','#3a4630']],
+ ['sage-kit-floral-carved-wooden-box','Sage Kit + Carved Wooden Box','sage',39.99,39.99,0,'A full sage kit stored in a hand-carved floral box. Made to be given.','Keep your tools together in the box on your altar.',{Type:'Kit with storage box'},['cleanse','love'],'box',['#ecdfcf','#6b4a2c']],
+ ['sacred-turkey-feather','Sacred Turkey Feather','sage',3.99,3.99,0,'Adds the air element to your ritual. Use it to guide smoke into every corner.','Wave gently toward the smoke while smudging or meditating.',{Size:'12 in'},['cleanse'],'feather',['#ebe3d6','#5c4733']],
+ ['black-salt','Black Ritual Salt','sage',2.22,2.22,0,'A protective salt for thresholds and corners of your home.','Sprinkle a thin line across doorways and windowsills to set a boundary.',{Type:'Ritual salt'},['cleanse'],'jar',['#dcd9d4','#2f2b26']],
+ ['coconut-milk-bath-oatmeal-honey','Coconut Milk Bath · Oatmeal + Honey','bath',12.99,12.99,0,'A gentle soak for sensitive or dry skin, with oatmeal, honey and chamomile.','Add one cup to a warm bath. Use the included bag for easy cleanup, then moisturize.',{Size:'8 oz, 2–3 baths',Ingredients:'Oatmeal, honey, chamomile, thyme · 100% organic'},['calm','love'],'jar',['#f1e6d3','#8c5430'],'bestseller'],
+ ['coconut-milk-bath','Coconut Milk Bath · Rosemary + Forget-Me-Nots','bath',12.99,12.99,0,'Floral and softly herbal, with rose petals, violets and ylang ylang.','Add one cup to a warm bath and soak for at least 20 minutes.',{Size:'8 oz, 2–3 baths',Ingredients:'Rosemary, ylang ylang, rose petals, violet · 100% organic'},['love','calm'],'jar',['#f0e2e4','#8f4d5b']],
+ ['herbal-bath-salts','Herbal Bath Salts','bath',12.99,12.99,0,'Mineral salts infused with dried herbs and flowers. A reset at the end of a long day.','Add 1–2 cups to a warm tub. Follow with a body butter to lock in moisture.',{Size:'8 oz, 2–3 baths',Ingredients:'Bath salt blend, dried herbs + flowers · 100% organic'},['calm','cleanse'],'jar',['#e7e8de','#4a5a3a']],
+ ['herbal-shower-steamers-rejuvenating-citrus','Shower Steamers · Rejuvenating Citrus','bath',3.99,14.99,0,'Turns a quick shower into a bright, citrusy steam. No tub needed.','Wet it and set it at the far end of the shower, away from the direct stream.',{Size:'1 steamer or jar of 5',Ingredients:'Citrus blend, citric acid, witch hazel · 100% organic'},['begin'],'jar',['#f5ead0','#8a6a1f']],
+ ['herbal-facial-steam-blend','Herbal Facial Steam Blend','bath',9.99,9.99,0,'Just add hot water. A ten-minute spa ritual for your face.','Pour boiling water over 1–2 tablespoons, drape a towel over your head and breathe for 10–15 minutes.',{Type:'Loose herbal blend'},['calm','love'],'jar',['#e5ead9','#4a5a3a']],
+ ['softening-foot-bath','Softening Herbal Foot Bath','bath',7.99,7.99,0,'Dead Sea and Himalayan salts with lavender and rose buds, for tired feet.','Add 2–4 tablespoons to warm water and soak for 15 minutes.',{Size:'8 oz, 2–3 uses'},['calm'],'jar',['#f0e0e0','#8f4d5b']],
+ ['hand-scrub-cubes','Hand Scrub Cubes','bath',9.99,9.99,0,'Individual sugar-scrub cubes that leave hands and feet soft.','Crush one cube in your palm and massage over damp skin, then rinse.',{Size:'10 oz jar'},['love'],'jar',['#f2e8db','#8c5430']],
+ ['love-drawing-soap','Love Drawing Soap','bath',6.66,6.66,0,'Floral rose soap for a self-love cleansing bath.','Use it for a ritual bath or simply to wash your hands with intention.',{Type:'Bar soap'},['love'],'bar',['#f3dfe2','#8f4d5b']],
+ ['7-chakra-incense-set','7 Chakra Incense Set','aroma',5.99,5.99,0,'Seven scents, one for each chakra. A week of meditations in one set.','Burn the scent that matches the chakra you are focusing on that day.',{Size:'7 packs, 11–12 in sticks',Origin:'India'},['begin','calm'],'incense',['#ece3d8','#5c4733']],
+ ['tibetan-incense','Tibetan Incense','aroma',8.99,8.99,0,'Made using traditional Tibetan methods. Sandalwood and calming blends.','Light the tip for a few seconds, then let it smolder.',{Size:'5–8 in sticks',Origin:'Tibet'},['calm'],'incense',['#efe1cf','#7a4a33']],
+ ['artisan-incense','Artisan Incense','aroma',3.99,9.99,0,'Hand-rolled with organic herbs and resin.','Light the tip for a few seconds, then let it smolder.',{Size:'5 sticks, 5–12 in',Origin:'India'},['calm'],'incense',['#ece3d8','#5c4733']],
+ ['om-waterfall-cone-burner','Om Waterfall Cone Burner','aroma',18.99,18.99,0,'Backflow cones send smoke tumbling down like a waterfall.','Place a backflow cone on top and light. Comes with a cone bundle.',{Size:'4.5 × 4.5 in',Material:'Metal'},['calm'],'burner',['#e3ded6','#4a4436']],
+ ['cactus-palo-santo-burner','Cactus Palo Santo Burner','aroma',18.99,18.99,0,'Holds a palo santo stick, a cone or a chime candle.','Rest a lit stick or cone in the holder.',{Size:'6.5 × 5 in',Material:'Metal'},['calm'],'burner',['#e3e7da','#3a4630']],
+ ['mulch-blend','Ritual Mulch Blend','aroma',8.99,8.99,0,'Palo santo, cedar, white sage, yerba santa and rosemary, ready to burn on charcoal.','Burn a pinch on a charcoal disc, add to a candle, or use in a floor wash.',{Size:'16 oz jar'},['cleanse'],'jar',['#e6e2d4','#4a4436']],
+ ['display-abalone-shell','Display Abalone Shell','home',24.99,24.99,0,'An iridescent shell to catch ash while you smudge, styled with crystals.','Rest your burning bundle in the shell. Add sand to protect it from heat.',{Type:'Display shell with crystals'},['cleanse'],'shell',['#dfe6e6','#3d5560']],
+ ['tibetan-singing-bowl-5d','Tibetan Singing Bowl','home',39.95,39.95,0,'A 5-inch singing bowl with mallet. Sound to begin and close each meditation.','Hold the bowl in your left palm and circle the rim slowly with the mallet.',{Size:'5 in diameter'},['calm'],'bowl',['#ebdfc8','#7a5420']],
+ ['leather-embossed-journal','Leather Embossed Journal','home',22.22,22.22,0,'About 192 handmade pages for journaling, manifesting and logging dreams.','Write three lines each morning: what you feel, what you want, what you will do.',{Size:'5 × 7 in',Origin:'India'},['begin','abundance'],'book',['#e9dccb','#6b4a2c']],
+ ['7-chakra-wooden-chest','7 Chakra Wooden Chest','home',39.99,39.99,0,'Seven compartments for crystals, herbs or seven written wishes.','Store one intention or tool in each compartment.',{Size:'11 × 8.5 × 5.5 in',Origin:'India'},['abundance'],'box',['#e7dccc','#6b4a2c']],
+ ['refined-decor-safety-matches','Refined Safety Matches','home',8.99,11.99,0,'Matches in a vintage glass jar, pretty enough to leave out. Nine colors.','Keep beside your candles and sage.',{Options:'9 colors'},['love'],'jar',['#f0e1e4','#8f4d5b']],
+ ['florida-water-spray','Florida Water Spray','home',12.12,12.12,0,'The classic cologne since 1808, in an easy spray for cleansing tools and spaces.','Mist your altar, tools or the air before a ritual.',{Type:'Spray'},['cleanse'],'bottle',['#e0e8e2','#3d5a4a']],
+ ['chakra-dreamcatcher','Chakra Dreamcatcher','home',11.11,11.11,0,'A three-foot dreamcatcher in the seven chakra colors.','Hang above the bed or in a sunny window.',{Size:'3 ft',Origin:'India'},['calm'],'catcher',['#ece4ef','#5b4a73']],
+ ['refined-life-co-giftcard','Refined Life Co. Gift Card','home',10,100,0,'Let them choose their own ritual.','Delivered by email with a note from you.',{Values:'$10–$100'},['love'],'card',['#efe3d1','#8c5430']],
+ // Life Design (digital)
+ ['complete-transformation-toolkit-ebook-planner-spreadsheet','The Complete Transformation Toolkit','design',39,39,50,'The eBook, the 52-week planner and the career and money spreadsheet in one download. One 12-month roadmap, three tools.','Read the chapter, plan the week, run the numbers.',{Format:'PDF + editable .xlsx',Includes:'eBook, 52-Week Planner, Financial & Career Toolkit'},['begin','abundance'],'page',['#e9e0cd','#6b4a2c'],'save $11'],
+ ['one-year-life-transformation-ebook-printable','One-Year Life Transformation eBook','design',19,19,0,'A 96-page guided roadmap for changing your career, your lifestyle, or both, at a pace your real life allows.','Start with your personal baseline in chapter two, then work one chapter at a time.',{Format:'Printable PDF, US Letter',Pages:'96 · 16 chapters'},['begin'],'book',['#e3e7da','#3a4630']],
+ ['52-week-transformation-planner-printable','52-Week Transformation Planner','design',19,19,0,'An undated weekly planner that turns big intentions into ordinary weeks. Matches the eBook roadmap.','Start any Monday. One spread per week.',{Format:'Printable PDF, undated',Pages:'87'},['begin'],'page',['#e3e7da','#3a4630']],
+ ['financial-career-toolkit-editable-spreadsheet','Financial & Career Toolkit','design',12,12,0,'Eight spreadsheet tabs that run the numbers behind your next move, so you change with a plan instead of panic.','Open the Start Here tab, then type into the cream cells. The formulas do the rest.',{Format:'Editable .xlsx · Excel, Numbers, Google Sheets',Note:'Planning tool, not financial advice'},['abundance','begin'],'sheet',['#e6e3d7','#3a4630']],
+ ['the-complete-planner-collection-all-5-printable-planners','The Complete Planner Collection','design',39,39,54,'All five printable planners in one instant download: 96 pages for your vision, style, body, budget, rest and home.','Download, print what you need, and start with the Self-Care Sunday reset this weekend.',{Format:'Printable PDF',Pages:'96'},['begin','abundance'],'page',['#efe3d1','#8c5430'],'save $15'],
+ ['luxury-lifestyle-vision-board-kit','Luxury Vision Board Kit','design',12,12,0,'From honest reflection to a finished board you pin where you will see it daily.','Work through the reflection pages first, then build your board.',{Format:'Printable PDF',Pages:'16'},['abundance','begin'],'page',['#f1e6cf','#7a5420']],
+ ['glow-up-planner-90-day-style-fitness-finance-goals','90-Day Glow-Up Planner','design',17,17,0,'Thirteen weeks of small choices across style, movement and money.','Set your three pillars on day one, then check in every Sunday.',{Format:'Printable PDF'},['begin','love'],'page',['#f0e0e0','#8f4d5b']],
+ ['self-care-sunday-reset-planner','Self-Care Sunday Reset Planner','design',7,7,0,'One unhurried Sunday routine for your mind, body, home and week.','Print a fresh set each week and work through it with your morning tea.',{Format:'Printable PDF',Pages:'15'},['calm','love'],'page',['#efe3d1','#8c5430']],
+ ['capsule-wardrobe-planner','Capsule Wardrobe Planner','design',9,9,0,'Fewer pieces, better outfits, and a closet where everything works together.','Audit what you wear most, then fill only the real gaps.',{Format:'Printable PDF',Pages:'14'},['begin'],'page',['#e8e2d6','#4a4436']],
+ ['home-organization-cleaning-schedule','Home Organization + Cleaning Schedule','design',9,9,0,'A calm home in fifteen minutes a day, with a system the whole household can follow.','Post the daily rhythm on the fridge and rotate the weekly zones.',{Format:'Printable PDF',Pages:'17'},['calm'],'page',['#dfe4e6','#3d5560']],
+ ['coach-facilitator-guide-life-transformation-course','Coach + Facilitator Guide','design',39,39,0,'Twelve ready-to-run monthly modules for coaches and workshop leaders teaching the One-Year Life Transformation program.','Each module runs as a 75-minute live session or a self-paced video lesson.',{Format:'Printable PDF',Pages:'42',License:'One facilitator'},['begin'],'book',['#2b3424','#d8b26b'],'for coaches'],
+ ['text-subscription-monthly','Daily Inspiration Texts','design',9.99,69.99,0,'Motivation, quotes, affirmations, mantras and music picks sent straight to your phone every day. Weekly or monthly, three levels.','Choose your level and subscribe. Activation steps arrive in your confirmation email.',{Billing:'Weekly from $2.99 or monthly from $9.99',Cancel:'Anytime'},['begin','love'],'phone',['#e3e7da','#3a4630'],'new']
+];
+const PRODUCTS = P.map(r=>({h:r[0],t:r[1],coll:r[2],min:r[3],max:r[4],ca:r[5],why:r[6],use:r[7],spec:r[8],intents:r[9],g:r[10],col:r[11],tag:r[12]||''}));
+const BY = Object.fromEntries(PRODUCTS.map(p=>[p.h,p]));
+const SHOP = PRODUCTS.filter(p=>p.coll!=='design');
+
+const KITS = [
+ {id:'kit-full-moon',name:'Full Moon Reset',price:27,for:'Release what you are done carrying, then reset.',items:['california-white-sage-7','selenite-wand-moon-phases','herbal-bath-salts','amethyst'],g:'moon',col:['#232b1d','#d8b26b']},
+ {id:'kit-sunday',name:'Self-Care Sunday',price:29,for:'A slow evening in: bath, scrub, stone and a planner for the week.',items:['coconut-milk-bath-oatmeal-honey','hand-scrub-cubes','rose-quartz','self-care-sunday-reset-planner'],g:'jar',col:['#3a3024','#e9c79a']},
+ {id:'kit-new-chapter',name:'New Chapter',price:42,for:'For a new job or a big decision: clear the slate, carry courage, make the plan.',items:['california-white-sage-7','crystals-tigers-eye','citrine','financial-career-toolkit-editable-spreadsheet','leather-embossed-journal'],g:'book',col:['#2a2f24','#c9b98a']},
+ {id:'kit-home',name:'New Home Blessing',price:44,for:'Clear and protect a new space, room by room.',items:['mixed-sage-bundle','display-abalone-shell','sacred-turkey-feather','black-salt','florida-water-spray'],g:'shell',col:['#23302c','#a9c7bd']}
+];
+const STORE_SETS = ['sage-deluxe-kit','sage-kit-floral-carved-wooden-box','7-chakra-pyramid-engraved-box'];
+const GIFT_SETS = [
+ {h:'gift-set-self-love',t:'Gift Set · Self Love',price:77.77,why:'Florida water, a heart storage box, bath salts, matches, crystals and more.',g:'box',col:['#f3dfe2','#8f4d5b']},
+ {h:'gift-set-chakra',t:'Gift Set · Chakra',price:99.99,max:111.11,why:'A complete chakra collection for meditation, beautifully boxed.',g:'pyramid',col:['#ece4ef','#5b4a73']},
+ {h:'money-drawing-kit',t:'Money Drawing Kit',price:22.22,why:'Everything for an abundance ritual in one kit.',g:'kit',col:['#f4e8c8','#8a6a1f']}
+];
+const LEVELS = [
+ {n:'Level 1',name:'Spark',w:2.99,m:9.99,inc:['2 inspirational texts a day','A mix of motivation, quotes, affirmations and mantras','Cancel anytime']},
+ {n:'Level 2',name:'Momentum',w:7.99,m:24.99,feat:true,inc:['4 inspirational texts a day, including music picks','1 motivation video a day (3–5 min): guided meditation, breathwork or sound therapy','Cancel anytime']},
+ {n:'Level 3',name:'Inner Circle',w:19.99,m:69.99,inc:['4 inspirational texts + 2 motivation videos a day','A text chat buddy','Affirmations written for you','Soulrise Goal Roadmap app (coming soon)']}
+];
+const TEXT_TYPES={
+ motivation:{n:'Motivation',d:'A push to start the day and keep going.',ex:[{t:'You do not need the whole plan today. You need the next honest step. Take it before noon.',s:'Motivation · 7:02 AM'}]},
+ quote:{n:'Quotes',d:'Timeless words to carry with you.',ex:[{t:'“The journey of a thousand miles begins with a single step.” — Lao Tzu',s:'Quote · 9:15 AM'}]},
+ affirmation:{n:'Affirmations',d:'Short lines to say out loud and believe.',ex:[{t:'I am allowed to want more. I am capable of building it.',s:'Affirmation · 12:30 PM'}]},
+ mantra:{n:'Mantras',d:'One phrase to repeat through a hard moment.',ex:[{t:'Breathe in: “I am here.” Breathe out: “I am ready.” Repeat five times.',s:'Mantra · 3:00 PM'}]},
+ music:{n:'Music',d:'A song or soundscape picked for the moment.',ex:[{t:'Today’s soundtrack: 20 minutes of soft piano for deep focus. Press play, close the tabs.',s:'Music pick · 10:40 AM',m:1}]},
+ video:{n:'Meditation + breathwork',d:'3–5 minute guided videos at Level 2 and up.',ex:[{t:'Today’s 4-minute breathwork is ready.',s:'Video · 4:12',v:1}]},
+ gratitude:{n:'Gratitude',d:'A nudge to notice what is already going well.',ex:[{t:'Name three good things from this morning. Small counts: coffee, sunlight, a kind text.',s:'Gratitude · 5:30 PM'}]},
+ prompt:{n:'Reflection prompts',d:'A question to close the day.',ex:[{t:'Evening check-in: what went right today? Write it down, even if it was small.',s:'Reflection · 8:45 PM'}]}
+};
+const SAMPLE_TEXTS=['motivation','quote','music','affirmation','video','mantra','prompt'].map(k=>TEXT_TYPES[k].ex[0]);
+
+/* ---------- specimen art ---------- */
+const GLYPH = {
+ crystal:'<path d="M50 18 L70 44 L50 86 L30 44 Z"/><path d="M30 44 H70 M50 18 V86 M40 44 L50 86 L60 44"/>',
+ tower:'<path d="M38 86 V40 L50 20 L62 40 V86 Z"/><path d="M38 40 H62 M50 20 V86"/>',
+ wand:'<path d="M44 88 L48 22 Q50 16 52 22 L56 88 Z"/><circle cx="50" cy="38" r="4"/><circle cx="50" cy="52" r="5"/><circle cx="50" cy="68" r="4"/>',
+ stone:'<path d="M28 62 Q26 42 44 38 Q62 32 72 48 Q78 66 60 74 Q36 82 28 62 Z"/><path d="M42 50 Q50 46 58 52" opacity=".6"/>',
+ cluster:'<path d="M26 82 H74"/><path d="M34 82 L38 50 L44 82 M44 82 L50 30 L56 82 M56 82 L62 46 L68 82"/>',
+ pyramid:'<path d="M24 80 L50 30 L76 80 Z"/><path d="M50 30 L56 80"/><path d="M20 84 H80"/>',
+ sage:'<path d="M42 88 Q36 56 50 22 Q64 56 58 88 Z"/><path d="M50 26 V86"/><path d="M42 50 Q50 54 58 50 M41 64 Q50 68 59 64 M43 76 Q50 79 57 76"/><path d="M46 16 Q50 8 54 14" opacity=".6"/>',
+ stick:'<rect x="44" y="28" width="12" height="58" rx="3"/><path d="M48 22 Q52 14 50 8" opacity=".6"/><path d="M47 40 H53 M47 56 H53 M47 72 H53" opacity=".5"/>',
+ jar:'<rect x="32" y="38" width="36" height="46" rx="6"/><rect x="34" y="28" width="32" height="10" rx="3"/><path d="M38 60 H62" opacity=".6"/><circle cx="50" cy="70" r="4" opacity=".6"/>',
+ bar:'<rect x="26" y="44" width="48" height="30" rx="9"/><path d="M36 58 Q50 52 64 58" opacity=".6"/>',
+ incense:'<path d="M30 84 H70"/><path d="M40 84 L46 30 M52 84 L56 26 M62 84 L64 34"/><path d="M46 24 Q42 16 46 10 M56 20 Q60 12 56 6" opacity=".55"/>',
+ burner:'<path d="M30 80 H70 L64 60 H36 Z"/><path d="M42 60 Q40 46 50 40 Q60 46 58 60"/><path d="M50 36 Q46 28 50 22" opacity=".55"/>',
+ shell:'<path d="M22 64 Q24 34 50 30 Q78 30 78 60 Q66 78 46 78 Q28 76 22 64 Z"/><path d="M34 62 Q50 50 68 56 M30 52 Q50 40 72 46" opacity=".6"/>',
+ bowl:'<path d="M24 50 H76 Q74 80 50 80 Q26 80 24 50 Z"/><path d="M22 50 H78"/><path d="M62 34 L76 22"/>',
+ book:'<rect x="30" y="24" width="40" height="56" rx="4"/><path d="M38 24 V80"/><circle cx="56" cy="50" r="7" opacity=".6"/>',
+ box:'<rect x="24" y="48" width="52" height="32" rx="4"/><path d="M24 58 H76"/><path d="M28 48 Q50 28 72 48"/><circle cx="50" cy="66" r="3"/>',
+ kit:'<rect x="22" y="46" width="56" height="34" rx="5"/><path d="M36 46 Q34 26 44 22 Q50 30 46 46 M54 46 L58 24 L64 46"/>',
+ feather:'<path d="M30 86 Q36 50 66 16 Q74 46 44 74"/><path d="M30 86 L58 32" opacity=".6"/>',
+ bottle:'<rect x="36" y="40" width="28" height="44" rx="5"/><rect x="44" y="24" width="12" height="16" rx="2"/><path d="M42 58 H58" opacity=".6"/>',
+ catcher:'<circle cx="50" cy="40" r="20"/><path d="M50 20 L50 60 M30 40 H70 M36 26 L64 54 M64 26 L36 54" opacity=".45"/><path d="M38 62 V84 M50 62 V88 M62 62 V84"/>',
+ page:'<rect x="30" y="20" width="40" height="56" rx="3"/><path d="M38 34 H62 M38 44 H62 M38 54 H54" opacity=".6"/><path d="M26 26 V82 H64" opacity=".5"/>',
+ sheet:'<rect x="24" y="26" width="52" height="48" rx="3"/><path d="M24 38 H76 M24 50 H76 M24 62 H76 M40 26 V74 M58 26 V74" opacity=".6"/><path d="M30 84 L44 72 L54 78 L70 64" />',
+ phone:'<rect x="36" y="18" width="28" height="64" rx="6"/><path d="M42 36 H58 M42 46 H54" opacity=".6"/><circle cx="50" cy="74" r="2.5"/>',
+ card:'<rect x="22" y="34" width="56" height="36" rx="5"/><path d="M22 46 H78"/><circle cx="62" cy="60" r="4"/>',
+ moon:'<circle cx="50" cy="52" r="26"/><path d="M50 26 A26 26 0 0 1 50 78 A18 26 0 0 0 50 26 Z" fill="currentColor" opacity=".35" stroke="none"/>',
+ circle:'<circle cx="50" cy="50" r="30"/><circle cx="50" cy="20" r="4"/><circle cx="76" cy="35" r="4"/><circle cx="76" cy="65" r="4"/><circle cx="50" cy="80" r="4"/><circle cx="24" cy="65" r="4"/><circle cx="24" cy="35" r="4"/><circle cx="50" cy="50" r="8" opacity=".5"/>',
+ path:'<path d="M20 82 Q40 70 44 54 Q48 38 70 34 Q80 32 82 20"/><circle cx="20" cy="82" r="3"/><circle cx="82" cy="20" r="4"/><path d="M60 58 l4 -4 m0 0 l4 4" opacity=".5"/>'
+};
+function tileSVG(g,col,{label='',sub=''}={}){
+  const [bg,ink]=col;
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(label)}" style="color:${ink}">
+    <rect width="100" height="100" fill="${bg}"/>
+    <circle cx="50" cy="54" r="38" fill="${ink}" opacity=".06"/>
+    <g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" transform="translate(12 10) scale(.76)">${GLYPH[g]||GLYPH.crystal}</g>
+  </svg>${sub?`<div class="label" style="color:${ink}">${esc(sub)}</div>`:''}`;
+}
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const money=n=>'$'+n.toFixed(2);
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ARR='<span class="arr">→</span>';
+const PLUS='<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
+const collLink=k=>k==='design'?'design':'shop-'+k;
+function priceHTML(p){
+  const from=p.max>p.min?'<span class="from">from</span>':'';
+  const was=p.ca&&p.ca>p.min?`<s>${money(p.ca)}</s>`:'';
+  return `<span class="price">${from}${money(p.min)}${was}</span>`;
+}
+function card(p){
+  return `<article class="card">
+    <div class="tile">${p.tag?`<span class="tag ${p.tag==='sale'?'sale':''}">${esc(p.tag)}</span>`:''}<a href="#p-${p.h}" data-go="p-${p.h}" aria-label="${esc(p.t)}">${tileSVG(p.g,p.col,{label:p.t})}</a><div class="quick"><button class="btn" data-add="${p.h}">Quick add · ${money(p.min)}</button></div></div>
+    <h3><a href="#p-${p.h}" data-go="p-${p.h}">${esc(p.t)}</a></h3>
+    <p class="why">${esc(p.why.split('. ')[0].replace(/\.$/,''))}.</p>
+    <div class="row">${priceHTML(p)}<button class="add" data-add="${p.h}" aria-label="Add ${esc(p.t)} to cart">${PLUS}</button></div>
+  </article>`;
+}
+const kitTotal=k=>k.items.reduce((s,h)=>s+BY[h].min,0);
+function kitCard(k){
+  const tot=kitTotal(k), pct=Math.round((1-k.price/tot)*100);
+  return `<article class="kit rv">
+    <div class="tile">${tileSVG(k.g,k.col,{label:k.name})}</div>
+    <span class="proposed">Built from in-stock pieces</span>
+    <h3>${esc(k.name)} Kit</h3>
+    <p class="for">${esc(k.for)}</p>
+    <ul>${k.items.map(h=>`<li><span>${esc(BY[h].t)}</span><span>${money(BY[h].min)}</span></li>`).join('')}</ul>
+    <div class="kp"><b>${money(k.price)}</b><s>${money(tot)}</s><span class="save">Save ${pct}%</span></div>
+    <button class="btn amber mag" data-add="${k.id}">Add kit to cart ${ARR}</button>
+  </article>`;
+}
+
+/* ---------- moon ---------- */
+const SYN=29.530588853, REF=Date.UTC(2000,0,6,18,14);
+function moonInfo(d=new Date()){
+  let age=((d-REF)/864e5)%SYN; if(age<0)age+=SYN;
+  const names=[[1.84,'New Moon'],[5.54,'Waxing Crescent'],[9.23,'First Quarter'],[12.92,'Waxing Gibbous'],[16.61,'Full Moon'],[20.30,'Waning Gibbous'],[23.99,'Last Quarter'],[27.68,'Waning Crescent'],[30,'New Moon']];
+  return {age,f:age/SYN,name:names.find(n=>age<n[0])[1],toFull:Math.round(((14.77-age)+SYN)%SYN)};
+}
+function nextFullMoons(n){
+  const now=new Date(); const {age}=moonInfo(now);
+  let days=((14.77-age)+SYN)%SYN; if(days<0.5)days+=SYN;
+  return Array.from({length:n},(_,i)=>new Date(now.getTime()+(days+i*SYN)*864e5));
+}
+function drawMoon(cv,f,lit,dark){
+  const dpr=window.devicePixelRatio||1, s=cv.clientWidth||40; cv.width=s*dpr; cv.height=s*dpr;
+  const x=cv.getContext('2d'); x.scale(dpr,dpr); const r=s/2-1.5, c=s/2;
+  x.fillStyle=dark; x.beginPath(); x.arc(c,c,r,0,Math.PI*2); x.fill();
+  const waxing=f<.5, k=Math.cos(f*2*Math.PI);
+  x.fillStyle=lit; x.beginPath();
+  x.arc(c,c,r,-Math.PI/2,Math.PI/2,!waxing);
+  x.ellipse(c,c,Math.abs(k)*r,r,0,Math.PI/2,-Math.PI/2,(k>0)===waxing);
+  x.fill();
+  x.strokeStyle=lit; x.globalAlpha=.45; x.lineWidth=1; x.beginPath(); x.arc(c,c,r,0,Math.PI*2); x.stroke();
+}
+function ritualFor(name){
+  if(name.includes('New'))return 'Set intentions. Write three on a fresh page.';
+  if(name.includes('Waxing'))return 'Build. Carry citrine and act on one intention.';
+  if(name.includes('Full'))return 'Release and cleanse. Charge your crystals tonight.';
+  return 'Rest and clear. Smudge your space and declutter one corner.';
+}
+const fmtDay=d=>d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+
+/* ---------- hero film (canvas smoke + stars + real moon) ---------- */
+let heroRAF=null;
+function startHeroFilm(mode='spirit'){
+  const cv=$('#heroCanvas'); if(!cv)return;
+  const ctx=cv.getContext('2d'); let W,H,dpr; const m=moonInfo();
+  const stars=Array.from({length:140},()=>({x:Math.random(),y:Math.random()*.7,r:Math.random()*1.2+.2,t:Math.random()*6}));
+  const wisps=Array.from({length:46},()=>newWisp(true));
+  function newWisp(init){return {x:.15+Math.random()*.7,y:init?Math.random()*1.2:1.15,r:60+Math.random()*140,s:.00025+Math.random()*.0005,ph:Math.random()*6.28,a:.035+Math.random()*.05,hue:Math.random()<.25}}
+  let mx=.5,my=.5,tmx=.5,tmy=.5;
+  cv.parentElement.addEventListener('pointermove',e=>{const b=cv.getBoundingClientRect();tmx=(e.clientX-b.left)/b.width;tmy=(e.clientY-b.top)/b.height});
+  function size(){dpr=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  size(); window.removeEventListener('resize',window.__heroSize||(()=>{})); window.__heroSize=size; window.addEventListener('resize',size);
+  const moonCv=document.createElement('canvas'); moonCv.style.width='200px'; moonCv.width=200; document.body.appendChild(moonCv); moonCv.style.position='absolute'; moonCv.style.left='-9999px';
+  drawMoon(moonCv,m.f,'#f1e6c8','#1f2619'); const moonImg=moonCv; setTimeout(()=>moonCv.remove(),0);
+  let t=0;
+  function frame(){
+    t+=1; mx+=(tmx-mx)*.04; my+=(tmy-my)*.04;
+    const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#0f130c'); g.addColorStop(.6,'#1a2215'); g.addColorStop(1,'#232b1d');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    // stars
+    for(const s of stars){ctx.globalAlpha=.35+.35*Math.sin(t*.02+s.t);ctx.fillStyle='#efe6cc';ctx.beginPath();ctx.arc(s.x*W+(mx-.5)*-10,s.y*H+(my-.5)*-6,s.r,0,6.28);ctx.fill()}
+    if(mode==='goals'){drawGoalPath(ctx,W,H,t,mx,my);if(!RM && document.body.contains(cv)) heroRAF=requestAnimationFrame(frame);return}
+    // moon + glow
+    const narrow=W<700; const ms=Math.min(W,H)*(narrow?.16:.2), mxp=W*(narrow?.8:.76)+(mx-.5)*-30, myp=H*(narrow?.11:.26)+(my-.5)*-18;
+    ctx.globalAlpha=1; const gl=ctx.createRadialGradient(mxp,myp,ms*.3,mxp,myp,ms*2.2); gl.addColorStop(0,'rgba(216,178,107,.22)'); gl.addColorStop(1,'rgba(216,178,107,0)');
+    ctx.fillStyle=gl; ctx.fillRect(mxp-ms*2.5,myp-ms*2.5,ms*5,ms*5);
+    ctx.drawImage(moonImg,mxp-ms/2,myp-ms/2,ms,ms);
+    // smoke
+    ctx.globalCompositeOperation='screen';
+    for(const w of wisps){
+      w.y-=w.s*(RM?0:1)*H/400*2; w.ph+=.01;
+      const x=(w.x+Math.sin(w.ph+w.y*4)*.06)*W+(mx-.5)*40*(1.2-w.y), y=w.y*H;
+      const rg=ctx.createRadialGradient(x,y,0,x,y,w.r*(1.4-w.y*.5));
+      const c=w.hue?'199,159,87':'186,196,168';
+      rg.addColorStop(0,`rgba(${c},${w.a*Math.min(1,(1.15-w.y)*2)*Math.min(1,w.y*2.5)})`); rg.addColorStop(1,`rgba(${c},0)`);
+      ctx.fillStyle=rg; ctx.beginPath(); ctx.arc(x,y,w.r*(1.4-w.y*.5),0,6.28); ctx.fill();
+      if(w.y<-.25)Object.assign(w,newWisp(false));
+    }
+    ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1;
+    if(!RM && document.body.contains(cv)) heroRAF=requestAnimationFrame(frame);
+  }
+  cancelAnimationFrame(heroRAF); frame();
+}
+
+function drawGoalPath(ctx,W,H,t,mx,my){
+  const narrow=W<700, ox=(mx-.5)*-24, oy=(my-.5)*-14;
+  const pts=narrow?[[.08,.97],[.3,.86],[.5,.72],[.68,.55],[.84,.38],[.92,.16]]:[[.6,.97],[.7,.84],[.74,.68],[.81,.55],[.86,.37],[.92,.16]];
+  const P=pts.map(([x,y])=>[x*W+ox,y*H+oy]);
+  // faint grid
+  ctx.globalAlpha=.05;ctx.strokeStyle='#efe6cc';ctx.lineWidth=1;
+  for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x+ox*.3,0);ctx.lineTo(x+ox*.3,H);ctx.stroke()}
+  for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y+oy*.3);ctx.lineTo(W,y+oy*.3);ctx.stroke()}
+  const cyc=RM?1:Math.min(1,((t%420)/300));
+  // path
+  ctx.globalAlpha=.28;ctx.strokeStyle='#b9c2a8';ctx.lineWidth=1.5;ctx.setLineDash([4,6]);
+  ctx.beginPath();P.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();ctx.setLineDash([]);
+  // progress
+  const segs=P.length-1, prog=cyc*segs;
+  ctx.globalAlpha=1;ctx.strokeStyle='#d8b26b';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(...P[0]);
+  for(let i=0;i<segs;i++){const f=Math.min(1,Math.max(0,prog-i));if(f<=0)break;ctx.lineTo(P[i][0]+(P[i+1][0]-P[i][0])*f,P[i][1]+(P[i+1][1]-P[i][1])*f)}
+  ctx.stroke();
+  P.forEach(([x,y],i)=>{const reached=prog>=i-.001;const last=i===P.length-1;
+    if(last){const g=ctx.createRadialGradient(x,y,2,x,y,90);g.addColorStop(0,`rgba(216,178,107,${reached?.45:.18})`);g.addColorStop(1,'rgba(216,178,107,0)');ctx.fillStyle=g;ctx.fillRect(x-90,y-90,180,180)}
+    ctx.beginPath();ctx.arc(x,y,last?8:5+(reached?Math.sin(t*.06+i)*.8:0),0,6.28);ctx.fillStyle=reached?'#d8b26b':'#2b3424';ctx.fill();ctx.strokeStyle=reached?'#e3c98f':'#6b7560';ctx.lineWidth=1.5;ctx.stroke();
+  });
+}
+/* ---------- views ---------- */
+const best=['7-chakra-crystal-set','california-white-sage-7','coconut-milk-bath-oatmeal-honey','selenite-tower-6','sacred-palo-santo-sticks','rose-quartz','tibetan-singing-bowl-5d','crystals-tigers-eye'];
+function manifesto(text){return text.split(' ').map(w=>w.startsWith('*')?`<em class="w">${w.replace(/\*/g,'')}</em>`:`<span class="w">${w}</span>`).join(' ')}
+const GOAL_AREAS={
+ career:{n:'Career',ex:'Move into a role I actually love',steps:['Name your target role and why it fits','Close your biggest skill gap','Have 10 networking conversations','Apply, interview and negotiate'],tools:['financial-career-toolkit-editable-spreadsheet','one-year-life-transformation-ebook-printable']},
+ money:{n:'Money',ex:'Build three months of savings',steps:['Know your real monthly numbers','Set a budget you can keep','Fund your first month of runway','Automate the rest and review monthly'],tools:['financial-career-toolkit-editable-spreadsheet','52-week-transformation-planner-printable']},
+ wellness:{n:'Wellness',ex:'Feel strong and rested again',steps:['Pick one daily habit to start','Track it for two weeks','Add a second habit','Review, reset and celebrate'],tools:['glow-up-planner-90-day-style-fitness-finance-goals','self-care-sunday-reset-planner']},
+ home:{n:'Home',ex:'A calm, organized home',steps:['Declutter one room','Set a 15-minute daily rhythm','Finish one project you keep postponing','Make the routine the whole household’s'],tools:['home-organization-cleaning-schedule','capsule-wardrobe-planner']},
+ self:{n:'Self',ex:'Know what I want for my next chapter',steps:['Write an honest vision of the next year','Choose three intentions','Check in every Sunday','Celebrate what changed, then set the next goal'],tools:['luxury-lifestyle-vision-board-kit','52-week-transformation-planner-printable']}
+};
+let goalState={area:'career',days:90,text:''};
+function weekOfYear(d=new Date()){const s=new Date(d.getFullYear(),0,1);return Math.min(52,Math.ceil(((d-s)/864e5+s.getDay()+1)/7))}
+function renderGoal(){
+  const a=GOAL_AREAS[goalState.area], box=$('#goalOut'); if(!box)return;
+  const now=new Date(), title=goalState.text.trim()||a.ex;
+  const dates=a.steps.map((_,i)=>new Date(now.getTime()+goalState.days*(i+1)/4*864e5));
+  box.innerHTML=`<div class="road-head"><span class="eyebrow">Your roadmap · ${goalState.days} days</span><h3>${esc(title)}</h3><p class="muted">Finish by ${dates[3].toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</p></div>
+  <ol class="road">${a.steps.map((s,i)=>`<li style="--i:${i}"><span class="dot"></span><div><small>Milestone ${i+1} · by ${fmtDay(dates[i])}</small><b>${esc(s)}</b></div></li>`).join('')}</ol>
+  <div class="road-tools"><span class="eyebrow">Tools for this goal</span><div class="road-tool-row">${a.tools.map(h=>{const p=BY[h];return `<a class="upsell" href="#p-${h}" data-go="p-${h}"><div class="tile">${tileSVG(p.g,p.col)}</div><div><b>${esc(p.t)}</b><small>${money(p.min)}</small></div></a>`}).join('')}</div>
+  <a class="link" href="#inspiration" data-go="inspiration">Add daily texts to keep you moving →</a></div>`;
+}
+function soulrisePhone(){
+  return `<div class="phone app" aria-label="Soulrise Goal Roadmap app preview"><div class="bar-top">Soulrise · Goal Roadmap</div>
+    <div class="app-body">
+      <div class="app-goal"><svg viewBox="0 0 44 44" class="ring"><circle cx="22" cy="22" r="18"/><circle cx="22" cy="22" r="18" class="fg" stroke-dasharray="113" stroke-dashoffset="62"/></svg><div><small>Career · 90 days</small><b>Move into a role I love</b><span>45% · on track</span></div></div>
+      <ul class="app-steps"><li class="done">Name the target role</li><li class="done">Close the biggest skill gap</li><li class="now">10 networking conversations <em>6 of 10</em></li><li>Apply and interview</li></ul>
+      <div class="app-week"><small>Sunday check-in</small><b>What moved this week?</b><span>Tap to reflect</span></div>
+      <div class="app-text"><small>From your texts today</small>“Progress, not perfection. One conversation today.”</div>
+    </div></div>`;
+}
+function viewHome(){
+  const wk=weekOfYear(), left=52-wk;
+  const chapters=[
+   {k:'For your goals',h:'Life <em>Design</em>',p:'A one-year transformation eBook, a 52-week planner and a career and money toolkit. Change your career, your lifestyle, or both, with a plan you can keep.',tags:['Goal planning','Career toolkit','52-Week Planner','Planners'],go:'design',cta:'Design your year',g:'path',col:['#efe3d1','#8c5430']},
+   {k:'For every day',h:'Daily <em>Inspiration</em>',p:'Motivation, quotes, affirmations, mantras and music sent to your phone each day. A lift that shows up even when you do not feel like it.',tags:['Motivation','Affirmations','Mantras','Music','From $2.99/week'],go:'inspiration',cta:'Choose your level',g:'phone',col:['#e3e7da','#3a4630']},
+   {k:'Coming soon',h:'The Soulrise <em>App</em>',p:'Your goals as a roadmap you can see. Milestones, weekly check-ins and your daily texts in one place. Included with Inner Circle texts.',tags:['Goal Roadmap','Weekly check-ins','Join the waitlist'],go:'home',anchor:'soulrise',cta:'Join the waitlist',g:'path',col:['#232b1d','#d8b26b']},
+   {k:'For your people',h:'Gather<em>ings</em>',p:'Career reset workshops, vision board nights, full moon circles and private events, online and in person.',tags:['Career Reset','Vision Board Night','Private events'],go:'gatherings',cta:'See what’s coming',g:'circle',col:['#ece4ef','#5b4a73']},
+   {k:'For your spirit',h:'The <em>Spiritual</em> side',p:'Rituals, stones, sacred smoke and the moon calendar, for the quiet practice that keeps you grounded while you grow.',tags:['Moon rituals','Stones','Sacred Smoke','Ritual Kits'],go:'spiritual',cta:'Explore Spiritual',g:'moon',col:['#2b3424','#e3c98f']}
+  ];
+  return `<section class="hero" id="hero"><canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-in"><div class="wrap">
+      <span class="eyebrow" style="animation:fadein 1s .2s both;display:block">Goals · Daily inspiration · The Soulrise app · Gatherings</span>
+      <h1 style="margin-top:18px"><span class="ln"><span>Build the life</span></span><span class="ln"><span>you’re proud of.</span></span></h1>
+      <div class="hero-bottom">
+        <div>
+          <p class="lede">Set the goal. Make the plan. Get a lift every day. Refined Life Co. gives you planners and a career toolkit to map your next chapter, daily inspiration texts to keep you moving, and the Soulrise app to see it all come together.</p>
+          <div class="hero-ctas"><a class="btn amber mag" href="#design" data-go="design">Start your transformation ${ARR}</a><a class="btn mag" href="#inspiration" data-go="inspiration">Get daily inspiration</a></div>
+        </div>
+        <div class="moon-chip week-chip"><div class="wk"><b>${wk}</b><small>of 52</small></div><div><strong>This is week ${wk}.</strong><small>${left>0?`${left} week${left===1?'':'s'} left to finish the year strong. Pick one goal and start this week.`:'The final week. Close the year, then set the next one.'}</small></div></div>
+      </div>
+    </div></div>
+    <div class="scroll-cue" aria-hidden="true">Scroll<i></i></div>
+  </section>
+
+  <section class="manifesto"><div class="wrap">
+    <span class="eyebrow">Our belief</span>
+    <p id="manifesto" style="margin-top:22px">${manifesto('A better life is not built in a day. It is built in *ordinary* weeks: one goal, one plan, one honest step at a time. We give you the *tools,* the daily *lift* and the people to keep going until the life you want is the life you *live.*')}</p>
+    <p class="sig">Refined Life Co.</p>
+  </div></section>
+
+  <section class="chapters film" id="chapters">
+    <div class="stage">
+      <div class="head"><div class="wrap"><span class="eyebrow">Five ways to grow</span></div></div>
+      <div class="track" id="chapTrack">${chapters.map(c=>`<div class="chap">
+        <div class="tile">${tileSVG(c.g,c.col,{label:c.h.replace(/<[^>]+>/g,'')})}</div>
+        <div><span class="k">${c.k}</span><h3>${c.h}</h3><p>${c.p}</p><ul>${c.tags.map(t=>`<li>${t}</li>`).join('')}</ul><a class="btn amber mag" href="#${c.anchor||c.go}" ${c.anchor?`data-scroll="${c.anchor}"`:`data-go="${c.go}"`}>${c.cta} ${ARR}</a></div>
+      </div>`).join('')}</div>
+      <div class="chap-meter"><div class="wrap" style="display:flex;gap:14px;align-items:center;width:100%"><span id="chapNum">Life Design</span><div class="bar"><i id="chapBar"></i></div><span>Spiritual</span></div></div>
+    </div>
+  </section>
+
+  <section class="band" id="goal-demo"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Try it · goal roadmap</span><h2>Map a goal in <em>thirty seconds</em></h2><p class="muted">Pick an area, name your goal and choose a timeline. You get four milestones with dates, plus the tools that help. This is how roadmaps work in our planners and the upcoming Soulrise app.</p></div></div>
+    <div class="goal-grid">
+      <form class="goal-form" data-form="goal" novalidate>
+        <span class="lbl">1 · Area of life</span>
+        <div class="chips" id="goalAreas">${Object.entries(GOAL_AREAS).map(([k,v])=>`<button type="button" class="chip" data-garea="${k}" aria-pressed="${goalState.area===k}">${v.n}</button>`).join('')}</div>
+        <label class="lbl" for="goalText">2 · Your goal</label>
+        <input id="goalText" placeholder="${esc(GOAL_AREAS[goalState.area].ex)}" value="${esc(goalState.text)}">
+        <span class="lbl">3 · Timeline</span>
+        <div class="chips" id="goalDays">${[30,90,365].map(d=>`<button type="button" class="chip" data-gdays="${d}" aria-pressed="${goalState.days===d}">${d===365?'1 year':d+' days'}</button>`).join('')}</div>
+      </form>
+      <div class="goal-out" id="goalOut"></div>
+    </div>
+  </div></section>
+
+  <section class="band film night" id="soulrise"><div class="wrap mentor">
+    <div class="rv">
+      <span class="eyebrow">Coming soon · The Soulrise app</span>
+      <h2 style="font-size:clamp(36px,4.8vw,64px);font-weight:300;margin:12px 0 18px">Your goals, <em style="color:var(--amber)">mapped.</em></h2>
+      <p class="muted" style="font-size:18px;max-width:46ch">Soulrise turns each goal into a roadmap you can see: milestones, a weekly check-in, and the encouragement from your daily texts in the same place. It will be included with Inner Circle inspiration texts.</p>
+      <ul class="app-feats"><li>Every goal as a roadmap of milestones</li><li>A Sunday check-in that shows what moved</li><li>Works alongside your planners and daily texts</li></ul>
+      <form class="nl" data-form="wait" novalidate style="margin:26px 0 0;justify-content:flex-start">
+        <label for="waitEmail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+        <input id="waitEmail" type="email" placeholder="you@example.com" required>
+        <button class="btn amber" type="submit">Join the waitlist</button>
+      </form>
+      <p class="nl-msg" id="waitMsg" style="text-align:left">Be first to know when Soulrise opens.</p>
+    </div>
+    ${soulrisePhone()}
+  </div></section>
+
+  <section class="band film"><div class="wrap mentor">
+    ${phoneHTML()}
+    <div class="rv">
+      <span class="eyebrow">Daily Inspiration Texts</span>
+      <h2 style="font-size:clamp(36px,4.8vw,64px);font-weight:300;margin:12px 0 18px">A little lift, <em style="color:var(--amber)">every day.</em></h2>
+      <p class="muted" style="font-size:18px;max-width:46ch">Motivation, quotes, affirmations, mantras and music picks sent straight to your phone, plus short guided meditations and breathwork at Level 2 and up. For the job search, the new role, the fresh start, or just a hard week.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px"><a class="btn amber mag" href="#inspiration" data-go="inspiration">Choose your level ${ARR}</a><span class="muted" style="align-self:center;font-size:14px">From $2.99 a week · cancel anytime</span></div>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Life Design toolkit</span><h2>Read it. Plan it. <em>Run the numbers.</em></h2><p class="muted">A one-year roadmap for changing your career, your lifestyle, or both. Three tools that work together, or all three for $39.</p></div><a class="link" href="#design" data-go="design">Explore Life Design →</a></div>
+    <div class="grid">${['complete-transformation-toolkit-ebook-planner-spreadsheet','one-year-life-transformation-ebook-printable','52-week-transformation-planner-printable','financial-career-toolkit-editable-spreadsheet'].map(h=>card(BY[h])).join('')}</div>
+  </div></section>
+
+  <section class="band film night"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Gatherings</span><h2>Grow <em>together</em></h2></div><a class="btn small mag" href="#gatherings" data-go="gatherings">All gatherings ${ARR}</a></div>
+    <div class="events">${EVENTS().filter(e=>e.t!=='Full Moon Circle').slice(0,3).map(evRow).join('')}</div>
+  </div></section>
+
+  <section class="band"><div class="wrap split">
+    <div class="tile rv" style="aspect-ratio:4/3;border-radius:var(--arch)">${tileSVG('moon',['#232b1d','#d8b26b'],{label:'Spiritual',sub:'Spiritual'})}</div>
+    <div class="prose rv">
+      <span class="eyebrow">For your spirit</span>
+      <h2>Stay grounded <em style="color:var(--clay-ink)">while you grow</em></h2>
+      <p>Big goals go further with a quiet practice behind them. Our Spiritual space holds moon rituals, ritual guides, stones, sacred smoke and Ritual Kits.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px"><a class="btn solid mag" href="#spiritual" data-go="spiritual">Explore Spiritual ${ARR}</a><a class="btn mag" href="#kits" data-go="kits">Shop Ritual Kits</a></div>
+    </div>
+  </div></section>
+
+  ${bigCTA()}
+  ${trust()}`;
+}
+function viewSpiritual(){
+  const m=moonInfo(), fm=nextFullMoons(3);
+  return `<section class="hero spirit" id="hero"><canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-in"><div class="wrap">
+      <span class="eyebrow" style="animation:fadein 1s .2s both;display:block">Spiritual · Rituals · Moon · Stones · Sacred smoke</span>
+      <h1 style="margin-top:18px"><span class="ln"><span>Refine the ritual.</span></span><span class="ln"><span>Ground the spirit.</span></span></h1>
+      <div class="hero-bottom">
+        <div>
+          <p class="lede">The quiet side of a refined life. Moon rituals, cleansing practices and hand-picked stones and sacred smoke, each with the steps to use it. A practice to come home to while you grow.</p>
+          <div class="hero-ctas"><a class="btn amber mag" href="#kits" data-go="kits">Shop Ritual Kits ${ARR}</a><a class="btn mag" href="#guides" data-scroll="guides">Read the ritual guides</a></div>
+        </div>
+        <div class="moon-chip"><canvas id="heroMoon" aria-hidden="true"></canvas><div><strong>Tonight: ${m.name}</strong><small>${m.name.includes('Full')?'The full moon is here.':`Full moon in ${m.toFull} day${m.toFull===1?'':'s'}.`} ${ritualFor(m.name)}</small></div></div>
+      </div>
+    </div></div>
+    <div class="scroll-cue" aria-hidden="true">Scroll<i></i></div>
+  </section>
+
+  <section class="manifesto"><div class="wrap">
+    <span class="eyebrow">Our practice</span>
+    <p id="manifesto" style="margin-top:22px">${manifesto('Ritual is how we *remember.* A bundle of sage on a Sunday. A stone held before a hard *conversation.* A full moon to let go of what we no longer need. Small sacred acts, repeated, keep us *rooted* while everything else *changes.*')}</p>
+    <p class="sig">Refined Life Co.</p>
+  </div></section>
+
+  <section class="band film"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">The moon calendar</span><h2>Live by the <em>moon</em></h2><p class="muted">Each phase carries its own intention. Here is what the sky holds next.</p></div></div>
+    <div class="moon-cal">
+      ${[['New Moon',0,'Set intentions. Write three on a fresh page.'],['First Quarter',.25,'Build. Act on one intention this week.'],['Full Moon',.5,'Release and cleanse. Charge your crystals.'],['Last Quarter',.75,'Rest and clear. Declutter one corner.']].map(([n,f,d])=>`<div class="mc rv ${m.name.startsWith(n.split(' ')[0])&&(n!=='New Moon'||m.name==='New Moon')?'on':''}"><canvas data-phase="${f}"></canvas><b>${n}</b><span>${d}</span></div>`).join('')}
+    </div>
+    <p class="muted" style="margin-top:24px;font-size:15px">Next full moons: ${fm.map(fmtDay).join(' · ')} · <a class="link" href="#gatherings" data-go="gatherings">Join a Full Moon Circle →</a></p>
+  </div></section>
+
+  <section class="band"><div class="wrap collage">
+    <div class="c1" data-speed=".06"><div class="tile">${tileSVG('moon',['#232b1d','#d8b26b'],{label:'Full Moon Reset Kit',sub:'Full Moon Reset'})}</div></div>
+    <div class="c2" data-speed="-.08"><div class="tile">${tileSVG('jar',['#efe3d1','#8c5430'],{label:'Self-Care Sunday Kit',sub:'Self-Care Sunday'})}</div></div>
+    <div class="c3" data-speed=".12"><div class="tile">${tileSVG('crystal',['#e7ddef','#5b4a73'],{label:'Stones'})}</div></div>
+    <div class="txt rv">
+      <span class="eyebrow">Ritual Kits · save up to 20%</span>
+      <h2>The whole ritual, <em style="color:var(--clay-ink)">packed together</em></h2>
+      <p>Four kits that pair pieces made to work together, priced below buying them one by one.</p>
+      <a class="btn solid mag" href="#kits" data-go="kits">Explore the kits ${ARR}</a>
+    </div>
+  </div></section>
+
+  <section class="band" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Shop by intention</span><h2>What does your spirit <em>need?</em></h2></div></div>
+    <div class="intent-list" id="intentList">${Object.entries(INTENTS).map(([k,[n,d]])=>`<a class="irow rv" href="#shop" data-intent-go="${k}" data-prev="${k}"><h3>${n}</h3><span class="d">${d}</span><span class="go">→</span></a>`).join('')}</div>
+  </div></section>
+
+  <section class="band" id="guides" style="background:var(--bg-deep)"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Ritual guides</span><h2>Learn the <em>practice</em></h2><p class="muted">Plain-spoken guides to cleansing, the moon and rituals for life’s big moments.</p></div></div>
+    <div class="posts">${POSTS.map(postCard).join('')}</div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Spiritual favorites</span><h2>Stones + <em>sacred smoke</em></h2></div><div class="rail-nav"><button class="add" data-rail="-1" aria-label="Scroll left">←</button><button class="add" data-rail="1" aria-label="Scroll right">→</button></div></div>
+    <div class="rail" id="rail">${best.map(h=>card(BY[h])).join('')}</div>
+  </div></section>
+
+  <section class="band" style="padding-top:0"><div class="wrap" style="max-width:860px"><div class="prose rv">
+    <span class="eyebrow">A note on sacred plants</span><h2 style="font-size:clamp(28px,3.4vw,40px)">Use them with <em style="color:var(--clay-ink)">care</em></h2>
+    <p>White sage, palo santo and other sacred plants carry real history for the cultures that first used them. We share where each one comes from and encourage using them with respect.</p>
+  </div></div></section>
+  ${letterBand()}`;
+}
+function phoneHTML(){return `<div class="phone" aria-label="Sample inspirational texts"><div class="bar-top">Refined Life Co. · Daily Inspiration</div><div class="msgs" id="msgs"></div></div>`}
+function bigCTA(){
+  return `<div class="marquee" aria-hidden="true"><div class="track">${['Set the goal','Make the plan','Take the step','Check in','Celebrate','Begin again','Set the goal','Make the plan','Take the step','Check in','Celebrate','Begin again'].map(s=>`<span>${s}</span>`).join('')}</div></div>
+  <section class="big-cta"><div class="wrap">
+    <h2 class="rv">Begin your<br><em>refined</em> life.</h2>
+    <p>Start with one goal. A plan for your year, a daily text to keep you going, and a ritual to keep you grounded.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn solid mag" href="#design" data-go="design">Start your transformation ${ARR}</a><a class="btn mag" href="#inspiration" data-go="inspiration">Get daily inspiration</a></div>
+  </div></section>`;
+}
+function letterBand(){
+  return `<section class="band letter film"><div class="wrap">
+    <span class="eyebrow">The Moon Letter</span>
+    <h2>One ritual, every moon cycle</h2>
+    <div class="phases" aria-hidden="true">${[0,.25,.5,.75].map((f,i)=>`<div><canvas data-phase="${f}"></canvas>${['New','First quarter','Full','Last quarter'][i]}</div>`).join('')}</div>
+    <p>A short letter at each full moon: a simple ritual, a career or life prompt, a featured stone, and first look at new kits and gatherings. Join and take 10% off your first order.</p>
+    <form class="nl" data-form="nl" novalidate>
+      <label for="nlEmail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+      <input id="nlEmail" type="email" placeholder="you@example.com" required>
+      <button class="btn amber" type="submit">Get 10% off</button>
+    </form>
+    <p class="nl-msg" id="nlMsg">One email per moon cycle. Unsubscribe anytime.</p>
+  </div></section>`;
+}
+function trust(){
+  return `<div class="wrap"><div class="trust">
+    <div><svg viewBox="0 0 24 24"><path d="M3 8h12v8H3zM15 11h3.5L21 14v2h-6"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg><span><b>Free shipping over $35</b>Packed by hand in small batches</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 7.6 8 9 4.6-1.4 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Secure checkout</b>Cards, Shop Pay, Apple Pay, PayPal</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span><b>Instant downloads</b>Planners and toolkits arrive by email</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 21c4-3.5 7-7 7-11a7 7 0 0 0-14 0c0 4 3 7.5 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Origins listed</b>Every product says where it comes from</span></div>
+  </div></div>`;
+}
+function viewShop(coll){
+  const c=coll?COLLS[coll]:null;
+  return `<div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">The Ritual Shop</span>
+      <h1>${c?esc(c.long):'Everything for <em>your space</em>'}</h1>
+      <p class="muted">${c?esc(c.blurb):'Stones, sacred smoke, bath rituals, incense and altar pieces. Every piece is chosen by hand and comes with the steps to use it.'}</p>
+      <div class="chips" style="margin-top:26px">
+        <a class="chip" href="#shop" data-go="shop" aria-pressed="${!coll}">All</a>
+        ${Object.entries(COLLS).filter(([k])=>k!=='design').map(([k,v])=>`<a class="chip" href="#shop-${k}" data-go="shop-${k}" aria-pressed="${coll===k}">${esc(v.name)}</a>`).join('')}
+        <a class="chip" href="#kits" data-go="kits">Ritual Kits</a>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="chips" id="shopIntents">${Object.entries(INTENTS).map(([k,[v]])=>`<button class="chip" data-filter="${k}" aria-pressed="${shopState.intent===k}" style="padding:6px 13px;font-size:13px">${v}</button>`).join('')}</div>
+      <label>Sort <select id="sortSel"><option value="feat">Featured</option><option value="lo">Price, low to high</option><option value="hi">Price, high to low</option><option value="az">A–Z</option></select></label>
+    </div>
+    <p class="muted" id="countLine" style="font-size:14px;margin-bottom:18px"></p>
+    <div class="grid" id="shopGrid"></div>
+    <div class="upsell" data-go="kits" style="margin-top:56px"><div class="tile">${tileSVG('moon',['#232b1d','#d8b26b'])}</div><div><b>Save up to 20% with a Ritual Kit</b><small>Matched sets built from these products. See all kits →</small></div></div>
+  </div>
+  ${trust()}`;
+}
+let shopState={intent:'',sort:'feat'};
+function renderShopGrid(coll){
+  let list=SHOP.filter(p=>!coll||p.coll===coll);
+  if(shopState.intent)list=list.filter(p=>p.intents.includes(shopState.intent));
+  const s=shopState.sort;
+  if(s==='lo')list=[...list].sort((a,b)=>a.min-b.min);
+  if(s==='hi')list=[...list].sort((a,b)=>b.min-a.min);
+  if(s==='az')list=[...list].sort((a,b)=>a.t.localeCompare(b.t));
+  $('#shopGrid').innerHTML=list.length?list.map(card).join(''):'<p class="muted">Nothing here yet for that intention. Try another.</p>';
+  $('#countLine').textContent=`${list.length} piece${list.length===1?'':'s'}${shopState.intent?' for '+INTENTS[shopState.intent][0]:''}`;
+}
+function viewProduct(h){
+  const p=BY[h]; const c=COLLS[p.coll];
+  const kit=KITS.find(k=>k.items.includes(h));
+  const pairs=PRODUCTS.filter(x=>x.h!==h&&x.coll!==p.coll&&x.intents.some(i=>p.intents.includes(i))).slice(0,4);
+  const shades=[p.col,[p.col[1],p.col[0]],['#f6f2ea',p.col[1]],[p.col[0],'#2a251f']];
+  const isDigital=p.coll==='design';
+  return `<div class="wrap">
+    <div class="crumbs"><a href="#${isDigital?'design':'shop'}" data-go="${isDigital?'design':'shop'}">${isDigital?'Life Design':'The Ritual Shop'}</a> / ${isDigital?'':`<a href="#shop-${p.coll}" data-go="shop-${p.coll}">${esc(c.name)}</a> / `}${esc(p.t)}</div>
+    <div class="pdp">
+      <div class="gallery">
+        <div class="tile main" id="mainImg">${tileSVG(p.g,p.col,{label:p.t,sub:'Photo slot · hero'})}</div>
+        <div class="thumbs">${shades.map((col,i)=>`<div class="tile ${i===0?'on':''}" data-shot="${i}">${tileSVG(p.g,col,{label:['Product','Detail','Scale','In use'][i]})}</div>`).join('')}</div>
+        <p class="muted" style="font-size:12.5px">Photo slots: clean hero, detail, scale in hand, in use. Hover the main image to zoom.</p>
+      </div>
+      <div class="pdp-info">
+        <span class="eyebrow">${esc(c.name)}${p.spec.Origin?' · '+esc(p.spec.Origin):''}</span>
+        <h1>${esc(p.t)}</h1>
+        <div>${priceHTML(p)}${p.ca&&p.ca>p.min?` <span class="save" style="color:var(--clay-ink);border-color:var(--clay);margin-left:8px">Save ${money(p.ca-p.min)}</span>`:''}</div>
+        <p class="why-line">${esc(p.why)}</p>
+        <div class="chips">${p.intents.map(i=>`<a class="chip" href="#shop" data-intent-go="${i}" style="padding:5px 12px;font-size:12.5px">${INTENTS[i][0]}</a>`).join('')}</div>
+        ${p.max>p.min?`<p style="font-size:14px" class="muted">Options from ${money(p.min)} to ${money(p.max)}.</p>`:''}
+        <div class="buy-row">
+          <div class="qty"><button data-q="-1" aria-label="Decrease quantity">−</button><output id="pq">1</output><button data-q="1" aria-label="Increase quantity">+</button></div>
+          <button class="btn solid mag" data-add-qty="${p.h}">Add to cart · ${money(p.min)}</button>
+        </div>
+        <div class="reassure"><span>${isDigital?'Instant download':'Ships in 1–2 business days'}</span><span>Free shipping over $35</span><span>Secure checkout</span></div>
+        ${kit?`<div class="upsell" data-go="kits"><div class="tile">${tileSVG(kit.g,kit.col)}</div><div><b>Part of the ${esc(kit.name)} Kit</b><small>Get it with ${kit.items.length-1} matching pieces for ${money(kit.price)}, save ${Math.round((1-kit.price/kitTotal(kit))*100)}% →</small></div></div>`:''}
+        <div>
+          <details class="acc" open><summary>How to use</summary><div>${esc(p.use)}</div></details>
+          <details class="acc"><summary>Details</summary><div><dl class="specs">${Object.entries(p.spec).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div></details>
+          <details class="acc"><summary>${isDigital?'Delivery':'Shipping + returns'}</summary><div>${isDigital?'Digital files arrive by email right after checkout. Because files are delivered instantly, all sales are final.':'Orders ship in 1–2 business days. Free U.S. shipping over $35.'} Questions? Email therefinedlifeco@gmail.com.</div></details>
+        </div>
+      </div>
+    </div>
+  </div>
+  ${pairs.length?`<section class="band" style="background:var(--bg-deep)"><div class="wrap"><div class="sec-head"><div><span class="eyebrow">Pairs well with</span><h2>Complete the <em>ritual</em></h2></div></div><div class="grid">${pairs.map(card).join('')}</div></div></section>`:''}`;
+}
+function viewKits(){
+  return `<section class="film"><div class="wrap page-head"><span class="eyebrow">Ritual Kits</span><h1>The whole ritual, <em>packed together</em></h1><p class="muted">Each kit pairs pieces that work together, priced below buying them one by one. Every item listed is in stock today.</p></div>
+  <div class="wrap" style="padding-bottom:90px"><div class="kit-grid two">${KITS.map(kitCard).join('')}</div></div></section>
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Gift sets</span><h2>Ready to <em>give</em></h2><p class="muted">Boxed sets for birthdays, housewarmings, promotions and the holidays.</p></div></div>
+    <div class="grid">${GIFT_SETS.map(g=>`<article class="card"><div class="tile">${tileSVG(g.g,g.col,{label:g.t})}<div class="quick"><button class="btn" data-add="${g.h}">Quick add · ${money(g.price)}</button></div></div><h3>${esc(g.t)}</h3><p class="why">${esc(g.why)}</p><div class="row"><span class="price">${g.max?'<span class="from">from</span>':''}${money(g.price)}</span><button class="add" data-add="${g.h}" aria-label="Add ${esc(g.t)} to cart">${PLUS}</button></div></article>`).join('')}${STORE_SETS.map(h=>card(BY[h])).join('')}</div>
+  </div></section>${trust()}`;
+}
+const CHAPTERS=['The Decision to Change Your Life','Understanding Your Current Reality','Discovering Who You Want to Become','Breaking Through Fear and Limiting Beliefs','Exploring New Careers','Creating Your Financial Freedom Plan','Career Transition Strategy','Navigating Setbacks and Rejection','Measuring Your Transformation','Creating Your Next Three-Year Vision'];
+const SHEETS=[['Budget','Monthly budget against actual spending, with variances highlighted.'],['Savings Runway','Your savings target, your funding gap and how many months of runway you have.'],['Career Comparison','Score up to five career paths on interest, income, flexibility, skills fit and feasibility.'],['Skills Inventory','Current vs. target skill levels, the gap, your evidence and learning actions.'],['Opportunity Tracker','Roles and clients with stage dropdowns and follow-up dates.'],['Networking Tracker','Every conversation, its purpose, status and next follow-up.'],['Weekly Scorecard','All 52 weeks with automatic completion percentages.'],['Life Audit','Eight life areas scored each quarter, with a progress chart.']];
+function viewDesign(){
+  const d=h=>BY[h];
+  return `<section class="film"><div class="wrap page-head" style="padding-bottom:70px">
+    <span class="eyebrow">Life Design</span>
+    <h1>Change your career, your life, <em>or both.</em></h1>
+    <p class="muted">Practical tools for a year of intentional change: a guided eBook, a 52-week planner and a spreadsheet that runs the numbers. Built for real lives with real bills, at a pace you can keep.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><button class="btn amber mag" data-add="complete-transformation-toolkit-ebook-planner-spreadsheet">Get the Complete Toolkit · $39 ${ARR}</button><a class="btn mag" href="#p-complete-transformation-toolkit-ebook-planner-spreadsheet" data-go="p-complete-transformation-toolkit-ebook-planner-spreadsheet">What’s inside</a></div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">The transformation system</span><h2>Read it. Plan it. <em>Run the numbers.</em></h2><p class="muted">Three tools that share one 12-month roadmap. Buy them alone, or together and save $11.</p></div></div>
+    <div class="grid">${['complete-transformation-toolkit-ebook-planner-spreadsheet','one-year-life-transformation-ebook-printable','52-week-transformation-planner-printable','financial-career-toolkit-editable-spreadsheet'].map(h=>card(d(h))).join('')}</div>
+  </div></section>
+
+  <section class="band" style="background:var(--bg-deep);padding-top:80px"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Inside the eBook · 96 pages, 16 chapters</span><h2>Your year, <em>chapter by chapter</em></h2><p class="muted">Every chapter has three lessons, a real-world scenario, a guided exercise, journal prompts and a checkpoint. A few of the chapters:</p></div></div>
+    <div class="roadmap">${CHAPTERS.slice(0,8).map((c,i)=>`<div class="rv"><small>${['Decide','See','Envision','Break through','Explore','Fund','Transition','Persist'][i]}</small><b>${c}</b></div>`).join('')}</div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Financial & Career Toolkit · $12</span><h2>Eight tabs that <em>do the math</em></h2><p class="muted">Works in Excel, Apple Numbers and Google Sheets. Click a tab.</p></div></div>
+    <div class="sheet-tabs" id="sheetTabs">${SHEETS.map((s,i)=>`<button data-sheet="${i}" aria-pressed="${i===0}">${s[0]}</button>`).join('')}</div>
+    <div class="sheet-view" id="sheetView"><b>${SHEETS[0][0]}</b><p class="muted">${SHEETS[0][1]}</p></div>
+    <p class="muted" style="font-size:13px;margin-top:12px">An educational planning tool, not financial advice.</p>
+  </div></section>
+
+  <section class="band" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Printable planners</span><h2>Design the <em>everyday</em></h2><p class="muted">Instant-download planners for your vision, style, body, budget, rest and home. All five for $39.</p></div></div>
+    <div class="grid">${['the-complete-planner-collection-all-5-printable-planners','luxury-lifestyle-vision-board-kit','glow-up-planner-90-day-style-fitness-finance-goals','self-care-sunday-reset-planner','capsule-wardrobe-planner','home-organization-cleaning-schedule'].map(h=>card(d(h))).join('')}</div>
+  </div></section>
+
+  <section class="band film"><div class="wrap split">
+    <div class="tile rv">${tileSVG('book',['#2b3424','#d8b26b'],{label:'Coach guide'})}</div>
+    <div class="prose rv">
+      <span class="eyebrow">For coaches + facilitators</span>
+      <h2>Teach the program</h2>
+      <p>The Coach + Facilitator Guide turns the One-Year Life Transformation program into twelve ready-to-run monthly modules for life coaches, career coaches, workshop leaders and community educators.</p>
+      <p>Each module includes a minute-by-minute 75-minute lesson plan, an 8-slide presentation outline with speaker notes, a video script, discussion prompts and an assessment rubric.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px"><button class="btn amber mag" data-add="coach-facilitator-guide-life-transformation-course">Add the guide · $39</button><a class="btn mag" href="#gatherings" data-go="gatherings">Book a workshop</a></div>
+    </div>
+  </div></section>
+  ${bigCTA()}`;
+}
+function viewMentorship(per){
+  return `<section class="film"><div class="wrap mentor" style="padding-block:70px 90px">
+    <div>
+      <span class="eyebrow">Daily Inspiration Texts</span>
+      <div class="page-head" style="padding:0"><h1 style="margin-top:14px">A little <em>lift,</em> every day.</h1></div>
+      <p class="muted" style="font-size:18px;max-width:48ch;margin-top:18px">Motivation, quotes, affirmations, mantras and music sent straight to your phone to start and move through each day, with short guided videos at Level 2 and up. For career changes, job searches, fresh starts and ordinary hard weeks.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><a class="btn amber mag" href="#levels" data-scroll="levels">Choose your level ${ARR}</a><span class="muted" style="align-self:center;font-size:14px">From $2.99 a week · cancel anytime</span></div>
+    </div>
+    ${phoneHTML()}
+  </div></section>
+  <section class="band" style="background:var(--bg-deep)"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">What arrives</span><h2>Seven kinds of <em>lift</em></h2><p class="muted">Each day brings a mix. Tap one to see a sample on the phone.</p></div></div>
+    <div class="types">${Object.entries(TEXT_TYPES).map(([k,v])=>`<button class="type rv" data-ttype="${k}"><b>${v.n}</b><span>${v.d}</span></button>`).join('')}</div>
+  </div></section>
+  <section class="band" id="levels"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Three levels</span><h2>Pick your <em>pace</em></h2><p class="muted">Monthly saves about 19–28% compared with paying weekly.</p></div>
+      <div class="toggle" role="group" aria-label="Billing"><button data-per="w" aria-pressed="${per==='w'}">Weekly</button><button data-per="m" aria-pressed="${per==='m'}">Monthly</button></div></div>
+    <div class="levels">${LEVELS.map(l=>`<div class="lvl rv ${l.feat?'feat':''}">
+      <span class="eyebrow">${l.n}${l.feat?' · most chosen':''}</span>
+      <h3>${l.name}</h3>
+      <div class="amt">${money(per==='w'?l.w:l.m)}<small> / ${per==='w'?'week':'month'}</small></div>
+      <ul>${l.inc.map(i=>`<li>${i}</li>`).join('')}</ul>
+      <button class="btn ${l.feat?'amber':'solid'} mag" data-add-sub="${l.n}|${per}">Start ${l.name}</button>
+    </div>`).join('')}</div>
+    <p class="muted" style="font-size:13px;margin-top:16px">Level names are suggestions; your store lists them as Level 1, 2 and 3.</p>
+  </div></section>
+  <section class="band" style="background:var(--bg-deep)"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">How it works</span><h2>Three steps to your <em>first text</em></h2></div></div>
+    <div class="steps"><div><b>Choose your level</b><p class="muted">Pick weekly or monthly billing and the level that fits your season.</p></div><div><b>Activate</b><p class="muted">Activation instructions arrive in your order confirmation email right after checkout.</p></div><div><b>Your texts begin</b><p class="muted">Encouragement arrives through the day. Cancel anytime from your account.</p></div></div>
+  </div></section>
+  <section class="band"><div class="wrap split">
+    <div class="prose rv"><span class="eyebrow">Pairs well with</span><h2>Make the <em>plan,</em> then get the push.</h2><p>Daily inspiration works best alongside a plan. Pair them with the 52-Week Transformation Planner or the Complete Toolkit, and let the daily texts keep you moving between Sunday check-ins.</p><a class="link" href="#design" data-go="design">Explore Life Design →</a></div>
+    <div class="grid" style="grid-template-columns:1fr 1fr">${['52-week-transformation-planner-printable','complete-transformation-toolkit-ebook-planner-spreadsheet'].map(h=>card(BY[h])).join('')}</div>
+  </div></section>`;
+}
+function EVENTS(){
+  const fm=nextFullMoons(3);
+  return [
+   {d:fm[0],type:'virtual',t:'Full Moon Circle',p:'A guided release ritual, a short meditation and journal prompts, together on video. Bring sage or a candle and something to write with.',meta:['Virtual','7:30 PM ET','Monthly']},
+   {month:'Jan',day:'TBA',type:'person',t:'Vision Board Night',p:'Start the year with a finished vision board. Supplies, tea and the Luxury Vision Board Kit included.',meta:['In person','Charlotte, NC','Seasonal']},
+   {d:fm[1],type:'virtual',t:'Full Moon Circle',p:'Our monthly release ritual. New guests welcome.',meta:['Virtual','7:30 PM ET','Monthly']},
+   {month:'Quarterly',day:'',type:'virtual',t:'Career Reset Intensive',p:'A two-hour working session built on the One-Year Life Transformation program. Leave with your career comparison scored and a 90-day plan.',meta:['Virtual','Includes Career Toolkit']},
+   {month:'Seasonal',day:'',type:'person',t:'Self-Care Sunday Pop-Up',p:'Shop the Ritual Shop in person, make your own bath blend and meet the community.',meta:['In person','Charlotte, NC']},
+   {d:fm[2],type:'virtual',t:'Full Moon Circle',p:'Our monthly release ritual. New guests welcome.',meta:['Virtual','7:30 PM ET','Monthly']}
+  ];
+}
+function evRow(e,i){
+  const date=e.d?`<b>${e.d.getDate()}</b><span>${e.d.toLocaleDateString('en-US',{month:'short',weekday:'short'})}</span>`:`<b style="font-size:26px">${e.month}</b><span>${e.day||'Dates soon'}</span>`;
+  return `<div class="ev" data-type="${e.type}">
+    <div class="date">${date}</div>
+    <div><h3>${e.t}</h3><p>${e.p}</p><div class="meta">${e.meta.map(m=>`<span class="pill">${m}</span>`).join('')}<span class="pill sample">Sample listing</span></div></div>
+    <button class="btn small mag" data-rsvp="${i}">${e.d?'RSVP':'Join the waitlist'}</button>
+    <form class="rsvp" data-form="rsvp" hidden><input type="email" placeholder="Your email" aria-label="Your email" required><button class="btn amber small" type="submit">${e.d?'Save my seat':'Notify me'}</button><p></p></form>
+  </div>`;
+}
+function viewGatherings(){
+  return `<section class="film night"><div class="wrap">
+    <div class="page-head"><span class="eyebrow">Gatherings</span><h1>Come <em>sit with us.</em></h1><p class="muted">Full moon circles, workshops and pop-ups, online and in person. Full moon dates below follow the real lunar calendar.</p>
+      <div class="chips" style="margin-top:26px" id="evFilter"><button class="chip" data-ev="all" aria-pressed="true">All</button><button class="chip" data-ev="virtual" aria-pressed="false">Virtual</button><button class="chip" data-ev="person" aria-pressed="false">In person</button></div></div>
+    <div class="events" id="evList" style="margin-bottom:90px">${EVENTS().map(evRow).join('')}</div>
+  </div></section>
+  <section class="band"><div class="wrap split">
+    <div class="prose rv">
+      <span class="eyebrow">Private gatherings</span>
+      <h2>Bring a ritual to <em>your people</em></h2>
+      <p>Birthday circles, bridal and baby showers, team offsites and corporate wellness days. We plan and run the whole experience: the ritual, the setup, take-home kits for every guest.</p>
+      <p>Coaches and community leaders can also book a facilitated Career Reset workshop for their groups.</p>
+    </div>
+    <form class="inquiry rv" data-form="inq" novalidate>
+      <label>Name<input id="iqName" required></label>
+      <label>Email<input id="iqEmail" type="email" required></label>
+      <label>Type of gathering<select id="iqType"><option>Birthday or celebration</option><option>Shower</option><option>Team or corporate wellness</option><option>Career Reset workshop</option><option>Something else</option></select></label>
+      <label>Guests<select id="iqGuests"><option>Under 10</option><option>10–25</option><option>25–50</option><option>50+</option></select></label>
+      <label class="full">Tell us about it<textarea id="iqMsg" placeholder="Date, place and the feeling you want guests to leave with"></textarea></label>
+      <div class="full" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button class="btn solid mag" type="submit">Send inquiry ${ARR}</button><span class="muted" id="iqMsgOut" style="font-size:14px"></span></div>
+    </form>
+  </div></section>
+  ${letterBand()}`;
+}
+function viewStory(){
+  const rows=[['Tumbled stones + druzy','Brazil'],['California white, blue + black sage','California, USA'],['Palo santo','South America'],['Hand-rolled + artisan incense','India'],['Traditional incense','Tibet'],['Incense bundles + cones','Africa'],['Chests, journals + dreamcatchers','India'],['Milk baths, salts + steamers','Blended in small batches with organic herbs'],['Planners, eBook + toolkit','Written and designed by Refined Life Co.'],['Daily Inspiration Texts','Written by Refined Life Co.']];
+  const pillars=[
+   ['Life Design','For your goals','Planners, a one-year transformation eBook and a career and money toolkit, so change comes with a plan.','design','path',['#efe3d1','#8c5430']],
+   ['Daily Inspiration','For every day','Motivation, quotes, affirmations, mantras and music on your phone, so the plan has a voice behind it.','inspiration','phone',['#e3e7da','#3a4630']],
+   ['Gatherings','For your people','Workshops, circles and private events, so no one grows alone.','gatherings','circle',['#ece4ef','#5b4a73']],
+   ['Spiritual + the Ritual Shop','For your spirit','Stones, sacred smoke, bath rituals and moon practices, so you stay grounded while everything changes.','spiritual','moon',['#232b1d','#d8b26b']]
+  ];
+  const values=[
+   ['Practical over perfect','A refined life is not a flawless one. Every tool we make is built for real schedules, real budgets and real setbacks.'],
+   ['Every product comes with the next step','You should never open a stone, a bundle, a planner or a text and wonder what to do with it. Each one tells you how to use it.'],
+   ['Small batches, made with care','Bath blends are mixed in small runs, every order is packed by a person, and every planner is written and designed in house.'],
+   ['Respect for sacred plants','White sage, palo santo and other sacred plants carry real history for the cultures that first used them. We share where each one comes from and encourage using them with care.'],
+   ['Honest about what we are','We offer encouragement, structure and ritual. We are not therapy, medical, financial or legal advice, and we never promise a job, an income or an outcome. We promise tools that help you do the work.']
+  ];
+  const forWho=[['The career changer','who knows it is time for something new and needs a plan, a budget and courage.'],['The overwhelmed','who wants calmer mornings, a quieter home and a few minutes back each day.'],['The fresh start','moving into a new home, a new city, a new year or a new chapter.'],['The seeker','drawn to the moon, to stones and to sacred smoke, and wanting to practice with intention.'],['The goal setter','who writes the list every January and wants this to be the year it sticks.'],['The coach and the community leader','guiding others through change and looking for a program to teach.']];
+  return `<section class="film night"><div class="wrap page-head" style="padding-bottom:90px">
+    <span class="eyebrow">Our story</span>
+    <h1>Built for the life <em>you’re building.</em></h1>
+    <p class="muted">Refined Life Co. brings together the practical and the spiritual: plans for your goals, a daily lift to keep you going, and rituals to keep you grounded along the way.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap split">
+    <div class="tile rv">${tileSVG('sage',['#3a4630','#e3c98f'],{label:'Refined Life Co.',sub:'Where it began'})}</div>
+    <div class="prose rv">
+      <span class="eyebrow">Where it began</span>
+      <h2>It started with <em style="color:var(--clay-ink)">small rituals</em></h2>
+      <p>Refined Life Co. began with a simple belief: a few intentional minutes each day can change the shape of a life. A bundle of sage on a Sunday. A stone carried into a hard meeting. A warm bath at the end of a long week.</p>
+      <p>Those small rituals made room to breathe. And once there was room to breathe, the bigger questions came: Is this the career I want? Where is the money going? What would I do if I stopped waiting?</p>
+      <p>So the shop grew. Alongside the stones and the sage came planners, a one-year transformation program, a career and money toolkit, and daily inspiration texts. The spiritual and the practical turned out to belong together. One keeps you grounded. The other keeps you moving.</p>
+    </div>
+  </div></section>
+
+  <section class="manifesto" style="padding-block:clamp(60px,9vw,110px)"><div class="wrap">
+    <span class="eyebrow">Our mission</span>
+    <p style="margin-top:22px;font-family:var(--f-display);font-weight:300;font-size:clamp(28px,4vw,54px);line-height:1.18;max-width:24ch">To help people build lives they are <em style="color:var(--clay-ink)">proud of,</em> one goal, one ritual and one ordinary week at a time.</p>
+  </div></section>
+
+  <section class="band film"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">What we make</span><h2>Four ways we <em>help you grow</em></h2><p class="muted">Each one works on its own. Together, they cover the plan, the daily push, the people and the practice.</p></div></div>
+    <div class="story-pillars">${pillars.map(([n,k,d,go,g,col])=>`<a class="sp rv" href="#${go}" data-go="${go}"><div class="tile">${tileSVG(g,col,{label:n})}</div><span class="eyebrow">${k}</span><h3>${n}</h3><p>${d}</p><span class="link">Explore →</span></a>`).join('')}</div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Who we are for</span><h2>If this sounds like you, <em>welcome</em></h2></div></div>
+    <div class="who">${forWho.map(([h,d])=>`<div class="rv"><b>${h}</b><span>${d}</span></div>`).join('')}</div>
+  </div></section>
+
+  <section class="band" style="background:var(--bg-deep)"><div class="wrap" style="max-width:960px">
+    <div class="prose"><span class="eyebrow">What we believe</span><h2>Five promises</h2></div>
+    <div class="values">${values.map(([h,d])=>`<details class="acc" open><summary>${h}</summary><div>${d}</div></details>`).join('')}</div>
+  </div></section>
+
+  <section class="band"><div class="wrap" style="max-width:900px">
+    <div class="prose"><span class="eyebrow">Where it comes from</span><h2>Our origins list</h2><p>We list the origin of every product we can, so you know what you are bringing into your home and your life.</p></div>
+    <div class="tbl"><table class="origins"><thead><tr><th>What</th><th>Where</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>
+  </div></section>
+
+  <section class="band film night"><div class="wrap" style="max-width:900px;text-align:center">
+    <span class="eyebrow">The road ahead</span>
+    <h2 style="font-size:clamp(32px,4.4vw,56px);font-weight:300;margin:12px 0 16px">What’s <em style="color:var(--amber)">next</em></h2>
+    <p class="muted" style="font-size:18px;max-width:56ch;margin:0 auto">The Soulrise goal roadmap app is on its way, bringing your goals, check-ins and daily texts into one place. New gatherings, kits and planners arrive through the year.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px"><a class="btn amber mag" href="#home" data-go="home" data-then="soulrise">Join the Soulrise waitlist ${ARR}</a><a class="btn mag" href="#gatherings" data-go="gatherings">See upcoming gatherings</a></div>
+  </div></section>
+  ${bigCTA()}`;
+}
+const POSTS=[
+ {id:'j-cleanse-crystals',cat:'Rituals',t:'How to cleanse your crystals: four simple ways',d:'Moonlight, smoke, sound and selenite. Which method suits which stone.',g:'crystal',col:['#e7ddef','#5b4a73'],shop:['selenite-charging-bowl','california-white-sage-7','tibetan-singing-bowl-5d'],
+  body:`<p>Crystals pick up the energy of everything around them, including the box they arrived in. Cleansing them is the first step of any crystal practice, and it takes less than ten minutes.</p><h2>1. Moonlight</h2><p>Set your stones on a windowsill overnight during a full moon. This is the gentlest method and safe for nearly every stone.</p><h2>2. Smoke</h2><p>Light a sage bundle or palo santo stick, blow out the flame and pass each crystal through the smoke for about 30 seconds while holding a clear intention.</p><h2>3. Sound</h2><p>Circle a singing bowl near your crystals for a minute or two. Sound works well when you have many stones to cleanse at once.</p><h2>4. Selenite</h2><p>Rest your stones in a selenite bowl overnight. Selenite is known for clearing other crystals without water or smoke.</p><h2>A note on water</h2><p>Some stones, including selenite itself, dissolve or dull in water. When in doubt, choose moonlight, smoke or sound.</p>`},
+ {id:'j-career-ritual',cat:'Career',t:'A ritual for the week before a career change',d:'Clear the slate, carry courage and run the numbers before you leap.',g:'path',col:['#efe3d1','#8c5430'],shop:['financial-career-toolkit-editable-spreadsheet','crystals-tigers-eye','california-white-sage-7'],
+  body:`<p>A new job, a resignation letter or a business launch can feel like standing at the edge of something. This one-week ritual pairs practical planning with small grounding habits so you move with a plan instead of panic.</p><h2>Day 1: Clear the slate</h2><p>Smudge your workspace and clear your desk. Write down what you are leaving and what you hope to find.</p><h2>Days 2–3: Run the numbers</h2><p>Fill in your budget and savings runway. Knowing how many months of runway you have turns fear into a number you can plan around.</p><h2>Days 4–5: Compare your paths</h2><p>Score each option on interest, income, flexibility, skills fit and feasibility. The highest score is not always the answer, but it shows you what you value.</p><h2>Days 6–7: Carry courage</h2><p>Carry a tiger’s eye to your conversations. Before each one, take three slow breaths and say your intention out loud.</p>`},
+ {id:'j-full-moon',cat:'Moon cycles',t:'A 15-minute full moon ritual for beginners',d:'Release, cleanse and set intentions. No experience needed.',g:'moon',col:['#232b1d','#d8b26b'],shop:['selenite-wand-moon-phases','herbal-bath-salts','amethyst'],
+  body:`<p>The full moon is traditionally a time for release: letting go of what you no longer need so there is room for what comes next. This ritual takes about fifteen minutes.</p><h2>What you need</h2><ul><li>A sage bundle or palo santo</li><li>A selenite wand</li><li>Paper and a pen</li><li>Bath salts (optional)</li></ul><h2>The ritual</h2><ol><li>Clear your space with smoke, starting at the front door.</li><li>Write down one thing you are ready to release.</li><li>Sweep the selenite wand slowly around your body from head to feet.</li><li>Read what you wrote out loud, then tear up the paper.</li><li>End with a warm bath and set your crystals in the window to charge overnight.</li></ol>`}
+];
+function postCard(p){return `<a class="post rv" href="#${p.id}" data-go="${p.id}"><div class="tile">${tileSVG(p.g,p.col,{label:p.t})}</div><span class="eyebrow">${esc(p.cat)}</span><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p></a>`}
+function viewPost(id){
+  const p=POSTS.find(x=>x.id===id);
+  return `<article class="article wrap"><span class="eyebrow">${esc(p.cat)}</span><h1>${esc(p.t)}</h1><p class="muted" style="font-size:19px">${esc(p.d)}</p>
+    <div class="tile">${tileSVG(p.g,p.col,{label:p.t})}</div>${p.body}
+    <div class="shop-the-ritual"><span class="eyebrow">Shop this ritual</span><div class="grid three" style="margin-top:16px">${p.shop.map(h=>card(BY[h])).join('')}</div></div>
+    <p style="margin-top:28px"><a class="link" href="#spiritual" data-go="spiritual">← Back to Spiritual</a></p></article>`;
+}
+function viewFAQ(){
+  const D='<span class="draft">Confirm</span>';
+  const qa=[
+   ['Orders + shipping',[['How fast do orders ship?'+D,'Most orders ship within 1–2 business days, with tracking sent by email.'],['Do you offer free shipping?'+D,'Yes. U.S. orders over $35 ship free.'],['How do planners and toolkits arrive?','They are instant downloads. Your files arrive by email right after checkout, and you can print pages as often as you like for personal use.']]],
+   ['Returns',[['Can I return something?'+D,'If something arrives damaged or is not right, email therefinedlifeco@gmail.com within 30 days and we will make it right. Burned sage and opened bath products cannot be returned.'],['Can I return a digital product?','Because files are delivered instantly, all digital sales are final.']]],
+   ['Daily Inspiration',[['How do I start my inspiration texts?','Activation instructions arrive in your order confirmation email right after checkout.'],['Can I cancel?','Yes, anytime from your account.'],['Is this therapy or counseling?','No. Inspiration texts and our programs offer encouragement and structure. They are not therapy, medical, financial or legal advice.']]],
+   ['Gatherings',[['Do I need experience to join a circle?','No. Every gathering is beginner-friendly.'],['Can you host a private event?','Yes. Send an inquiry from the Gatherings page and we will plan it with you.']]],
+   ['Using your products',[['Is burning sage safe indoors?','Keep a window open, never leave a burning bundle unattended, and rest it in a heat-safe dish or shell with sand. Keep smoke away from pets and anyone sensitive to it.'],['Are crystal benefits medical claims?','No. Our descriptions share traditional and spiritual uses. They are not medical advice.']]]
+  ];
+  return `<div class="wrap"><div class="page-head" style="max-width:800px;margin:0 auto"><span class="eyebrow">Help</span><h1>Questions, <em>answered</em></h1></div></div>
+  <div class="faq wrap">${qa.map(([h,items])=>`<h2>${h}</h2>${items.map(([q,a])=>`<details class="acc"><summary>${q}</summary><div>${a}</div></details>`).join('')}`).join('')}
+  <p class="muted" style="margin-top:30px">Still have a question? Email <b>therefinedlifeco@gmail.com</b>.</p></div>`;
+}
+
+/* ---------- router + transitions ---------- */
+let mentorPer='m', current='';
+const WORDS={home:'Refined',shop:'The Ritual Shop',kits:'Ritual Kits',design:'Life Design',inspiration:'Daily Inspiration',gatherings:'Gatherings',spiritual:'Spiritual',story:'Our Story',faq:'Questions'};
+function parse(raw){
+  if(raw.startsWith('shop-')&&COLLS[raw.slice(5)])return ['shop',raw.slice(5)];
+  if(raw.startsWith('p-')&&BY[raw.slice(2)])return ['product',raw.slice(2)];
+  if(POSTS.find(p=>p.id===raw))return ['post',raw];
+  if(['home','shop','kits','design','inspiration','gatherings','spiritual','story','faq'].includes(raw))return [raw];
+  return ['home'];
+}
+function route(){
+  const raw=(location.hash||'#home').slice(1)||'home';
+  const [v,arg]=parse(raw); current=v; chapSetup=null;
+  const map={home:viewHome,shop:()=>viewShop(arg),product:()=>viewProduct(arg),kits:viewKits,design:viewDesign,inspiration:()=>viewMentorship(mentorPer),gatherings:viewGatherings,spiritual:viewSpiritual,post:()=>viewPost(arg),story:viewStory,faq:viewFAQ};
+  $('#app').innerHTML=map[v]();
+  const navKey=v==='product'?(BY[arg].coll==='design'?'design':'shop'):v==='post'?'spiritual':v==='kits'?'shop':v;
+  $$('#navLinks a').forEach(a=>{if(a.dataset.go===navKey)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  if(v==='shop'){ $('#sortSel').value=shopState.sort; $('#app').dataset.coll=arg||''; renderShopGrid(arg||null); }
+  if(v==='home'){ startHeroFilm('goals'); setupChapters(); renderGoal(); }
+  if(v==='spiritual'){ startHeroFilm('spirit'); }
+  setupPhone(); drawAllMoons(); onScroll(); bindRail();
+}
+function go(token,{scroll=true}={}){
+  closeMenu(); openCart(false);
+  const doIt=()=>{ if(location.hash==='#'+token)route(); else history.pushState(null,'','#'+token), route(); if(scroll)window.scrollTo(0,0); };
+  if(RM){doIt();return}
+  const c=$('#curtain'); $('#curtainWord').textContent=WORDS[parse(token)[0]]||'Refined';
+  c.className='curtain in';
+  setTimeout(()=>{doIt(); c.className='curtain out'; setTimeout(()=>c.className='curtain',650)},460);
+}
+window.addEventListener('popstate',()=>{route();window.scrollTo(0,0)});
+
+/* ---------- scroll effects ---------- */
+let chapSetup=null;
+function setupChapters(){
+  const sec=$('#chapters'); if(!sec)return;
+  const flat=window.innerWidth<=900||RM;
+  sec.classList.toggle('flat',flat);
+  if(flat){sec.style.height='';chapSetup=null;return}
+  const track=$('#chapTrack'); const dist=track.scrollWidth-window.innerWidth;
+  sec.style.height=(window.innerHeight+dist)+'px';
+  chapSetup={sec,track,dist};
+}
+function onScroll(){
+  const y=window.scrollY, H=window.innerHeight;
+  const max=document.documentElement.scrollHeight-H;
+  $('#progress').style.transform=`scaleX(${max>0?y/max:0})`;
+  // header over hero
+  const hero=$('#hero'); $('#siteHeader').classList.toggle('over',!!hero&&y<hero.offsetHeight-80);
+  // chapters pin
+  if(chapSetup){
+    const {sec,track,dist}=chapSetup; const top=sec.getBoundingClientRect().top;
+    const p=Math.min(1,Math.max(0,-top/dist));
+    track.style.transform=`translate3d(${-p*dist}px,0,0)`;
+    $('#chapBar').style.transform=`scaleX(${p})`;
+    $('#chapNum').textContent=['Life Design','Daily Inspiration','Soulrise App','Gatherings','Spiritual'][Math.min(4,Math.round(p*4))];
+  }
+  // parallax
+  if(!RM)$$('[data-speed]').forEach(el=>{const r=el.getBoundingClientRect();const c=r.top+r.height/2-H/2;el.style.transform=`translate3d(0,${c*+el.dataset.speed}px,0)`});
+  // manifesto word fill
+  const m=$('#manifesto'); if(m){const r=m.getBoundingClientRect();const p=Math.min(1,Math.max(0,(H*.85-r.top)/(r.height+H*.35)));const ws=m.querySelectorAll('.w');const n=Math.round(p*ws.length);ws.forEach((w,i)=>w.classList.toggle('on',i<n||RM))}
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',()=>{if(current==='home')setupChapters();onScroll()});
+
+/* ---------- phone texts ---------- */
+let phoneTimer=null;
+function setupPhone(){
+  clearTimeout(phoneTimer); const box=$('#msgs'); if(!box)return;
+  let i=0; box.innerHTML='';
+  const add=()=>{
+    if(!document.body.contains(box))return;
+    const m=SAMPLE_TEXTS[i%SAMPLE_TEXTS.length];
+    const typing=document.createElement('div'); typing.className='typing'; typing.innerHTML='<i></i><i></i><i></i>'; box.appendChild(typing);
+    phoneTimer=setTimeout(()=>{typing.remove();const b=document.createElement('div');b.className='bubble'+(m.v?' vid':m.m?' mus':'');b.innerHTML=`<span>${m.t}<small>${m.s}</small></span>`;box.appendChild(b);while(box.children.length>5)box.firstChild.remove();i++;phoneTimer=setTimeout(add,RM?0:2200)},RM?0:1100);
+  };
+  if(RM){SAMPLE_TEXTS.forEach(m=>{box.insertAdjacentHTML('beforeend',`<div class="bubble${m.v?' vid':m.m?' mus':''}"><span>${m.t}<small>${m.s}</small></span></div>`)});return}
+  SAMPLE_TEXTS.slice(0,2).forEach(m=>box.insertAdjacentHTML('beforeend',`<div class="bubble${m.v?' vid':m.m?' mus':''}"><span>${m.t}<small>${m.s}</small></span></div>`)); i=2; phoneTimer=setTimeout(add,1600);
+}
+
+/* ---------- rail drag ---------- */
+function bindRail(){
+  const r=$('#rail'); if(!r||r.dataset.b)return; r.dataset.b=1;
+  let down=false,sx=0,sl=0,moved=false;
+  r.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=r.scrollLeft});
+  window.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;r.classList.add('drag')}r.scrollLeft=sl-dx});
+  window.addEventListener('pointerup',()=>{down=false;r.classList.remove('drag')});
+  r.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+}
+
+/* ---------- cursor, magnetic, previews ---------- */
+const cur=$('#cursor'), dot=$('#cursorDot'), prev=$('#preview');
+let cx=0,cy=0,tx=0,ty=0;
+if(matchMedia('(pointer:fine)').matches&&!RM){
+  window.addEventListener('pointermove',e=>{document.body.classList.add('moved');tx=e.clientX;ty=e.clientY;dot.style.transform=`translate(${tx}px,${ty}px)`;
+    const big=e.target.closest('a,button,[data-go],.tile,summary');cur.classList.toggle('big',!!big);
+    prev.style.left=tx+'px';prev.style.top=ty+'px';
+    const row=e.target.closest('[data-prev]');
+    if(row){const k=row.dataset.prev;const p=SHOP.find(x=>x.intents.includes(k)&&x.tag)||SHOP.find(x=>x.intents.includes(k));if(prev.dataset.k!==k){prev.innerHTML=tileSVG(p.g,p.col,{sub:INTENTS[k][0]});prev.dataset.k=k}prev.classList.add('on')}else prev.classList.remove('on');
+    const mag=e.target.closest('.mag');
+    $$('.mag.pulled').forEach(m=>{if(m!==mag){m.style.transform='';m.classList.remove('pulled')}});
+    if(mag){const b=mag.getBoundingClientRect();mag.style.transform=`translate(${(tx-b.left-b.width/2)*.18}px,${(ty-b.top-b.height/2)*.3}px)`;mag.classList.add('pulled')}
+  });
+  (function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(loop)})();
+}
+document.addEventListener('pointermove',e=>{const m=e.target.closest('.gallery .main');if(!m)return;const b=m.getBoundingClientRect();m.style.setProperty('--zx',((e.clientX-b.left)/b.width*100)+'%');m.style.setProperty('--zy',((e.clientY-b.top)/b.height*100)+'%')});
+
+function cssVar(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function drawAllMoons(){
+  const hm=$('#heroMoon'); if(hm)drawMoon(hm,moonInfo().f,'#e3c98f','#2b3424');
+  $$('canvas[data-phase]').forEach(c=>drawMoon(c,+c.dataset.phase,'#d8b26b','#3a4630'));
+}
+
+/* ---------- cart ---------- */
+const FREE=35; let cart=[];
+try{cart=JSON.parse(localStorage.getItem('rlc-cart')||'[]')}catch(e){cart=[]}
+function save(){try{localStorage.setItem('rlc-cart',JSON.stringify(cart))}catch(e){}}
+function itemInfo(id){
+  if(id.startsWith('sub:')){const [n,per]=id.slice(4).split('|');const l=LEVELS.find(x=>x.n===n);return {t:`Inspiration Texts · ${l.name}`,price:per==='w'?l.w:l.m,g:'phone',col:['#e3e7da','#3a4630'],sub:`${n}, billed ${per==='w'?'weekly':'monthly'}`,digital:1}}
+  const k=KITS.find(k=>k.id===id); if(k)return {t:k.name+' Kit',price:k.price,g:k.g,col:k.col,sub:k.items.length+' pieces'};
+  const gs=GIFT_SETS.find(g=>g.h===id); if(gs)return {t:gs.t,price:gs.price,g:gs.g,col:gs.col,sub:'Gift set'};
+  const p=BY[id]; if(!p)return null; return {t:p.t,price:p.min,g:p.g,col:p.col,sub:p.max>p.min?'Smallest option':COLLS[p.coll].name,digital:p.coll==='design'};
+}
+cart=cart.filter(l=>itemInfo(l.id));
+function addToCart(id,q=1){const l=cart.find(l=>l.id===id);if(l)l.q+=q;else cart.push({id,q});save();renderCart();toast(`Added ${itemInfo(id).t}`);bump()}
+function bump(){const b=$('#cartBtn');b.animate?.([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:400,easing:'ease-out'})}
+function renderCart(){
+  const n=cart.reduce((s,l)=>s+l.q,0), sub=cart.reduce((s,l)=>s+l.q*itemInfo(l.id).price,0);
+  const physical=cart.some(l=>!itemInfo(l.id).digital);
+  const b=$('#cartCount'); b.textContent=n; b.hidden=n===0;
+  const left=Math.max(0,FREE-sub);
+  $('#ship').innerHTML=(!physical&&sub>0)?'Digital items only. Nothing to ship.':sub===0?'Free U.S. shipping on orders over $35.':left>0?`You are <b>${money(left)}</b> away from free shipping.`:'<b>You have free shipping.</b>';
+  $('#ship').insertAdjacentHTML('beforeend',`<div class="meter"><i style="width:${Math.min(100,sub/FREE*100)}%"></i></div>`);
+  if(!cart.length){$('#lines').innerHTML=`<div class="empty"><p>Your cart is empty.</p><button class="btn solid small" data-go="kits">Start with a Ritual Kit</button></div>`;$('#drFoot').innerHTML='';return}
+  $('#lines').innerHTML=cart.map(l=>{const i=itemInfo(l.id);return `<div class="line"><div class="tile">${tileSVG(i.g,i.col,{label:i.t})}</div><div><b>${esc(i.t)}</b><small>${esc(i.sub)}</small><div class="qty"><button data-cq="${l.id}" data-d="-1" aria-label="Decrease">−</button><output>${l.q}</output><button data-cq="${l.id}" data-d="1" aria-label="Increase">+</button></div></div><span class="lp">${money(i.price*l.q)}</span></div>`}).join('');
+  const sugg=physical&&left>0?SHOP.filter(p=>p.min<=left+6&&p.min>=Math.min(left,3)&&!cart.find(l=>l.id===p.h)).sort((a,b)=>Math.abs(a.min-left)-Math.abs(b.min-left))[0]:null;
+  $('#drFoot').innerHTML=`${sugg?`<div class="upsell-mini"><div class="tile">${tileSVG(sugg.g,sugg.col)}</div><span>Add <b>${esc(sugg.t)}</b> for free shipping</span><button class="btn small" data-add="${sugg.h}">${money(sugg.min)}</button></div>`:''}
+    <div class="tot"><span>Subtotal</span><span>${money(sub)}</span></div>
+    <button class="btn solid" id="checkoutBtn">Check out ${ARR}</button>
+    <p class="note">Prototype: checkout connects to Shopify when the theme goes live.</p>`;
+}
+function openCart(o=true){$('#drawer').classList.toggle('on',o);$('#scrim').classList.toggle('on',o);$('#drawer').setAttribute('aria-hidden',!o)}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1900)}
+function closeMenu(){$('#mobileNav').hidden=true;$('#menuBtn').setAttribute('aria-expanded','false')}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  const T=s=>e.target.closest(s);
+  let el;
+  if(el=T('[data-add]')){e.preventDefault();addToCart(el.dataset.add);return}
+  if(el=T('[data-add-sub]')){addToCart('sub:'+el.dataset.addSub);openCart();return}
+  if(el=T('[data-add-qty]')){addToCart(el.dataset.addQty,+$('#pq').textContent);openCart();return}
+  if(el=T('[data-q]')){const o=$('#pq');o.textContent=Math.max(1,+o.textContent+ +el.dataset.q);return}
+  if(el=T('[data-cq]')){const l=cart.find(l=>l.id===el.dataset.cq);l.q+= +el.dataset.d;if(l.q<1)cart=cart.filter(x=>x!==l);save();renderCart();return}
+  if(el=T('[data-intent-go]')){e.preventDefault();shopState.intent=el.dataset.intentGo;go('shop');return}
+  if(el=T('[data-filter]')){shopState.intent=shopState.intent===el.dataset.filter?'':el.dataset.filter;$$('[data-filter]').forEach(c=>c.setAttribute('aria-pressed',c.dataset.filter===shopState.intent));renderShopGrid($('#app').dataset.coll||null);return}
+  if(el=T('[data-shot]')){$$('[data-shot]').forEach(s=>s.classList.toggle('on',s===el));$('#mainImg').innerHTML=el.innerHTML;return}
+  if(el=T('[data-rail]')){$('#rail').scrollBy({left:+el.dataset.rail*320,behavior:'smooth'});return}
+  if(el=T('[data-sheet]')){const s=SHEETS[+el.dataset.sheet];$$('[data-sheet]').forEach(b=>b.setAttribute('aria-pressed',b===el));$('#sheetView').innerHTML=`<b>${s[0]}</b><p class="muted">${s[1]}</p>`;return}
+  if(el=T('[data-garea]')){goalState.area=el.dataset.garea;$$('[data-garea]').forEach(b=>b.setAttribute('aria-pressed',b===el));$('#goalText').placeholder=GOAL_AREAS[goalState.area].ex;renderGoal();return}
+  if(el=T('[data-gdays]')){goalState.days=+el.dataset.gdays;$$('[data-gdays]').forEach(b=>b.setAttribute('aria-pressed',b===el));renderGoal();return}
+  if(el=T('[data-ttype]')){const m=TEXT_TYPES[el.dataset.ttype].ex[0];const box=$('#msgs');if(box){clearTimeout(phoneTimer);box.insertAdjacentHTML('beforeend',`<div class="bubble${m.v?' vid':m.m?' mus':''}"><span>${m.t}<small>${m.s}</small></span></div>`);while(box.children.length>5)box.firstChild.remove();$$('[data-ttype]').forEach(b=>b.setAttribute('aria-pressed',b===el));box.closest('.phone').scrollIntoView({behavior:RM?'auto':'smooth',block:'center'});phoneTimer=setTimeout(setupPhone,9000)}return}
+  if(el=T('[data-per]')){mentorPer=el.dataset.per;const y=window.scrollY;route();window.scrollTo(0,y);return}
+  if(el=T('[data-scroll]')){e.preventDefault();const tgt=document.getElementById(el.dataset.scroll);if(tgt)tgt.scrollIntoView({behavior:RM?'auto':'smooth'});return}
+  if(el=T('[data-rsvp]')){const f=el.parentElement.querySelector('form');f.hidden=!f.hidden;if(!f.hidden)f.querySelector('input').focus();return}
+  if(el=T('[data-ev]')){$$('[data-ev]').forEach(b=>b.setAttribute('aria-pressed',b===el));$$('#evList .ev').forEach(r=>r.hidden=el.dataset.ev!=='all'&&r.dataset.type!==el.dataset.ev);return}
+  if(T('#checkoutBtn')){toast('Checkout opens in Shopify once live');return}
+  if(el=T('[data-go]')){e.preventDefault();const then=el.dataset.then;go(el.dataset.go);if(then)setTimeout(()=>document.getElementById(then)?.scrollIntoView(),RM?50:700);return}
+});
+document.addEventListener('input',e=>{if(e.target.id==='goalText'){goalState.text=e.target.value;renderGoal()}});
+document.addEventListener('change',e=>{if(e.target.id==='sortSel'){shopState.sort=e.target.value;renderShopGrid($('#app').dataset.coll||null)}});
+document.addEventListener('submit',e=>{
+  const f=e.target; e.preventDefault(); const ok=v=>/^\S+@\S+\.\S+$/.test(v.trim());
+  if(f.dataset.form==='nl'){const v=$('#nlEmail').value;$('#nlMsg').textContent=ok(v)?'You are on the list. Your 10% code is WELCOME10.':'Enter a full email address, like you@example.com.'}
+  if(f.dataset.form==='wait'){const v=$('#waitEmail').value;$('#waitMsg').textContent=ok(v)?'You are on the Soulrise waitlist. We will email you when it opens.':'Enter a full email address, like you@example.com.'}
+  if(f.dataset.form==='rsvp'){const v=f.querySelector('input').value;f.querySelector('p').textContent=ok(v)?'You are in. Details will arrive by email the week of the gathering.':'Enter a full email address, like you@example.com.'}
+  if(f.dataset.form==='inq'){const v=$('#iqEmail').value;$('#iqMsgOut').textContent=!$('#iqName').value.trim()?'Add your name so we know who to reply to.':ok(v)?'Thank you. We reply to every inquiry within two business days.':'Enter a full email address, like you@example.com.'}
+});
+$('#cartBtn').onclick=()=>openCart(true);
+$('#closeCart').onclick=()=>openCart(false);
+$('#scrim').onclick=()=>openCart(false);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){openCart(false);closeMenu()}});
+$('#menuBtn').onclick=()=>{$('#mobileNav').hidden=false;$('#menuBtn').setAttribute('aria-expanded','true')};
+$('#menuClose').onclick=closeMenu;
+
+renderCart(); route();
+</script>
+
+</body></html>
