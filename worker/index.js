@@ -47,7 +47,7 @@ export default {
       return json(
         {
           ok: true,
-          stripeKey: env.STRIPE_SECRET_KEY ? (env.STRIPE_SECRET_KEY.startsWith('sk_live_') ? 'live' : 'test') : 'missing',
+          stripeKey: env.STRIPE_SECRET_KEY ? (/^(sk|rk)_live_/.test(env.STRIPE_SECRET_KEY) ? 'live' : 'test') : 'missing',
           shippingFlatCents: Number.isFinite(ship) ? ship : 'missing',
           products: Object.keys(CATALOG).length,
         },
