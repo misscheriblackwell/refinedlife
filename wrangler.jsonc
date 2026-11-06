@@ -1,11 +1,13 @@
 // Cloudflare Worker that runs Stripe checkout for refinedlifeco.com.
 // The website itself is served by GitHub Pages; this Worker only answers /api/* requests.
-// STRIPE_SECRET_KEY (secret) and SHIPPING_FLAT_CENTS (variable) are set in the Cloudflare dashboard.
+// STRIPE_SECRET_KEY is a secret set in the Cloudflare dashboard (never commit it here).
+// SHIPPING_FLAT_CENTS: shipping on physical orders under $35, in cents (595 = $5.95).
 {
   "name": "refinedlife",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
   "keep_vars": true,
+  "vars": { "SHIPPING_FLAT_CENTS": "595" },
   "observability": { "enabled": true }
 }

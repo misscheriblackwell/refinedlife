@@ -7,7 +7,7 @@
 //
 // Settings (Cloudflare dashboard > Workers & Pages > refinedlife > Settings > Variables and Secrets):
 //   STRIPE_SECRET_KEY    (Secret)  your Stripe secret key, sk_live_... or sk_test_...
-//   SHIPPING_FLAT_CENTS  (in wrangler.jsonc)  shipping charged on physical orders under $35, in cents
+//   SHIPPING_FLAT_CENTS  (in wrangler.jsonc)  shipping on physical orders under $35, in cents (595 = $5.95)
 
 import CATALOG from './catalog.json';
 
