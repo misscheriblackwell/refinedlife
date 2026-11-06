@@ -703,7 +703,7 @@ body{font-size:16px;line-height:1.65}
     </div>
     <div class="foot-base">
       <span>© 2026 Refined Life Co. · therefined.net</span>
-      <div class="pay"><span>Visa</span><span>Mastercard</span><span>Amex</span><span>Shop Pay</span><span>Apple Pay</span><span>PayPal</span></div>
+      <div class="pay"><span>Visa</span><span>Mastercard</span><span>Amex</span><span>Apple Pay</span><span>Google Pay</span></div>
     </div>
   </div>
 </footer>
@@ -1219,7 +1219,7 @@ function letterBand(){
 function trust(){
   return `<div class="wrap"><div class="trust">
     <div><svg viewBox="0 0 24 24"><path d="M3 8h12v8H3zM15 11h3.5L21 14v2h-6"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg><span><b>Free shipping over $35</b>Packed by hand in small batches</span></div>
-    <div><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 7.6 8 9 4.6-1.4 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Secure checkout</b>Cards, Shop Pay, Apple Pay, PayPal</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 7.6 8 9 4.6-1.4 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Secure checkout</b>Cards, Apple Pay, Google Pay</span></div>
     <div><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span><b>Instant downloads</b>Planners and toolkits arrive by email</span></div>
     <div><svg viewBox="0 0 24 24"><path d="M12 21c4-3.5 7-7 7-11a7 7 0 0 0-14 0c0 4 3 7.5 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Origins listed</b>Every product says where it comes from</span></div>
   </div></div>`;
@@ -1662,7 +1662,7 @@ function renderCart(){
   $('#drFoot').innerHTML=`${sugg?`<div class="upsell-mini"><div class="tile">${tileSVG(sugg.g,sugg.col)}</div><span>Add <b>${esc(sugg.t)}</b> for free shipping</span><button class="btn small" data-add="${sugg.h}">${money(sugg.min)}</button></div>`:''}
     <div class="tot"><span>Subtotal</span><span>${money(sub)}</span></div>
     <button class="btn solid" id="checkoutBtn">Check out ${ARR}</button>
-    <p class="note">Prototype: checkout connects to Shopify when the theme goes live.</p>`;
+    <p class="note">Secure checkout powered by Stripe.</p>`;
 }
 function openCart(o=true){$('#drawer').classList.toggle('on',o);$('#scrim').classList.toggle('on',o);$('#drawer').setAttribute('aria-hidden',!o)}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1900)}
@@ -1689,7 +1689,7 @@ document.addEventListener('click',e=>{
   if(el=T('[data-scroll]')){e.preventDefault();const tgt=document.getElementById(el.dataset.scroll);if(tgt)tgt.scrollIntoView({behavior:RM?'auto':'smooth'});return}
   if(el=T('[data-rsvp]')){const f=el.parentElement.querySelector('form');f.hidden=!f.hidden;if(!f.hidden)f.querySelector('input').focus();return}
   if(el=T('[data-ev]')){$$('[data-ev]').forEach(b=>b.setAttribute('aria-pressed',b===el));$$('#evList .ev').forEach(r=>r.hidden=el.dataset.ev!=='all'&&r.dataset.type!==el.dataset.ev);return}
-  if(T('#checkoutBtn')){toast('Checkout opens in Shopify once live');return}
+  if(el=T('#checkoutBtn')){startCheckout(el);return}
   if(el=T('[data-go]')){e.preventDefault();const then=el.dataset.then;go(el.dataset.go);if(then)setTimeout(()=>document.getElementById(then)?.scrollIntoView(),RM?50:700);return}
 });
 document.addEventListener('input',e=>{if(e.target.id==='goalText'){goalState.text=e.target.value;renderGoal()}});
@@ -1707,6 +1707,26 @@ $('#scrim').onclick=()=>openCart(false);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){openCart(false);closeMenu()}});
 $('#menuBtn').onclick=()=>{$('#mobileNav').hidden=false;$('#menuBtn').setAttribute('aria-expanded','true')};
 $('#menuClose').onclick=closeMenu;
+
+/* ---------- Stripe checkout (via Cloudflare Worker) ---------- */
+const CHECKOUT_API='https://refinedlife.riidevelopher.workers.dev/api/checkout';
+async function startCheckout(btn){
+  if(!cart.length)return;
+  const label=btn.innerHTML; btn.disabled=true; btn.textContent='Opening secure checkout…';
+  try{
+    const r=await fetch(CHECKOUT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:cart.map(l=>({id:l.id,q:l.q}))})});
+    const d=await r.json().catch(()=>({}));
+    if(r.ok&&d.url){location.href=d.url;return}
+    toast(d.error||'Checkout could not start. Please try again.');
+  }catch(e){toast('Checkout could not start. Check your connection and try again.')}
+  btn.disabled=false; btn.innerHTML=label;
+}
+(function checkoutReturn(){
+  const q=new URLSearchParams(location.search), st=q.get('checkout'); if(!st)return;
+  if(st==='success'){cart=[];save()}
+  history.replaceState(null,'',location.pathname+location.hash);
+  setTimeout(()=>{const t=$('#toast');t.textContent=st==='success'?'Thank you! Your order is confirmed. A receipt is on its way to your email.':'Checkout cancelled. Your cart is saved.';t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),6000)},600);
+})();
 
 renderCart(); route();
 </script>
