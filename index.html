@@ -1710,11 +1710,13 @@ $('#menuClose').onclick=closeMenu;
 
 /* ---------- Stripe checkout (via Cloudflare Worker) ---------- */
 const CHECKOUT_API='https://refinedlife.riidevelopher.workers.dev/api/checkout';
+// Sandbox testing: open the site with ?sandbox=1 to send checkouts to the Stripe sandbox (test cards only); ?sandbox=0 turns it off.
+const SANDBOX=(()=>{try{const v=new URLSearchParams(location.search).get('sandbox');if(v==='1')sessionStorage.setItem('rlc-sandbox','1');if(v==='0')sessionStorage.removeItem('rlc-sandbox');return sessionStorage.getItem('rlc-sandbox')==='1'}catch(e){return false}})();
 async function startCheckout(btn){
   if(!cart.length)return;
   const label=btn.innerHTML; btn.disabled=true; btn.textContent='Opening secure checkout…';
   try{
-    const r=await fetch(CHECKOUT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:cart.map(l=>({id:l.id,q:l.q}))})});
+    const r=await fetch(CHECKOUT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:cart.map(l=>({id:l.id,q:l.q})),test:SANDBOX})});
     const d=await r.json().catch(()=>({}));
     if(r.ok&&d.url){location.href=d.url;return}
     toast(d.error||'Checkout could not start. Please try again.');
@@ -1724,10 +1726,11 @@ async function startCheckout(btn){
 (function checkoutReturn(){
   const q=new URLSearchParams(location.search), st=q.get('checkout'); if(!st)return;
   if(st==='success'){cart=[];save()}
-  history.replaceState(null,'',location.pathname+location.hash);
+  q.delete('checkout');q.delete('sandbox');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash);
   setTimeout(()=>{const t=$('#toast');t.textContent=st==='success'?'Thank you! Your order is confirmed. A receipt is on its way to your email.':'Checkout cancelled. Your cart is saved.';t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),6000)},600);
 })();
 
+if(SANDBOX){document.body.insertAdjacentHTML('afterbegin','<div style="position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#a3643a;color:#fff;font:600 13px/1.4 sans-serif;text-align:center;padding:6px">Sandbox mode: checkout uses Stripe test cards only. <a href="?sandbox=0" style="color:#fff">Exit</a></div>')}
 renderCart(); route();
 </script>
 

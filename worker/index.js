@@ -6,8 +6,14 @@
 // If you change a price on the site, change it in catalog.json too.
 //
 // Settings (Cloudflare dashboard > Workers & Pages > refinedlife > Settings > Variables and Secrets):
-//   STRIPE_SECRET_KEY    (Secret)  your Stripe secret key, sk_live_... or sk_test_...
-//   SHIPPING_FLAT_CENTS  (in wrangler.jsonc)  shipping on physical orders under $35, in cents (595 = $5.95)
+//   STRIPE_SECRET_KEY       (Secret)  live key for real orders (rk_live_... restricted key recommended)
+//   STRIPE_TEST_SECRET_KEY  (Secret)  sandbox key (rk_test_/sk_test_) used when the site sends {test:true}
+//   SHIPPING_FLAT_CENTS     (wrangler.jsonc)  shipping on physical orders under $35, in cents (595 = $5.95)
+//   LIVE_USES_CATALOG       (wrangler.jsonc)  "1" once the live Stripe account has the rlc_* products
+//
+// Each catalog item maps to a Stripe product with ID rlc_<site id> (see productId below). The sandbox
+// always has them; the live account uses them once LIVE_USES_CATALOG is "1". The price charged still
+// comes from catalog.json either way.
 
 import CATALOG from './catalog.json';
 
@@ -20,6 +26,8 @@ const ALLOWED_ORIGINS = [
 ];
 const DEFAULT_SITE = 'https://refinedlifeco.com';
 const FREE_SHIPPING_CENTS = 3500;
+const productId = (id) => 'rlc_' + id.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const keyMode = (k) => (!k ? 'missing' : /^(sk|rk)_live_/.test(k) ? 'live' : 'test');
 
 function json(data, status, headers) {
   return new Response(JSON.stringify(data), {
@@ -47,7 +55,9 @@ export default {
       return json(
         {
           ok: true,
-          stripeKey: env.STRIPE_SECRET_KEY ? (/^(sk|rk)_live_/.test(env.STRIPE_SECRET_KEY) ? 'live' : 'test') : 'missing',
+          stripeKey: keyMode(env.STRIPE_SECRET_KEY),
+          sandboxKey: keyMode(env.STRIPE_TEST_SECRET_KEY),
+          liveUsesCatalog: env.LIVE_USES_CATALOG === '1',
           shippingFlatCents: Number.isFinite(ship) ? ship : 'missing',
           products: Object.keys(CATALOG).length,
         },
@@ -59,16 +69,19 @@ export default {
     if (url.pathname !== '/api/checkout' || request.method !== 'POST') {
       return json({ error: 'Not found' }, 404, cors);
     }
-    if (!env.STRIPE_SECRET_KEY) {
-      return json({ error: 'Checkout is not set up yet. Please try again soon.' }, 503, cors);
-    }
-
     let body;
     try {
       body = await request.json();
     } catch {
       return json({ error: 'Something went wrong. Please refresh and try again.' }, 400, cors);
     }
+
+    const sandbox = body?.test === true;
+    const stripeKey = sandbox ? env.STRIPE_TEST_SECRET_KEY : env.STRIPE_SECRET_KEY;
+    if (!stripeKey || (sandbox && keyMode(stripeKey) !== 'test')) {
+      return json({ error: sandbox ? 'Sandbox checkout is not set up yet.' : 'Checkout is not set up yet. Please try again soon.' }, 503, cors);
+    }
+    const useCatalog = sandbox || env.LIVE_USES_CATALOG === '1';
 
     const items = Array.isArray(body?.items) ? body.items : [];
     if (!items.length || items.length > 50) return json({ error: 'Your cart is empty.' }, 400, cors);
@@ -96,21 +109,23 @@ export default {
 
     const f = new URLSearchParams();
     f.set('mode', interval ? 'subscription' : 'payment');
-    f.set('success_url', `${site}/?checkout=success`);
-    f.set('cancel_url', `${site}/?checkout=cancelled`);
+    const sb = sandbox ? '&sandbox=1' : '';
+    f.set('success_url', `${site}/?checkout=success${sb}`);
+    f.set('cancel_url', `${site}/?checkout=cancelled${sb}`);
     f.set('allow_promotion_codes', 'true');
     f.set('billing_address_collection', 'auto');
 
     let n = 0;
-    const addLine = (name, cents, qty, recurring) => {
+    const addLine = (name, cents, qty, recurring, product) => {
       const k = `line_items[${n++}]`;
       f.set(`${k}[quantity]`, String(qty));
       f.set(`${k}[price_data][currency]`, 'usd');
       f.set(`${k}[price_data][unit_amount]`, String(cents));
-      f.set(`${k}[price_data][product_data][name]`, name);
+      if (product) f.set(`${k}[price_data][product]`, product);
+      else f.set(`${k}[price_data][product_data][name]`, name);
       if (recurring) f.set(`${k}[price_data][recurring][interval]`, recurring);
     };
-    for (const { p, q } of lines) addLine(p.name, p.cents, q, p.interval);
+    for (const { id, p, q } of lines) addLine(p.name, p.cents, q, p.interval, useCatalog ? productId(id) : null);
 
     if (physical) {
       f.set('shipping_address_collection[allowed_countries][0]', 'US');
@@ -129,7 +144,7 @@ export default {
     const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+        Authorization: `Bearer ${stripeKey}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: f,
