@@ -11,7 +11,7 @@
   --ink:#2a251f; --ink-soft:#615749; --ink-faint:#8a7f6f;
   --moss:#3a4630; --moss-deep:#232b1d; --night:#171c13; --on-moss:#eef0e6; --on-moss-soft:#b9c2a8;
   --clay:#a3643a; --clay-ink:#8c5430; --amber:#c79f57; --amber-soft:#e3c98f;
-  --ok:#4f6b3a;
+  --ok:#4f6b3a; --photo-bg:#f7f3ec;
   --f-display:'DM Serif Display', Georgia, 'Times New Roman', serif;
   --f-script:'Parisienne', 'Snell Roundhand', 'Brush Script MT', cursive;
   --f-body:'Jost', 'Futura', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -215,6 +215,16 @@ section.band{padding-block:clamp(70px,9vw,120px)}
 /* tiles */
 .tile{position:relative;overflow:hidden;border-radius:14px;display:block}
 .tile>svg{display:block;width:100%;height:100%}
+.tile{background:var(--photo-bg)}
+.tile>img,.tile>a>img,.tile>button>img{display:block;width:100%;height:100%;object-fit:cover}
+.card .tile img{transition:transform .8s var(--ease-out)}
+.card:hover .tile img{transform:scale(1.05)}
+.mosaic{display:grid;width:100%;height:100%;gap:2px;background:var(--photo-bg)}
+.mosaic.m3{grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr}.mosaic.m3 img:first-child{grid-row:span 2}
+.mosaic.m4{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.mosaic img{width:100%;height:100%;object-fit:cover;display:block;min-height:0}
+.thumbs button.tile{padding:0;border:0;cursor:pointer;font:inherit}
+.thumbs button.tile:focus-visible{outline:2px solid var(--gold,#D1A562);outline-offset:2px}
 .tile .label{position:absolute;left:14px;bottom:12px;right:14px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
 
 /* product grid + rail */
@@ -465,6 +475,8 @@ section.band{padding-block:clamp(70px,9vw,120px)}
 .gallery .main{aspect-ratio:1/1;border-radius:22px;cursor:zoom-in}
 .gallery .main>svg{transition:transform .5s var(--ease-out);transform-origin:var(--zx,50%) var(--zy,50%)}
 .gallery .main:hover>svg{transform:scale(1.6)}
+.gallery .main>img{transition:transform .5s var(--ease-out);transform-origin:var(--zx,50%) var(--zy,50%)}
+.gallery .main:hover>img{transform:scale(1.8)}
 .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .thumbs .tile{aspect-ratio:1/1;border-radius:10px;cursor:pointer;opacity:.7;transition:opacity .2s}
 .thumbs .tile:hover,.thumbs .tile.on{opacity:1;outline:2px solid var(--clay);outline-offset:2px}
@@ -862,6 +874,13 @@ function tileSVG(g,col,{label='',sub=''}={}){
   </svg>${sub?`<div class="label" style="color:${ink}">${esc(sub)}</div>`:''}`;
 }
 
+/* ---------- product photos ---------- */
+const IMGS = /*IMGS*/{"52-week-transformation-planner-printable":3,"7-chakra-crystal-set":2,"7-chakra-incense-set":1,"7-chakra-pyramid-engraved-box":3,"7-chakra-wooden-chest":1,"amethyst-druzy-crystal-19":2,"amethyst":1,"artisan-incense":3,"beginner-tumbled-stones":2,"black-salt":2,"blue-sage":1,"cactus-palo-santo-burner":1,"california-white-sage-7":1,"capsule-wardrobe-planner":3,"chakra-dreamcatcher":1,"citrine":1,"coach-facilitator-guide-life-transformation-course":3,"coconut-milk-bath-oatmeal-honey":1,"coconut-milk-bath":1,"complete-transformation-toolkit-ebook-planner-spreadsheet":2,"crystals-smoky-quartz":1,"crystals-super-seven":3,"crystals-tigers-eye":1,"crystals-tumbled-assorted-1lb-mix":1,"display-abalone-shell":1,"dragons-blood-sage":1,"financial-career-toolkit-editable-spreadsheet":3,"florida-water-spray":1,"gift-set-chakra":3,"gift-set-self-love":2,"glow-up-planner-90-day-style-fitness-finance-goals":3,"hand-scrub-cubes":2,"herbal-bath-salts":1,"herbal-facial-steam-blend":2,"herbal-shower-steamers-rejuvenating-citrus":2,"home-organization-cleaning-schedule":3,"lavender-sage":1,"leather-embossed-journal":3,"love-drawing-soap":1,"luxury-lifestyle-vision-board-kit":3,"mixed-sage-bundle":1,"money-drawing-kit":2,"mulch-blend":2,"om-waterfall-cone-burner":1,"one-year-life-transformation-ebook-printable":3,"refined-decor-safety-matches":3,"refined-life-co-giftcard":1,"rose-quartz":1,"sacred-palo-santo-sticks":1,"sacred-turkey-feather":1,"sage-deluxe-kit":1,"sage-kit-floral-carved-wooden-box":2,"selenite-charging-bowl":3,"selenite-tower-6":1,"selenite-wand-moon-phases":1,"self-care-sunday-reset-planner":3,"softening-foot-bath":1,"text-subscription-monthly":1,"the-complete-planner-collection-all-5-printable-planners":3,"tibetan-incense":1,"tibetan-singing-bowl-5d":2}/*END*/;
+const imgSrc=(h,i=0)=>`img/p/${h}-${i}.jpg`;
+function photo(h,alt,i=0,eager=false){return `<img src="${imgSrc(h,i)}" alt="${esc(alt||'')}" ${eager?'':'loading="lazy"'} decoding="async">`}
+function art(p,opts={}){return IMGS[p.h]?photo(p.h,p.t):tileSVG(p.g,p.col,opts)}
+function kitArt(k){const hs=k.items.filter(h=>IMGS[h]).slice(0,4);if(hs.length<3)return tileSVG(k.g,k.col,{label:k.name});return `<div class="mosaic m${hs.length}">${hs.map(h=>photo(h,BY[h].t)).join('')}</div>`}
+
 /* ---------- helpers ---------- */
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -877,7 +896,7 @@ function priceHTML(p){
 }
 function card(p){
   return `<article class="card">
-    <div class="tile">${p.tag?`<span class="tag ${p.tag==='sale'?'sale':''}">${esc(p.tag)}</span>`:''}<a href="#p-${p.h}" data-go="p-${p.h}" aria-label="${esc(p.t)}">${tileSVG(p.g,p.col,{label:p.t})}</a><div class="quick"><button class="btn" data-add="${p.h}">Quick add · ${money(p.min)}</button></div></div>
+    <div class="tile">${p.tag?`<span class="tag ${p.tag==='sale'?'sale':''}">${esc(p.tag)}</span>`:''}<a href="#p-${p.h}" data-go="p-${p.h}" aria-label="${esc(p.t)}">${art(p,{label:p.t})}</a><div class="quick"><button class="btn" data-add="${p.h}">Quick add · ${money(p.min)}</button></div></div>
     <h3><a href="#p-${p.h}" data-go="p-${p.h}">${esc(p.t)}</a></h3>
     <p class="why">${esc(p.why.split('. ')[0].replace(/\.$/,''))}.</p>
     <div class="row">${priceHTML(p)}<button class="add" data-add="${p.h}" aria-label="Add ${esc(p.t)} to cart">${PLUS}</button></div>
@@ -887,7 +906,7 @@ const kitTotal=k=>k.items.reduce((s,h)=>s+BY[h].min,0);
 function kitCard(k){
   const tot=kitTotal(k), pct=Math.round((1-k.price/tot)*100);
   return `<article class="kit rv">
-    <div class="tile">${tileSVG(k.g,k.col,{label:k.name})}</div>
+    <div class="tile">${kitArt(k)}</div>
     <span class="proposed">Built from in-stock pieces</span>
     <h3>${esc(k.name)} Kit</h3>
     <p class="for">${esc(k.for)}</p>
@@ -1012,7 +1031,7 @@ function renderGoal(){
   const dates=a.steps.map((_,i)=>new Date(now.getTime()+goalState.days*(i+1)/4*864e5));
   box.innerHTML=`<div class="road-head"><span class="eyebrow">Your roadmap · ${goalState.days} days</span><h3>${esc(title)}</h3><p class="muted">Finish by ${dates[3].toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</p></div>
   <ol class="road">${a.steps.map((s,i)=>`<li style="--i:${i}"><span class="dot"></span><div><small>Milestone ${i+1} · by ${fmtDay(dates[i])}</small><b>${esc(s)}</b></div></li>`).join('')}</ol>
-  <div class="road-tools"><span class="eyebrow">Tools for this goal</span><div class="road-tool-row">${a.tools.map(h=>{const p=BY[h];return `<a class="upsell" href="#p-${h}" data-go="p-${h}"><div class="tile">${tileSVG(p.g,p.col)}</div><div><b>${esc(p.t)}</b><small>${money(p.min)}</small></div></a>`}).join('')}</div>
+  <div class="road-tools"><span class="eyebrow">Tools for this goal</span><div class="road-tool-row">${a.tools.map(h=>{const p=BY[h];return `<a class="upsell" href="#p-${h}" data-go="p-${h}"><div class="tile">${art(p)}</div><div><b>${esc(p.t)}</b><small>${money(p.min)}</small></div></a>`}).join('')}</div>
   <a class="link" href="#inspiration" data-go="inspiration">Add daily texts to keep you moving →</a></div>`;
 }
 function soulrisePhone(){
@@ -1161,9 +1180,9 @@ function viewSpiritual(){
   </div></section>
 
   <section class="band"><div class="wrap collage">
-    <div class="c1" data-speed=".06"><div class="tile">${tileSVG('moon',['#232b1d','#d8b26b'],{label:'Full Moon Reset Kit',sub:'Full Moon Reset'})}</div></div>
-    <div class="c2" data-speed="-.08"><div class="tile">${tileSVG('jar',['#efe3d1','#8c5430'],{label:'Self-Care Sunday Kit',sub:'Self-Care Sunday'})}</div></div>
-    <div class="c3" data-speed=".12"><div class="tile">${tileSVG('crystal',['#e7ddef','#5b4a73'],{label:'Stones'})}</div></div>
+    <div class="c1" data-speed=".06"><div class="tile">${kitArt(KITS[0])}</div></div>
+    <div class="c2" data-speed="-.08"><div class="tile">${IMGS['coconut-milk-bath-oatmeal-honey']?photo('coconut-milk-bath-oatmeal-honey','Coconut Milk Bath, part of the Self-Care Sunday Kit'):tileSVG('jar',['#efe3d1','#8c5430'],{label:'Self-Care Sunday Kit',sub:'Self-Care Sunday'})}</div></div>
+    <div class="c3" data-speed=".12"><div class="tile">${IMGS['amethyst']?photo('amethyst','Tumbled amethyst'):tileSVG('crystal',['#e7ddef','#5b4a73'],{label:'Stones'})}</div></div>
     <div class="txt rv">
       <span class="eyebrow">Ritual Kits · save up to 20%</span>
       <h2>The whole ritual, <em style="color:var(--clay-ink)">packed together</em></h2>
@@ -1268,9 +1287,11 @@ function viewProduct(h){
     <div class="crumbs"><a href="#${isDigital?'design':'shop'}" data-go="${isDigital?'design':'shop'}">${isDigital?'Life Design':'The Ritual Shop'}</a> / ${isDigital?'':`<a href="#shop-${p.coll}" data-go="shop-${p.coll}">${esc(c.name)}</a> / `}${esc(p.t)}</div>
     <div class="pdp">
       <div class="gallery">
-        <div class="tile main" id="mainImg">${tileSVG(p.g,p.col,{label:p.t,sub:'Photo slot · hero'})}</div>
+        ${IMGS[h]?`<div class="tile main photo" id="mainImg">${photo(h,p.t,0,true)}</div>
+        ${IMGS[h]>1?`<div class="thumbs">${Array.from({length:IMGS[h]},(_,i)=>`<button type="button" class="tile ${i===0?'on':''}" data-shot="${i}" aria-label="Show photo ${i+1} of ${IMGS[h]}">${photo(h,p.t+' photo '+(i+1),i)}</button>`).join('')}</div>`:''}
+        <p class="muted" style="font-size:12.5px">Hover the photo to zoom.</p>`:`<div class="tile main" id="mainImg">${tileSVG(p.g,p.col,{label:p.t,sub:'Photo slot · hero'})}</div>
         <div class="thumbs">${shades.map((col,i)=>`<div class="tile ${i===0?'on':''}" data-shot="${i}">${tileSVG(p.g,col,{label:['Product','Detail','Scale','In use'][i]})}</div>`).join('')}</div>
-        <p class="muted" style="font-size:12.5px">Photo slots: clean hero, detail, scale in hand, in use. Hover the main image to zoom.</p>
+        <p class="muted" style="font-size:12.5px">Photo slots: clean hero, detail, scale in hand, in use. Hover the main image to zoom.</p>`}
       </div>
       <div class="pdp-info">
         <span class="eyebrow">${esc(c.name)}${p.spec.Origin?' · '+esc(p.spec.Origin):''}</span>
@@ -1284,7 +1305,7 @@ function viewProduct(h){
           <button class="btn solid mag" data-add-qty="${p.h}">Add to cart · ${money(p.min)}</button>
         </div>
         <div class="reassure"><span>${isDigital?'Instant download':'Ships in 1–2 business days'}</span><span>Free shipping over $35</span><span>Secure checkout</span></div>
-        ${kit?`<div class="upsell" data-go="kits"><div class="tile">${tileSVG(kit.g,kit.col)}</div><div><b>Part of the ${esc(kit.name)} Kit</b><small>Get it with ${kit.items.length-1} matching pieces for ${money(kit.price)}, save ${Math.round((1-kit.price/kitTotal(kit))*100)}% →</small></div></div>`:''}
+        ${kit?`<div class="upsell" data-go="kits"><div class="tile">${kitArt(kit)}</div><div><b>Part of the ${esc(kit.name)} Kit</b><small>Get it with ${kit.items.length-1} matching pieces for ${money(kit.price)}, save ${Math.round((1-kit.price/kitTotal(kit))*100)}% →</small></div></div>`:''}
         <div>
           <details class="acc" open><summary>How to use</summary><div>${esc(p.use)}</div></details>
           <details class="acc"><summary>Details</summary><div><dl class="specs">${Object.entries(p.spec).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div></details>
@@ -1300,7 +1321,7 @@ function viewKits(){
   <div class="wrap" style="padding-bottom:90px"><div class="kit-grid two">${KITS.map(kitCard).join('')}</div></div></section>
   <section class="band"><div class="wrap">
     <div class="sec-head"><div><span class="eyebrow">Gift sets</span><h2>Ready to <em>give</em></h2><p class="muted">Boxed sets for birthdays, housewarmings, promotions and the holidays.</p></div></div>
-    <div class="grid">${GIFT_SETS.map(g=>`<article class="card"><div class="tile">${tileSVG(g.g,g.col,{label:g.t})}<div class="quick"><button class="btn" data-add="${g.h}">Quick add · ${money(g.price)}</button></div></div><h3>${esc(g.t)}</h3><p class="why">${esc(g.why)}</p><div class="row"><span class="price">${g.max?'<span class="from">from</span>':''}${money(g.price)}</span><button class="add" data-add="${g.h}" aria-label="Add ${esc(g.t)} to cart">${PLUS}</button></div></article>`).join('')}${STORE_SETS.map(h=>card(BY[h])).join('')}</div>
+    <div class="grid">${GIFT_SETS.map(g=>`<article class="card"><div class="tile">${IMGS[g.h]?photo(g.h,g.t):tileSVG(g.g,g.col,{label:g.t})}<div class="quick"><button class="btn" data-add="${g.h}">Quick add · ${money(g.price)}</button></div></div><h3>${esc(g.t)}</h3><p class="why">${esc(g.why)}</p><div class="row"><span class="price">${g.max?'<span class="from">from</span>':''}${money(g.price)}</span><button class="add" data-add="${g.h}" aria-label="Add ${esc(g.t)} to cart">${PLUS}</button></div></article>`).join('')}${STORE_SETS.map(h=>card(BY[h])).join('')}</div>
   </div></section>${trust()}`;
 }
 const CHAPTERS=['The Decision to Change Your Life','Understanding Your Current Reality','Discovering Who You Want to Become','Breaking Through Fear and Limiting Beliefs','Exploring New Careers','Creating Your Financial Freedom Plan','Career Transition Strategy','Navigating Setbacks and Rejection','Measuring Your Transformation','Creating Your Next Three-Year Vision'];
@@ -1337,7 +1358,7 @@ function viewDesign(){
   </div></section>
 
   <section class="band film"><div class="wrap split">
-    <div class="tile rv">${tileSVG('book',['#2b3424','#d8b26b'],{label:'Coach guide'})}</div>
+    <div class="tile rv">${IMGS['coach-facilitator-guide-life-transformation-course']?photo('coach-facilitator-guide-life-transformation-course','Coach + Facilitator Guide'):tileSVG('book',['#2b3424','#d8b26b'],{label:'Coach guide'})}</div>
     <div class="prose rv">
       <span class="eyebrow">For coaches + facilitators</span>
       <h2>Teach the program</h2>
@@ -1621,7 +1642,7 @@ if(matchMedia('(pointer:fine)').matches&&!RM){
     const big=e.target.closest('a,button,[data-go],.tile,summary');cur.classList.toggle('big',!!big);
     prev.style.left=tx+'px';prev.style.top=ty+'px';
     const row=e.target.closest('[data-prev]');
-    if(row){const k=row.dataset.prev;const p=SHOP.find(x=>x.intents.includes(k)&&x.tag)||SHOP.find(x=>x.intents.includes(k));if(prev.dataset.k!==k){prev.innerHTML=tileSVG(p.g,p.col,{sub:INTENTS[k][0]});prev.dataset.k=k}prev.classList.add('on')}else prev.classList.remove('on');
+    if(row){const k=row.dataset.prev;const p=SHOP.find(x=>x.intents.includes(k)&&x.tag)||SHOP.find(x=>x.intents.includes(k));if(prev.dataset.k!==k){prev.innerHTML=art(p,{sub:INTENTS[k][0]});prev.dataset.k=k}prev.classList.add('on')}else prev.classList.remove('on');
     const mag=e.target.closest('.mag');
     $$('.mag.pulled').forEach(m=>{if(m!==mag){m.style.transform='';m.classList.remove('pulled')}});
     if(mag){const b=mag.getBoundingClientRect();mag.style.transform=`translate(${(tx-b.left-b.width/2)*.18}px,${(ty-b.top-b.height/2)*.3}px)`;mag.classList.add('pulled')}
@@ -1643,8 +1664,8 @@ function save(){try{localStorage.setItem('rlc-cart',JSON.stringify(cart))}catch(
 function itemInfo(id){
   if(id.startsWith('sub:')){const [n,per]=id.slice(4).split('|');const l=LEVELS.find(x=>x.n===n);return {t:`Inspiration Texts · ${l.name}`,price:per==='w'?l.w:l.m,g:'phone',col:['#e3e7da','#3a4630'],sub:`${n}, billed ${per==='w'?'weekly':'monthly'}`,digital:1}}
   const k=KITS.find(k=>k.id===id); if(k)return {t:k.name+' Kit',price:k.price,g:k.g,col:k.col,sub:k.items.length+' pieces'};
-  const gs=GIFT_SETS.find(g=>g.h===id); if(gs)return {t:gs.t,price:gs.price,g:gs.g,col:gs.col,sub:'Gift set'};
-  const p=BY[id]; if(!p)return null; return {t:p.t,price:p.min,g:p.g,col:p.col,sub:p.max>p.min?'Smallest option':COLLS[p.coll].name,digital:p.coll==='design'};
+  const gs=GIFT_SETS.find(g=>g.h===id); if(gs)return {h:gs.h,t:gs.t,price:gs.price,g:gs.g,col:gs.col,sub:'Gift set'};
+  const p=BY[id]; if(!p)return null; return {h:p.h,t:p.t,price:p.min,g:p.g,col:p.col,sub:p.max>p.min?'Smallest option':COLLS[p.coll].name,digital:p.coll==='design'};
 }
 cart=cart.filter(l=>itemInfo(l.id));
 function addToCart(id,q=1){const l=cart.find(l=>l.id===id);if(l)l.q+=q;else cart.push({id,q});save();renderCart();toast(`Added ${itemInfo(id).t}`);bump()}
@@ -1657,9 +1678,9 @@ function renderCart(){
   $('#ship').innerHTML=(!physical&&sub>0)?'Digital items only. Nothing to ship.':sub===0?'Free U.S. shipping on orders over $35.':left>0?`You are <b>${money(left)}</b> away from free shipping.`:'<b>You have free shipping.</b>';
   $('#ship').insertAdjacentHTML('beforeend',`<div class="meter"><i style="width:${Math.min(100,sub/FREE*100)}%"></i></div>`);
   if(!cart.length){$('#lines').innerHTML=`<div class="empty"><p>Your cart is empty.</p><button class="btn solid small" data-go="kits">Start with a Ritual Kit</button></div>`;$('#drFoot').innerHTML='';return}
-  $('#lines').innerHTML=cart.map(l=>{const i=itemInfo(l.id);return `<div class="line"><div class="tile">${tileSVG(i.g,i.col,{label:i.t})}</div><div><b>${esc(i.t)}</b><small>${esc(i.sub)}</small><div class="qty"><button data-cq="${l.id}" data-d="-1" aria-label="Decrease">−</button><output>${l.q}</output><button data-cq="${l.id}" data-d="1" aria-label="Increase">+</button></div></div><span class="lp">${money(i.price*l.q)}</span></div>`}).join('');
+  $('#lines').innerHTML=cart.map(l=>{const i=itemInfo(l.id);return `<div class="line"><div class="tile">${i.h&&IMGS[i.h]?photo(i.h,i.t):tileSVG(i.g,i.col,{label:i.t})}</div><div><b>${esc(i.t)}</b><small>${esc(i.sub)}</small><div class="qty"><button data-cq="${l.id}" data-d="-1" aria-label="Decrease">−</button><output>${l.q}</output><button data-cq="${l.id}" data-d="1" aria-label="Increase">+</button></div></div><span class="lp">${money(i.price*l.q)}</span></div>`}).join('');
   const sugg=physical&&left>0?SHOP.filter(p=>p.min<=left+6&&p.min>=Math.min(left,3)&&!cart.find(l=>l.id===p.h)).sort((a,b)=>Math.abs(a.min-left)-Math.abs(b.min-left))[0]:null;
-  $('#drFoot').innerHTML=`${sugg?`<div class="upsell-mini"><div class="tile">${tileSVG(sugg.g,sugg.col)}</div><span>Add <b>${esc(sugg.t)}</b> for free shipping</span><button class="btn small" data-add="${sugg.h}">${money(sugg.min)}</button></div>`:''}
+  $('#drFoot').innerHTML=`${sugg?`<div class="upsell-mini"><div class="tile">${art(sugg)}</div><span>Add <b>${esc(sugg.t)}</b> for free shipping</span><button class="btn small" data-add="${sugg.h}">${money(sugg.min)}</button></div>`:''}
     <div class="tot"><span>Subtotal</span><span>${money(sub)}</span></div>
     <button class="btn solid" id="checkoutBtn">Check out ${ARR}</button>
     <p class="note">Secure checkout powered by Stripe.</p>`;
