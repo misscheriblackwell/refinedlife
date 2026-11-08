@@ -8,6 +8,6 @@
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
   "keep_vars": true,
-  "vars": { "SHIPPING_FLAT_CENTS": "595", "LIVE_USES_CATALOG": "0" },
+  "vars": { "SHIPPING_FLAT_CENTS": "595", "LIVE_USES_CATALOG": "1" },
   "observability": { "enabled": true }
 }
