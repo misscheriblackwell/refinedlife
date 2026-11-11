@@ -1715,12 +1715,35 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('input',e=>{if(e.target.id==='goalText'){goalState.text=e.target.value;renderGoal()}});
 document.addEventListener('change',e=>{if(e.target.id==='sortSel'){shopState.sort=e.target.value;renderShopGrid($('#app').dataset.coll||null)}});
-document.addEventListener('submit',e=>{
-  const f=e.target; e.preventDefault(); const ok=v=>/^\S+@\S+\.\S+$/.test(v.trim());
-  if(f.dataset.form==='nl'){const v=$('#nlEmail').value;$('#nlMsg').textContent=ok(v)?'You are on the list. Your 10% code is WELCOME10.':'Enter a full email address, like you@example.com.'}
-  if(f.dataset.form==='wait'){const v=$('#waitEmail').value;$('#waitMsg').textContent=ok(v)?'You are on the Soulrise waitlist. We will email you when it opens.':'Enter a full email address, like you@example.com.'}
-  if(f.dataset.form==='rsvp'){const v=f.querySelector('input').value;f.querySelector('p').textContent=ok(v)?'You are in. Details will arrive by email the week of the gathering.':'Enter a full email address, like you@example.com.'}
-  if(f.dataset.form==='inq'){const v=$('#iqEmail').value;$('#iqMsgOut').textContent=!$('#iqName').value.trim()?'Add your name so we know who to reply to.':ok(v)?'Thank you. We reply to every inquiry within two business days.':'Enter a full email address, like you@example.com.'}
+// ── Kit email list (Refined's own Kit account). Paste each Kit form number between the quotes.
+const KIT_FORMS={nl:'KIT_REFINED_NEWSLETTER_ID',wait:'KIT_SOULRISE_WAITLIST_ID',rsvp:'KIT_GATHERING_RSVP_ID',inq:'KIT_REFINED_INQUIRY_ID'};
+const INQUIRY_NOTIFY='https://formspree.io/f/mwvdzqvb';
+async function kitSubscribe(kind,email,name){
+  const id=KIT_FORMS[kind]; if(!/^\d+$/.test(id))return true;
+  const d=new FormData(); d.append('email_address',email.trim()); if(name)d.append('fields[first_name]',name.trim().split(' ')[0]);
+  try{const r=await fetch('https://app.kit.com/forms/'+id+'/subscriptions',{method:'POST',headers:{'Accept':'application/json'},body:d});return r.ok}catch(err){console.error('Kit subscribe failed',err);return false}
+}
+const FAIL='Something went wrong. Please try again in a moment.';
+document.addEventListener('submit',async e=>{
+  const f=e.target; if(!f.dataset||!f.dataset.form||f.dataset.form==='goal')return; e.preventDefault(); const ok=v=>/^\S+@\S+\.\S+$/.test(v.trim());
+  const btn=f.querySelector('button[type=submit]'); const busy=b=>{if(btn)btn.disabled=b};
+  if(f.dataset.form==='nl'){const v=$('#nlEmail').value;if(!ok(v)){$('#nlMsg').textContent='Enter a full email address, like you@example.com.';return}
+    busy(true);const r=await kitSubscribe('nl',v);busy(false);$('#nlMsg').textContent=r?'You are on the list. Your 10% code is WELCOME10.':FAIL}
+  if(f.dataset.form==='wait'){const v=$('#waitEmail').value;if(!ok(v)){$('#waitMsg').textContent='Enter a full email address, like you@example.com.';return}
+    busy(true);const r=await kitSubscribe('wait',v);busy(false);$('#waitMsg').textContent=r?'You are on the Soulrise waitlist. We will email you when it opens.':FAIL}
+  if(f.dataset.form==='rsvp'){const v=f.querySelector('input').value;const out=f.querySelector('p');if(!ok(v)){out.textContent='Enter a full email address, like you@example.com.';return}
+    busy(true);const r=await kitSubscribe('rsvp',v);busy(false);out.textContent=r?'You are in. Details will arrive by email the week of the gathering.':FAIL}
+  if(f.dataset.form==='inq'){const v=$('#iqEmail').value,n=$('#iqName').value;const out=$('#iqMsgOut');
+    if(!n.trim()){out.textContent='Add your name so we know who to reply to.';return}
+    if(!ok(v)){out.textContent='Enter a full email address, like you@example.com.';return}
+    busy(true);
+    const [mail,kit]=await Promise.allSettled([
+      fetch(INQUIRY_NOTIFY,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name:n,email:v,gathering:$('#iqType').value,guests:$('#iqGuests').value,message:$('#iqMsg').value,_subject:'New Refined Life Co. Gathering Inquiry',source:'refinedlifeco.com inquiry form'})}),
+      kitSubscribe('inq',v,n)]);
+    busy(false);
+    const sent=(mail.status==='fulfilled'&&mail.value.ok)||(kit.status==='fulfilled'&&kit.value);
+    out.textContent=sent?'Thank you. We reply to every inquiry within two business days.':FAIL;
+    if(sent)f.reset()}
 });
 $('#cartBtn').onclick=()=>openCart(true);
 $('#closeCart').onclick=()=>openCart(false);
