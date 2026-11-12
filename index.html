@@ -1716,7 +1716,7 @@ document.addEventListener('click',e=>{
 document.addEventListener('input',e=>{if(e.target.id==='goalText'){goalState.text=e.target.value;renderGoal()}});
 document.addEventListener('change',e=>{if(e.target.id==='sortSel'){shopState.sort=e.target.value;renderShopGrid($('#app').dataset.coll||null)}});
 // ── Kit email list (Refined's own Kit account). Paste each Kit form number between the quotes.
-const KIT_FORMS={nl:'KIT_REFINED_NEWSLETTER_ID',wait:'KIT_SOULRISE_WAITLIST_ID',rsvp:'KIT_GATHERING_RSVP_ID',inq:'KIT_REFINED_INQUIRY_ID'};
+const KIT_FORMS={nl:'10178454',wait:'10178460',rsvp:'10178465',inq:'10178471'};
 const INQUIRY_NOTIFY='https://formspree.io/f/mwvdzqvb';
 async function kitSubscribe(kind,email,name){
   const id=KIT_FORMS[kind]; if(!/^\d+$/.test(id))return true;
